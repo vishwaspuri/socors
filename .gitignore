@@ -1,8 +1,9 @@
-__pycache__
-main/__pycache__
-main/api/__pycache__
-account/__pycache__
-account/api/__pycache__
-socors_backend/__pycache__
+.__pycache__
+.main/__pycache__
+.main/api/__pycache__
+.account/__pycache__
+.account/api/__pycache__
+.socors_backend/__pycache__
 env
 db.sqlite3
+.idea

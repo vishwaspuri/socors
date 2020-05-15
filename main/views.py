@@ -53,7 +53,7 @@ def list_slots_for_shop(request, gst_id):
         payload.append(slot.to_dict())
     return Response(payload, status=status.HTTP_200_OK)
 
-#
+
 @login_required(login_url='/accounts/login/')
 @api_view(['POST'])
 def book_slot(request):
@@ -92,7 +92,16 @@ def book_slot(request):
     book.save()
     return Response({'msg': 'Slot booked'}, status=status.HTTP_200_OK)
 
+@login_required(login_url='/accounts/login/')
+@api_view(['GET'])
+def user_booked_slots(request):
+    user=request.user
+    bookings=user.bookings.all()
+    payload=[]
+    for booking in bookings:
+        payload.append(booking.slot.to_dict())
 
+    return Response(payload, status=status.HTTP_200_OK)
 
 class BaseView(TemplateView):
     template_name = 'home.html'
