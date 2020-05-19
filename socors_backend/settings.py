@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'account',
-    'main'
+    'main',
+    'djcelery'
 ]
 
 MIDDLEWARE = [
@@ -125,6 +126,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+DATETIME_FORMAT = '%d-%m-%Y %H:%M:%S'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -134,3 +136,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 JWT_AUTH = {
     "JWT_VERIFY_EXPIRATION": False,
 }
+
+
+BROKER_URL='redis://127.0.0.1:6379/0'
+BROKER_TRANSPORT='redis'
+CELERYBEAT_SCHEDULER='djcelery.schedulers.DatabaseScheduler'

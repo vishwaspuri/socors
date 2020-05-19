@@ -9,12 +9,15 @@ class Shop(models.Model):
     stop_time = models.TimeField(auto_now=False, auto_now_add=False)
     shop_capacity=models.IntegerField()
     owner_name=models.CharField(max_length=120)
-    owner_phone_number=models.CharField(max_length=11)
+    owner_phone_number=models.CharField(max_length=10)
     shop_pincode=models.IntegerField(validators=[MaxValueValidator(999999)])
     shop_city = models.CharField(max_length=150)
     shop_area = models.CharField(max_length=500)
     shop_street = models.CharField(max_length=150)
     shop_state = models.CharField(max_length=25)
+    slot_duration= models.IntegerField(default=15)
+    shop_type=models.CharField(max_length=60, default='General Store')
+    give_whatsapp_order=models.BooleanField(default=False)
 
     def to_dict(self):
         shop_dict = {
@@ -57,3 +60,5 @@ class Booking(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE, related_name='bookings')
     slot=models.ForeignKey(Slot, on_delete=models.CASCADE, related_name='bookings')
     shop=models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='bookings')
+    is_message=models.BooleanField(default=False)
+    message_for_shopkeeper=models.CharField(max_length=256, null=True)
