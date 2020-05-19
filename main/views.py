@@ -6,7 +6,7 @@ from .models import Slot,Shop,Booking
 from .api.serializers import ShopSerializer
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
-from account.models import User
+from user.models import User
 from .tasks import hello_world
 from .whatsapp import send_whatsapp
 

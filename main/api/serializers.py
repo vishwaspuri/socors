@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from main.models import Shop,Slot,Booking
+from main.models import Shop,Slot
 
 
 class ShopSerializer(serializers.ModelSerializer):

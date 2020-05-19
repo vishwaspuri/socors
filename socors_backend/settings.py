@@ -36,14 +36,19 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'account',
+    'user',
     'main',
-    'djcelery'
+    'djcelery',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google'
 ]
 
 MIDDLEWARE = [
@@ -75,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-AUTH_USER_MODEL='account.User'
+AUTH_USER_MODEL='user.User'
 
 WSGI_APPLICATION = 'socors_backend.wsgi.application'
 
@@ -111,6 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
 )
 
 # Internationalization
@@ -141,3 +147,5 @@ JWT_AUTH = {
 BROKER_URL='redis://127.0.0.1:6379/0'
 BROKER_TRANSPORT='redis'
 CELERYBEAT_SCHEDULER='djcelery.schedulers.DatabaseScheduler'
+
+SITE_ID = 1
