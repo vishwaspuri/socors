@@ -69,6 +69,7 @@ def book_slot(request):
     else:
         try:
             message=request.data['message']
+            message='Mr./Mrs. '+str(user.first_name)+' has the following order:\n'+message
             book = Booking()
             book.user = user
             book.shop = shop
