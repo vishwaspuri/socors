@@ -1,7 +1,8 @@
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 from .models import Slot,Shop,Booking
 from .api.serializers import ShopSerializer
 from django.contrib.auth.decorators import login_required
@@ -28,7 +29,7 @@ def list_slots_for_shop(request, gst_id):
         payload.append(slot.to_dict())
     return Response(payload, status=status.HTTP_200_OK)
 
-
+@permission_classes([IsAuthenticated])
 @login_required(login_url='/accounts/login/')
 @api_view(['POST'])
 def book_slot(request):
@@ -97,6 +98,7 @@ def book_slot(request):
             book.save()
             return Response({'msg': 'Slot booked'}, status=status.HTTP_200_OK)
 
+@permission_classes([IsAuthenticated])
 @login_required(login_url='/accounts/login/')
 @api_view(['GET'])
 def user_booked_slots(request):
@@ -108,17 +110,14 @@ def user_booked_slots(request):
 
     return Response(payload, status=status.HTTP_200_OK)
 
+
+
+# ----------------------------------------------------------------
+# -----------------GENERIC VIEWS----------------------------------
+# ----------------------------------------------------------------
+
 class BaseView(TemplateView):
     template_name = 'home.html'
 
 
 
-#Things left:
-'''
-    1. Google oAuth authorization
-    2. Limiting one slot booking per user ------------Done
-    3. Automate slot creation
-'''
-
-# Google geocoding api to convert address into latitude longitude
-# Google directions api to get directions

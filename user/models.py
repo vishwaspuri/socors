@@ -3,10 +3,10 @@ from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
 )
 import uuid
-from django.core.validators import MaxValueValidator
+from django.core.validators import MaxValueValidator, RegexValidator
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, first_name,ph_number,password=None):
+    def create_user(self, email, full_name,ph_number,password=None):
         """
         Creates and saves a User with the given email and password.
         """
@@ -16,20 +16,20 @@ class UserManager(BaseUserManager):
         user = self.model(
             email=self.normalize_email(email),
             ph_number=ph_number,
-            first_name=first_name
+            full_name=full_name
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_staffuser(self, email, first_name,ph_number,password):
+    def create_staffuser(self, email, full_name,ph_number,password):
         """
         Creates and saves a staff user with the given email and password.
         """
         user = self.create_user(
             email,
-            first_name=first_name,
+            full_name=full_name,
             ph_number=ph_number,
             password=password,
         )
@@ -37,13 +37,13 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, first_name, ph_number,password):
+    def create_superuser(self, email, full_name, ph_number,password):
         """
         Creates and saves a superuser with the given email and password.
         """
         user = self.create_user(
             email,
-            first_name=first_name,
+            full_name=full_name,
             ph_number=ph_number,
             password=password,
 
@@ -63,20 +63,18 @@ class User(AbstractBaseUser):
         unique=True,
     )
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False,)
-    first_name = models.CharField(max_length=60, unique=False, null=False)
-    last_name = models.CharField(max_length=60, unique=False)
+    full_name = models.CharField(max_length=60, unique=False, null=False)
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False) # a admin user; non super-user
     admin = models.BooleanField(default=False) # a superuser
-    ph_number = models.CharField(max_length=10)
+    ph_number = models.CharField(max_length=10, unique=True)
     # notice the absence of a "Password field", that is built in.
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name','ph_number'] # Email & Password are required by default.
-
+    REQUIRED_FIELDS = ['full_name','ph_number'] # Email & Password are required by default.
     def get_full_name(self):
         # The user is identified by their email address
-        return self.email
+        return self.full_name
 
     def get_short_name(self):
         # The user is identified by their email address
@@ -121,3 +119,23 @@ class Address(models.Model):
     state=models.CharField(max_length=25)
     pincode=models.IntegerField(validators=[MaxValueValidator(999999)])
 
+
+class PhoneOTP(models.Model):
+    phone_regex  = RegexValidator(regex=r'^\(|\)|\d{10}$', message='Phone number not correct!')
+    phone        = models.CharField(validators=[phone_regex], max_length=10)
+    otp          = models.CharField(max_length= 9, blank= True, null=True)
+    count        = models.IntegerField(default=0)
+    validated    = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.phone)+' is sent '+str(self.otp)
+
+class LoginOTP(models.Model):
+    phone_regex  = RegexValidator(regex=r'^\(|\)|\d{10}$', message='Phone number not correct!')
+    phone        = models.CharField(validators=[phone_regex], max_length=10)
+    otp          = models.CharField(max_length= 9, blank= True, null=True)
+    count        = models.IntegerField(default=0)
+    validated    = models.BooleanField(default=False)
+
+    def __str__(self):
+        return str(self.phone)+' is sent '+str(self.otp)

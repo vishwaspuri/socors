@@ -1,9 +1,11 @@
-from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models import User,Address
+from .models import Address
 from django.contrib.auth.decorators import login_required
+from .models import User
+
+from django.shortcuts import get_object_or_404
 # Create your views here.
 
 @login_required(login_url='/accounts/login/')
@@ -53,4 +55,5 @@ def add_address(request):
     address.save()
 
     return Response(address.to_dict(), status=status.HTTP_201_CREATED)
+
 
