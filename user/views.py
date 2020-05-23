@@ -5,11 +5,12 @@ from .models import Address
 from django.contrib.auth.decorators import login_required
 from .models import User
 from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.shortcuts import get_object_or_404
 # Create your views here.
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/user/login/')
 @api_view(["POST"])
 def add_address(request):
     try:
@@ -58,16 +59,19 @@ def add_address(request):
     return Response(address.to_dict(), status=status.HTTP_201_CREATED)
 
 
-class AddaddressView(TemplateView):
+class AddaddressView(TemplateView,LoginRequiredMixin):
     model = User
+    login_url = '/user/login'
     template_name = 'addaddress.html'
 
-class ProfileView(TemplateView):
+class ProfileView(TemplateView,LoginRequiredMixin):
     model = User
+    login_url = '/user/login'
     template_name = 'profile.html'
 
-class RegisterView(TemplateView):
+class RegisterView(TemplateView,LoginRequiredMixin):
     model = User
+    login_url = '/user/login'
     template_name = 'signup.html'
 
 

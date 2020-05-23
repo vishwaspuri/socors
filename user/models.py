@@ -4,6 +4,9 @@ from django.contrib.auth.models import (
 )
 import uuid
 from django.core.validators import MaxValueValidator, RegexValidator
+from django.dispatch import receiver
+from allauth.account.signals import user_logged_in,user_signed_up
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, full_name,password=None):
@@ -104,8 +107,37 @@ class User(AbstractBaseUser):
     def is_active(self):
         "Is the user active?"
         return self.active
+    def to_dict(self):
+        user_dict={
+            'name': self.full_name,
+            'email': self.email,
+            'phone number': self.ph_number,
+            'id': self.id
+        }
+        address_dict=[]
+        addresses=self.address.all()
+        for address in addresses:
+            address_dict.append(address.to_dict())
+        user_dict['addresses']=address_dict
+        return user_dict
 
     objects = UserManager()
+
+@receiver(user_signed_up)
+def populate_soc_login_data(sociallogin,user,**kwargs):
+    if sociallogin.account.provider == 'google':
+        user.full_name=sociallogin.account.extra_data['name']
+        user.save()
+    elif sociallogin.account.provider=='facebook':
+        user.full_name=sociallogin.account.extra_data['name']
+        user.save()
+    else:
+        print('normal')
+
+
+
+
+
 
 
 class Address(models.Model):
@@ -115,6 +147,16 @@ class Address(models.Model):
     street        =models.CharField(max_length=150)
     state         =models.CharField(max_length=25)
     pincode       =models.IntegerField(validators=[MaxValueValidator(999999)])
+
+    def to_dict(self):
+        add_dict = {
+            'city':self.city,
+            'area': self.area,
+            'street': self.street,
+            'state': self.state,
+            'pincode': self.pincode
+        }
+        return add_dict
 
 
 class PhoneOTP(models.Model):

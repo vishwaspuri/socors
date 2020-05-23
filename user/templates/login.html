@@ -16,8 +16,8 @@
         <form id='login-form' action="{% url 'user:login' %}" method="POST">
             {% csrf_token %}
             <label for="number"><span class="icon num_ico"></span></label>
-            <input type="text" id="number" placeholder="Email" name="email" required><br>
-            <input type="password" id="password" placeholder="Password" name="password" required><br>
+            <input type="email" placeholder="email" name="username" required><br>
+            <input type="password" placeholder="password" name="password" required><br>
             {% if form.errors %}
                 <p class=" label label-danger">
                     Your email and password didn't match.

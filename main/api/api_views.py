@@ -2,16 +2,14 @@ from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from main.models import Slot,Shop,Booking
 from .serializers import ShopSerializer
 from django.contrib.auth.decorators import login_required
-from django.views.generic import TemplateView
-from main.tasks import hello_world
 from main.whatsapp import send_whatsapp
-from user.models import User,Address
 from main.models import Slot,Shop,Booking
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class ShopView(APIView):
+class ShopView(APIView, LoginRequiredMixin):
+    login_url = '/user/login/'
     def get(self, request,pin):
         qs=Shop.objects.filter(shop_pincode=pin)
         serializer=ShopSerializer(qs, many=True)
@@ -28,7 +26,7 @@ def list_slots_for_shop(request, gst_id):
         payload.append(slot.to_dict())
     return Response(payload, status=status.HTTP_200_OK)
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/user/login/')
 @api_view(['POST'])
 def book_slot(request):
     user=request.user
@@ -96,7 +94,7 @@ def book_slot(request):
             book.save()
             return Response({'msg': 'Slot booked'}, status=status.HTTP_200_OK)
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/user/login/')
 @api_view(['GET'])
 def user_booked_slots(request):
     try:
