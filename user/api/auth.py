@@ -166,93 +166,93 @@ class validateOTP(APIView):
 
 
 
-class GenerateOTPforLogin(APIView):
-    def post(self,request, *args, **kwargs):
-        try:
-            email = request.data['email']
-        except:
-            return Response({
-                'status': False,
-                'detail': 'Phone number not sent!'
-            }, status=status.HTTP_403_FORBIDDEN)
-        user=User.objects.filter(email= email).first()
-        if not user.exists():
-            return Response({
-                'status': False,
-                'detail': 'The user requested does not exist!'
-            }, status=status.HTTP_403_FORBIDDEN)
-        key=get_otp(user.ph_number)
-        if key:
-            old_otp=LoginOTP.objects.filter(phone__iexact=user.ph_number)
-            if old_otp.exists():
-                count=old_otp.count
-                if count>100:
-                    return Response({
-                        'status': False,
-                        'detail': 'You have reached otp response limit. Please contact customer service!'
-                    }, status=status.HTTP_403_FORBIDDEN)
-                else:
-                    old_otp.otp=key
-                    send_otp(user.ph_number, 'USER', key)
-                    old_otp.count=old_otp.count+1
-                    old_otp.save()
-                    return Response({
-                        'status': False,
-                        'detail': 'OTP sent!'
-                    }, status=status.HTTP_200_OK)
-            else:
-                otp_obj = LoginOTP()
-                otp_obj.otp=key
-                send_otp(user.ph_number, 'USER', key)
-                otp_obj.count=1
-                otp_obj.phone=user.ph_number
-                otp_obj.save()
-                return Response({
-                    'status': False,
-                    'detail': 'OTP sent!'
-                }, status=status.HTTP_200_OK)
-        else:
-            return Response({
-                'status': False,
-                'detail': 'Unable to send otp try again!'
-            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-
-
-class AuthenticateLoginOTP(APIView):
-    def post(self, request, *args, **kwargs):
-        try:
-            email=request.data['email']
-        except:
-            return Response({
-                'status': False,
-                'detail': 'Please send phone number!'
-            }, status=status.HTTP_403_FORBIDDEN)
-        try:
-            otp=request.data['otp']
-        except:
-            return Response({
-                'status': False,
-                'detail': 'Please send OTP!'
-            }, status=status.HTTP_403_FORBIDDEN)
-        user = User.objects.filter(email=email).first()
-        if not user.exists():
-            return Response({
-                'status': False,
-                'detail': 'The user requested does not exist!'
-            }, status=status.HTTP_403_FORBIDDEN)
-        actual_otp=LoginOTP.objects.filter(phone__iexact=user.ph_number)
-        if actual_otp.exists():
-            if str(actual_otp.otp)==str(otp):
-                pass
-            else:
-                return Response({
-                    'status': False,
-                    'detail': 'Incorrect otp!'
-                }, status=status.HTTP_403_FORBIDDEN)
-        else:
-            return Response({
-                'status': False,
-                'detail': 'Generate OTP first!'
-            }, status=status.HTTP_403_FORBIDDEN)
+# class GenerateOTPforLogin(APIView):
+#     def post(self,request, *args, **kwargs):
+#         try:
+#             email = request.data['email']
+#         except:
+#             return Response({
+#                 'status': False,
+#                 'detail': 'Phone number not sent!'
+#             }, status=status.HTTP_403_FORBIDDEN)
+#         user=User.objects.filter(email= email).first()
+#         if not user.exists():
+#             return Response({
+#                 'status': False,
+#                 'detail': 'The user requested does not exist!'
+#             }, status=status.HTTP_403_FORBIDDEN)
+#         key=get_otp(user.ph_number)
+#         if key:
+#             old_otp=LoginOTP.objects.filter(phone__iexact=user.ph_number)
+#             if old_otp.exists():
+#                 count=old_otp.count
+#                 if count>100:
+#                     return Response({
+#                         'status': False,
+#                         'detail': 'You have reached otp response limit. Please contact customer service!'
+#                     }, status=status.HTTP_403_FORBIDDEN)
+#                 else:
+#                     old_otp.otp=key
+#                     send_otp(user.ph_number, 'USER', key)
+#                     old_otp.count=old_otp.count+1
+#                     old_otp.save()
+#                     return Response({
+#                         'status': False,
+#                         'detail': 'OTP sent!'
+#                     }, status=status.HTTP_200_OK)
+#             else:
+#                 otp_obj = LoginOTP()
+#                 otp_obj.otp=key
+#                 send_otp(user.ph_number, 'USER', key)
+#                 otp_obj.count=1
+#                 otp_obj.phone=user.ph_number
+#                 otp_obj.save()
+#                 return Response({
+#                     'status': False,
+#                     'detail': 'OTP sent!'
+#                 }, status=status.HTTP_200_OK)
+#         else:
+#             return Response({
+#                 'status': False,
+#                 'detail': 'Unable to send otp try again!'
+#             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+#
+#
+#
+#
+# class AuthenticateLoginOTP(APIView):
+#     def post(self, request, *args, **kwargs):
+#         try:
+#             email=request.data['email']
+#         except:
+#             return Response({
+#                 'status': False,
+#                 'detail': 'Please send phone number!'
+#             }, status=status.HTTP_403_FORBIDDEN)
+#         try:
+#             otp=request.data['otp']
+#         except:
+#             return Response({
+#                 'status': False,
+#                 'detail': 'Please send OTP!'
+#             }, status=status.HTTP_403_FORBIDDEN)
+#         user = User.objects.filter(email=email).first()
+#         if not user.exists():
+#             return Response({
+#                 'status': False,
+#                 'detail': 'The user requested does not exist!'
+#             }, status=status.HTTP_403_FORBIDDEN)
+#         actual_otp=LoginOTP.objects.filter(phone__iexact=user.ph_number)
+#         if actual_otp.exists():
+#             if str(actual_otp.otp)==str(otp):
+#                 pass
+#             else:
+#                 return Response({
+#                     'status': False,
+#                     'detail': 'Incorrect otp!'
+#                 }, status=status.HTTP_403_FORBIDDEN)
+#         else:
+#             return Response({
+#                 'status': False,
+#                 'detail': 'Generate OTP first!'
+#             }, status=status.HTTP_403_FORBIDDEN)

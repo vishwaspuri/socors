@@ -1,5 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <body>
-    <h1>Welcome to socors!</h1>
-    </body>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+  
+  <title>First Page</title>
 </head>
+<body>
+  
+  <h2>SOCORS</h2>
+
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="center">
+            <h1>Search stores near you</h1>
+            <img src="{% static 'images/store.png' %}" alt="store">
+        </div>
+        <img src="{% static 'images/mag.png' %}" alt="magnifying_glass">
+        </div>
+        
+        <div class="swiper-slide"><div class="center bottom-margin">
+          <h1>Book your time slot</h1>
+          <img src="{% static 'images/cal.png' %}" alt="store">
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="center bottom-margin">
+            <h1>Collect from the shop at your designated time</h1>
+            <img src="{% static 'images/collect.png' %}" alt="store">
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="center bottom-margin">
+            <h1>Register with us and spread the word</h1>
+              <a href="{% url 'user:register' %}"><img src="{% static 'images/people.png' %}" alt="store"></a>
+          </div>
+        </div>
+    </div>
+   
+    <div class="swiper-pagination"></div>
+    <div class="swipeBtn">
+        <div class="swiper-button-next"></div>
+    </div>
+</div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- <script src="test.js"></script> -->
+    <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+
+  <script>
+    var mySwiper = new Swiper ('.swiper-container', {
+  
+      // If we need pagination
+      pagination: {
+        el: '.swiper-pagination',
+      },
+  
+      // Navigation arrows
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+
+    })
+    </script>
+</body>
+</html>

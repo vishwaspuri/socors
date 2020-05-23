@@ -1,0 +1,137 @@
+body, ::placeholder{
+    background: url(../images/top.png);
+    background-repeat: no-repeat;
+    background-size: 100% 25.3vh;
+    mix-blend-mode: normal;
+    max-width: 100%;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    margin: 0;
+}
+
+div{
+    text-align: center;
+}
+
+p{
+    font-size: 15px;
+    margin-top: 3.125vh;
+}
+
+h1{
+    color: white;
+    font-size: 45px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding-top: 11.25vh;
+    margin: 0 0 10.4vh 3.6vw;
+}
+
+input{
+    width: 67.5%;
+    border: 0;
+    border-bottom: 2px solid #000000;
+    margin-top: 4.33vh;
+    padding-bottom: 5px;
+    font-size: 16px;
+    font-weight: 800;
+    outline: none;
+}
+
+input[type='password']{
+    margin: 4.33vh 0 0 5.7vw;
+}
+
+::placeholder{
+    font-size: 15px;
+}
+
+input:focus{
+    font-family: 'Nunito', sans-serif;
+    outline: none;
+}
+
+.name_ico{
+    background: url(../images/user.png);
+    width: 5.3vw;
+    height: 3vh;
+}
+
+.num_ico{
+    background: url(../images/mobile.png);
+    width: 5.3vw;
+    height: 3vh;
+}
+
+.mail_ico{
+    background: url(../images/email.png);
+    width: 5.3vw;
+    height: 3vh;
+}
+
+#submit{
+    background: #2DA8CF;
+    font-family: 'Nunito', sans-serif;
+    color: white;
+    font-weight: 800;
+    height: 6.25vh;
+    min-height: 40px;
+    width: 135px;
+    margin: 6.1vh auto 1.72vh auto;
+    border-radius: 9px;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.18);
+    border: 0;
+    font-size: 15px;
+}
+
+
+::placeholder{
+    background: white;
+    color: rgba(0, 0, 0, 0.42);
+}
+
+.fb{
+    background: url(../images/fb_logo.png);
+    width: 43px;
+    height: 43px;
+    padding-top: 11px;
+    margin-left: 10px;
+}
+
+.google{
+    background: url(../images/google_logo.png);
+    width: 64px;
+    height: 64px;
+}
+
+.icon{
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    min-width: 20px;
+    min-height: 20px;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.separator::before, .separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 3px solid #2DA8CF;
+    /* width: 10%; */
+}
+
+.separator::before {
+    margin-right: 3.33vw;
+    margin-left: 20.8vw;
+    /* width: 10%; */
+}
+
+.separator::after {
+    margin-left: 3.33vw;
+    margin-right: 20.8vw;
+}

@@ -1,0 +1,39 @@
+{% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet"> 
+    <title>Log In</title>
+</head>
+<body>
+    <h1>Log In</h1>
+    <div class="center">
+        <form id='login-form' action="{% url 'user:login' %}" method="POST">
+            {% csrf_token %}
+            <label for="number"><span class="icon num_ico"></span></label>
+            <input type="text" id="number" placeholder="Email" name="email" required><br>
+            <input type="password" id="password" placeholder="Password" name="password" required><br>
+            {% if form.errors %}
+                <p class=" label label-danger">
+                    Your email and password didn't match.
+                    Please try again.
+                </p>
+            {% endif %}
+            <input type="hidden" name="next" value="{{ next }}" />
+
+            <input type="submit" value="login" id="submit">
+
+        </form>
+        
+        <p class="separator">OR</p>
+        <p>Log In With</p>
+        <i><a href="{% provider_login_url "facebook" method="js_sdk" %}" class="icon fb"></a></i>
+        <i><a href="{% provider_login_url "google" %}" class="icon google"></a></i>
+    </div>
+</body>
+</html>

@@ -1,0 +1,238 @@
+body{
+    height: 100%;
+    width: 100%;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    margin: 0;
+}
+
+*{
+    font-family: 'Nunito', sans-serif;
+    text-align: center;
+}
+
+#nameEdit{
+    width: 50vw ;
+    height: 25px;
+    border: 0;
+    border-bottom: 1px solid white;
+    background-color: #2DA8CF;
+    color: white;
+}
+
+.notif{
+    background: url(./../nav_imgs/notif.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 65%;
+    width: 7.8%;
+    border: 0;
+    margin-top: 0;
+    margin-right: 15px;
+    padding: 0;
+}
+
+.navbar-toggler{
+    margin-top: 0.9vh
+}
+.navbar-toggler-icon{
+    color: white;
+}
+
+#tri{
+    border: 0;
+}
+
+.navbar{
+    font-weight: 800;
+    height: 9.5vh;
+    min-height: 55px;
+}
+
+.picture{
+    height: 24vh;
+    min-height: 150px;
+    color: white;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 35px;
+}
+p{
+    margin-bottom: 0.8vh;
+}
+
+.dp{
+    height: 13.6vh;
+    width: auto;
+    min-height: 100px;
+    margin: 1.1vh auto 0 auto;
+}
+
+.tiny{
+    font-size: 13px;
+    line-height: 15px;
+    font-weight: normal;
+}
+
+.list{
+    background: white;
+    width: 100%;
+    padding-top: 6vh;
+    height: 76vh;
+}
+
+.link{
+    color: black;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 30px;
+    padding-bottom: 3vh;
+}
+.nav-item{
+    padding-bottom: 3vh;
+}
+
+.content{
+    margin-top: 9.5vh;
+}
+.mobileMenu{
+    width: 64vw;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.bg{
+    background: #2DA8CF;
+}
+
+.center{
+    text-align: center;
+
+}
+
+.content img{
+    width: 29vh;
+    max-width: 190px;
+    min-width: 150px;
+}
+
+img#edit_name{
+    width: 9px;
+    height: 9px;
+}
+
+#h1{
+    font-weight: 800;
+    color: black;
+    font-size: 18px;
+    line-height: 5.3vh;
+    padding-bottom: 4.2vh;
+}
+
+.h1margin{
+    margin: 11.9vh 0 -2vh 5vw;
+}
+
+.h1MinMargin{
+    margin: 70px 0 -2vh 5vw;
+}
+
+form{
+    font-weight: 800;
+}
+
+.inp, .lab{
+    display: block;
+}
+.lab{
+    font-size: 15px;
+    width: min-content;
+    margin: 0 0 0.5vh 18vw;
+    padding: 0 0;
+}
+.inp{
+    text-align: left;
+    margin: 0 0 1vh 18vw;
+    padding: 0 0;
+    border: 1px solid black;
+    box-sizing: border-box;
+    border-radius: 13px;
+    width: 58.6vw;
+    height: 5.2vh;
+    min-width: 200px;
+    min-height: 35px;
+}
+
+.inp:focus{
+    outline: none;
+}
+
+#street{
+    height: 8.125vh;
+    min-height: 65px;
+}
+
+#gender, #pincode{
+    width: 27vw;
+    min-width: 100px;
+}
+
+#gender{
+    margin-right: 0;
+}
+#pincode{
+    margin-left:0;
+}
+
+.flex{
+    display: flex;
+}
+.child{
+    flex: 1;
+    width: min-content;
+}
+.child:nth-of-type(2) .lab{
+    margin-left: 0;
+}
+
+#submit{
+    background: #2DA8CF;
+    font-family: 'Nunito', sans-serif;
+    color: white;
+    font-weight: 800;
+    height: 6.25vh;
+    min-height: 40px;
+    width: 135px;
+    margin: 3vh auto 1.72vh auto;
+    border-radius: 9px;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.18);
+    border: 0;
+    font-size: 15px;
+    padding: 0;
+}
+
+@media (max-width: 4000px){
+    .mobileMenu{
+        transform: translateX(100%);
+        position: fixed;
+        top: 0px;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        transition: all ease 0.25s;
+    }
+    .mobileMenu.open {
+        transform: translateX(0%);
+    }
+    .overlay{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        background-color: rgba(0,0,0,0.5);
+        display: none;
+    }
+    .overlay.open{
+        display: block;
+    }
+}

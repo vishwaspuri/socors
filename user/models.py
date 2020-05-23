@@ -6,7 +6,7 @@ import uuid
 from django.core.validators import MaxValueValidator, RegexValidator
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, full_name,ph_number,password=None):
+    def create_user(self, email, full_name,password=None):
         """
         Creates and saves a User with the given email and password.
         """
@@ -15,7 +15,6 @@ class UserManager(BaseUserManager):
 
         user = self.model(
             email=self.normalize_email(email),
-            ph_number=ph_number,
             full_name=full_name
         )
 
@@ -23,28 +22,26 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_staffuser(self, email, full_name,ph_number,password):
+    def create_staffuser(self, email, full_name,password):
         """
         Creates and saves a staff user with the given email and password.
         """
         user = self.create_user(
             email,
             full_name=full_name,
-            ph_number=ph_number,
             password=password,
         )
         user.staff = True
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, full_name, ph_number,password):
+    def create_superuser(self, email, full_name,password):
         """
         Creates and saves a superuser with the given email and password.
         """
         user = self.create_user(
             email,
             full_name=full_name,
-            ph_number=ph_number,
             password=password,
 
         )
@@ -62,16 +59,16 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False,)
-    full_name = models.CharField(max_length=60, unique=False, null=False)
-    active = models.BooleanField(default=True)
-    staff = models.BooleanField(default=False) # a admin user; non super-user
-    admin = models.BooleanField(default=False) # a superuser
-    ph_number = models.CharField(max_length=10, unique=True)
+    id           = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False,)
+    full_name    = models.CharField(max_length=60, unique=False, null=False)
+    active       = models.BooleanField(default=True)
+    staff        = models.BooleanField(default=False) # a admin user; non super-user
+    admin        = models.BooleanField(default=False) # a superuser
+    ph_number    = models.CharField(max_length=10)
     # notice the absence of a "Password field", that is built in.
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['full_name','ph_number'] # Email & Password are required by default.
+    REQUIRED_FIELDS = ['full_name'] # Email & Password are required by default.
     def get_full_name(self):
         # The user is identified by their email address
         return self.full_name
@@ -112,12 +109,12 @@ class User(AbstractBaseUser):
 
 
 class Address(models.Model):
-    user=models.ForeignKey(User, on_delete=models.CASCADE, related_name='address')
-    city=models.CharField(max_length=150)
-    area=models.CharField(max_length=500)
-    street=models.CharField(max_length=150)
-    state=models.CharField(max_length=25)
-    pincode=models.IntegerField(validators=[MaxValueValidator(999999)])
+    user          =models.ForeignKey(User, on_delete=models.CASCADE, related_name='address')
+    city          =models.CharField(max_length=150)
+    area          =models.CharField(max_length=500)
+    street        =models.CharField(max_length=150)
+    state         =models.CharField(max_length=25)
+    pincode       =models.IntegerField(validators=[MaxValueValidator(999999)])
 
 
 class PhoneOTP(models.Model):
@@ -139,3 +136,8 @@ class LoginOTP(models.Model):
 
     def __str__(self):
         return str(self.phone)+' is sent '+str(self.otp)
+
+
+
+
+

@@ -4,6 +4,7 @@ from rest_framework import status
 from .models import Address
 from django.contrib.auth.decorators import login_required
 from .models import User
+from django.views.generic import TemplateView
 
 from django.shortcuts import get_object_or_404
 # Create your views here.
@@ -55,5 +56,18 @@ def add_address(request):
     address.save()
 
     return Response(address.to_dict(), status=status.HTTP_201_CREATED)
+
+
+class AddaddressView(TemplateView):
+    model = User
+    template_name = 'addaddress.html'
+
+class ProfileView(TemplateView):
+    model = User
+    template_name = 'profile.html'
+
+class RegisterView(TemplateView):
+    model = User
+    template_name = 'signup.html'
 
 

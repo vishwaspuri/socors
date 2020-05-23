@@ -1,0 +1,173 @@
+body{
+    height: 100%;
+    width: 100%;
+}
+
+*{
+    font-family: 'Nunito', sans-serif;
+    text-align: center;
+    font-weight: 800;
+}
+
+.time{
+    font-size: 14px;
+    color: #A9A6A6;
+    font-weight: 600;
+    margin-right: 2vw;
+}
+div p{
+    margin-bottom: 0;
+}
+
+.line{
+    height: 9.2vh;
+    min-height: 80px;
+    box-shadow: 3px 3px 19px rgba(0, 0, 0, 0.14);
+    border-radius: 7px;
+    font-size: 14px;
+    margin-bottom: 1.5vh;
+}
+.col-2, .col-10{
+    margin-top: 2vh;
+}
+
+#nameEdit{
+    width: 50vw ;
+    height: 25px;
+    border: 0;
+    border-bottom: 1px solid white;
+    background-color: #2DA8CF;
+    color: white;
+}
+
+img#edit_name{
+    width: 9px;
+    height: 9px;
+}
+
+.notif{
+    background: url(../images/notif.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 65%;
+    width: 7.8%;
+    border: 0;
+    margin-top: 0;
+    margin-right: 15px;
+    padding: 0;
+}
+
+.navbar-toggler{
+    margin-top: 0.9vh
+}
+.navbar-toggler-icon{
+    color: white;
+}
+
+#tri{
+    border: 0;
+}
+
+.navbar{
+    font-weight: 800;
+    height: 9.5vh;
+    min-height: 55px;
+}
+
+.picture{
+    height: 24vh;
+    min-height: 150px;
+    color: white;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 35px;
+}
+
+#h1{
+    font-weight: 800;
+    color: black;
+    font-size: 18px;
+    line-height: 5.3vh;
+    padding-bottom: 4.2vh;
+}
+
+.h1margin{
+    margin: 11.9vh 0 -2vh 5vw;
+}
+
+.h1MinMargin{
+    margin: 70px 0 -2vh 5vw;
+}
+p{
+    margin-bottom: 0.8vh;
+}
+
+.dp{
+    height: 13.6vh;
+    width: auto;
+    min-height: 100px;
+    margin: 1.1vh auto 0 auto;
+}
+
+.tiny{
+    font-size: 13px;
+    line-height: 15px;
+    font-weight: normal;
+}
+
+.list{
+    background: white;
+    width: 100%;
+    padding-top: 6vh;
+    height: 76vh;
+}
+
+.link{
+    color: black;
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 30px;
+    padding-bottom: 3vh;
+}
+.nav-item{
+    padding-bottom: 3vh;
+}
+.content{
+    margin-top: 9.5vh;
+    width: 92.8vw;
+    margin: 0 auto;
+}
+.mobileMenu{
+    width: 64vw;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.bg{
+    background: #2DA8CF;
+}
+@media (max-width: 4000px){
+    .mobileMenu{
+        transform: translateX(100%);
+        position: fixed;
+        top: 0px;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        transition: all ease 0.25s;
+    }
+    .mobileMenu.open {
+        transform: translateX(0%);
+    }
+    .overlay{
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        background-color: rgba(0,0,0,0.5);
+        display: none;
+    }
+    .overlay.open{
+        display: block;
+    }
+}

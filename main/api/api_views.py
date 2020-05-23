@@ -1,0 +1,119 @@
+from rest_framework.decorators import api_view
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from main.models import Slot,Shop,Booking
+from .serializers import ShopSerializer
+from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
+from main.tasks import hello_world
+from main.whatsapp import send_whatsapp
+from user.models import User,Address
+from main.models import Slot,Shop,Booking
+
+class ShopView(APIView):
+    def get(self, request,pin):
+        qs=Shop.objects.filter(shop_pincode=pin)
+        serializer=ShopSerializer(qs, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+#Get the list of slots for a shop given the shops gst id
+@api_view(['GET'])
+def list_slots_for_shop(request, gst_id):
+    shop=Shop.objects.get(gst_id=gst_id)
+    slots= Slot.objects.filter(shop=shop).order_by('-slot_start_time')
+    payload=[]
+    for slot in slots:
+        payload.append(slot.to_dict())
+    return Response(payload, status=status.HTTP_200_OK)
+
+@login_required(login_url='/accounts/login/')
+@api_view(['POST'])
+def book_slot(request):
+    user=request.user
+    try:
+        shop_gst_id=request.data['gst_id']
+    except:
+        return Response({'error': 'Please send the shop\'s gst id'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        slot_start_time=request.data['slot_start_time']
+    except:
+        return Response({'error': 'Please send the slot start time'}, status=status.HTTP_400_BAD_REQUEST)
+
+    shop=Shop.objects.get(gst_id=shop_gst_id)
+    if shop==None:
+        return Response({'error': 'Shop not found!'}, status=status.HTTP_404_NOT_FOUND)
+
+    slot=Slot.objects.get(shop=shop, slot_start_time=slot_start_time)
+    if slot==None:
+        return Response({'error': 'Slot not found!'}, status=status.HTTP_404_NOT_FOUND)
+
+    user_bookings=user.bookings.all()
+    for booking in user_bookings:
+        if booking.slot==slot:
+            return Response({'error': 'Only one booking per slot can be made!'}, status=status.HTTP_403_FORBIDDEN)
+    if shop.give_whatsapp_order==False:
+        book = Booking()
+        book.user = user
+        book.shop = shop
+        book.slot = slot
+        entries_left = slot.num_entries_left
+        entries_left = entries_left - 1
+        slot.num_entries_left = entries_left
+        slot.save()
+        book.save()
+        return Response({'msg': 'Slot booked'}, status=status.HTTP_200_OK)
+    else:
+        try:
+            message=request.data['message']
+            message='Mr./Mrs. '+str(user.first_name)+' has the following order:\n'+message
+            book = Booking()
+            book.user = user
+            book.shop = shop
+            book.slot = slot
+            book.message_for_shopkeeper = message
+            flag=send_whatsapp(user.ph_number, message)
+            entries_left = slot.num_entries_left
+            entries_left = entries_left - 1
+            slot.num_entries_left = entries_left
+            slot.save()
+            book.save()
+            if flag:
+                return Response({'msg': 'Slot booked'}, status=status.HTTP_200_OK)
+            else:
+                return Response({'msg': 'Slot booked but message could not be sent!'}, status=status.HTTP_200_OK)
+        except:
+            book = Booking()
+            book.user = user
+            book.shop = shop
+            book.slot = slot
+            entries_left = slot.num_entries_left
+            entries_left = entries_left - 1
+            slot.num_entries_left = entries_left
+            slot.save()
+            book.save()
+            return Response({'msg': 'Slot booked'}, status=status.HTTP_200_OK)
+
+@login_required(login_url='/accounts/login/')
+@api_view(['GET'])
+def user_booked_slots(request):
+    try:
+        user=request.user
+    except:
+        return Response({
+                'status': False,
+                'detail': 'User not authenticated!'
+            }, status=status.HTTP_403_FORBIDDEN)
+    bookings=user.bookings.all()
+    if bookings==None:
+        return Response({
+            'status': False,
+            'detail': 'User has no bookings yet!'
+        }, status=status.HTTP_404_NOT_FOUND)
+    payload=[]
+    for booking in bookings:
+        payload.append(booking.slot.to_dict())
+
+    return Response(payload, status=status.HTTP_200_OK)

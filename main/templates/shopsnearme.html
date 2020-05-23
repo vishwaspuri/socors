@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/shopsnearme.css' %}">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha256-L/W5Wfqfa0sdBNIKN9cG6QA5F2qx4qICmU2VgLruv9Y="
+      crossorigin="anonymous"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+    <title>Shops near me</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-xxl navbar-dark bg justify-content-xxl-start fixed-top">
+        <a class="navbar-brand order-0 ml-xxl-0 ml-2 mr-auto" href="{% url 'main:menu' %}">SOCORS</a>
+        <button class="notif"></button>
+        <button id="tri" class="navbar-toggler align-self-start" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex flex-column flex-xxl-row bg mobileMenu" id="navbarSupportedContent">
+          
+          <div class="picture">
+            <img src="{% static 'images/user_dp.png' %}" alt="profile_picture" class="dp">
+            <p id="nav_name" class="mb-0">{{ user.full_name }}<a href="{% url 'user:profile' %}"> <img id="edit_name" src="{% static 'images/edit_icon.png' %}" alt=""></a></p>
+          </div>
+
+          <div class="list">
+            <ul class="navbar-nav align-self-stretch" id="menu">
+              <li class="nav-item">
+                <a class="link" href="{% url 'main:menu' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="link" href="{% url 'main:explore' %}">Explore</a>
+              </li>
+              <li class="nav-item">
+                <a class="link" href="{% url 'main:mytimeslots' %}" tabindex="-1" aria-disabled="true">My Timeslots</a>
+              </li>
+              <li class="nav-item">
+                <a class="link" href="{% url 'user:add-address' %}" tabindex="-1" aria-disabled="true">Add Address</a>
+              </li>
+              <li class="nav-item">
+                <a class="link" href="{% url 'main:notifications' %}" tabindex="-1" aria-disabled="true">Notifications</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    <div class="overlay"></div>
+    
+    <div class="content">
+        
+        <h1 id="h1" class="d-flex align-self-start h1margin">Shops near me</h1>
+        
+        <div class="shop row">
+            
+            <div class="col-3">
+                <div class="row"><img src="{% static 'images/shop.png' %}" alt="shop_img">
+                </div>
+                <div class="row status">Status: <span class="open">Open</span></div>
+            </div>
+            
+            <div class="col-7">
+                <div class="row">
+                   <p class="shop_name">Anna's Medical Store</p>
+                </div>
+                <div class="row">
+                        <p class="shop_address">shop no. XY, Krishna Market Kalkaji, Delhi</p>
+                </div>
+                <div class="d-flex flex-row-reverse">
+                    <button type="button" class="btn"><a href="{% url 'main:shop-slots' %}">Get Timeslot</a></button>
+                </div>
+            </div>  
+        </div>
+
+        <div class="shop row">
+            
+            <div class="col-3">
+                <div class="row"><img src="{% static 'images/shop.png' %}" class="shop_image" alt="shop_img">
+                </div>
+                <div class="row status">Status: <span class="closed">Closed</span></div>
+            </div>
+            
+            <div class="col-7">
+                <div class="row">
+                   <p class="shop_name">Anna's Medical Store</p>
+                </div>
+                <div class="row">
+                        <p class="shop_address">shop no. XY, Krishna Market Kalkaji, Delhi</p>
+                </div>
+                <div class="d-flex flex-row-reverse">
+                    <button type="button" class="btn disabled" disabled>Get Timeslot</button>
+                </div>
+            </div>  
+        </div>
+    </div>
+
+    <script
+			  src="https://code.jquery.com/jquery-3.5.1.min.js"
+			  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+              crossorigin="anonymous"></script>
+              
+              <script
+              src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"
+              integrity="sha256-OUFW7hFO0/r5aEGTQOz9F/aXQOt+TwqI1Z4fbVvww04="
+              crossorigin="anonymous"
+            ></script>
+    <script src="{% static 'js/shopsnearme.js' %}"></script>
+</body>
+</html>
