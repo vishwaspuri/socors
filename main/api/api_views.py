@@ -57,11 +57,11 @@ def book_slot(request):
             'error': 'Please send the shop\'s gst id'}, status=status.HTTP_400_BAD_REQUEST)
 
     try:
-        slot_start_time=request.data['slot_start_time']
+        slot_id=request.data['slot_id']
     except:
         return Response({
             'status':False,
-            'error': 'Please send the slot start time'}, status=status.HTTP_400_BAD_REQUEST)
+            'error': 'Please send the slot id'}, status=status.HTTP_400_BAD_REQUEST)
 
     shop=Shop.objects.get(gst_id=shop_gst_id)
     if shop==None:
@@ -69,7 +69,7 @@ def book_slot(request):
             'status': False,
             'error': 'Shop not found!'}, status=status.HTTP_404_NOT_FOUND)
 
-    slot=Slot.objects.get(shop=shop, slot_start_time=slot_start_time)
+    slot=Slot.objects.get(shop=shop, slot_id=slot_id)
     if slot==None:
         return Response({
             'status':False,

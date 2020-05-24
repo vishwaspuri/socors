@@ -17,7 +17,7 @@ urlpatterns = [
     path('add-address/', AddaddressView.as_view(), name='add-address'),
     path('profile/', ProfileView.as_view(), name='profile'),
     path('signup/', RegisterView.as_view(), name='register'),
-    path('user-details/', profile_details, name='user-details'),
+    path('api/user-details/', profile_details, name='user-details'),
     path('logout/', LogoutView.as_view(
         next_page='/'
     ),name='logout')

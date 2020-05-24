@@ -1,6 +1,7 @@
 from django.db import models
 from user.models import User
 from django.core.validators import MaxValueValidator
+import uuid
 
 class Shop(models.Model):
     shop_name           =models.CharField(max_length=60)
@@ -58,12 +59,14 @@ class Shop(models.Model):
 
 class Slot(models.Model):
     shop             =models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='slots')
+    slot_id          =models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     slot_start_time  =models.DateTimeField()
     slot_stop_time   =models.DateTimeField()
     num_entries_left =models.IntegerField()
 
     def to_dict(self):
         slot_dict={
+            "slot_id": self.slot_id,
             "owner": self.shop.to_dict(),
             "slot_start_time":self.slot_start_time,
             "slot_stop_time":self.slot_stop_time,

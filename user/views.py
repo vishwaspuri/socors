@@ -13,19 +13,7 @@ from django.shortcuts import get_object_or_404
 @login_required(login_url='/user/login/')
 @api_view(["POST"])
 def add_address(request):
-    try:
-        user_id=request.data['id']
-    except:
-        return Response({
-            'status':False,
-            'error': 'User id not sent correctly!'}, status=status.HTTP_400_BAD_REQUEST)
-
-    user=User.objects.get(id=user_id)
-
-    if user==None:
-        return Response({
-            'status':False,
-            'error': 'User not found!'}, status=status.HTTP_404_NOT_FOUND)
+    user=request.user
 
     try:
         city=request.data['city']
@@ -63,6 +51,7 @@ def add_address(request):
             'error': 'Pincode not sent!'}, status=status.HTTP_400_BAD_REQUEST)
 
     address=Address()
+    address.user=user
     address.city=city
     address.area=area
     address.street=street
