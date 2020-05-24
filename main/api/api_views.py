@@ -27,7 +27,7 @@ class ShopView(APIView, LoginRequiredMixin):
 @api_view(['GET'])
 def list_slots_for_shop(request, gst_id):
     shop=Shop.objects.get(gst_id=gst_id)
-    if not shop.exists():
+    if shop==None:
         return Response({
             'status': False,
             'error': 'Shop with the gst id not registered!'
