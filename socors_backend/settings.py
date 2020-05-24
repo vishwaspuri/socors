@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_jwt',
     'user',
     'main',
     'djcelery',
@@ -159,5 +160,15 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'
 LOGIN_REDIRECT_URL='/menu/'
 CORS_ORIGIN_ALLOW_ALL = True
 
+JWT_AUTH = {
+    "JWT_VERIFY_EXPIRATION": False,
+}
+
+JWT_TOKEN_EXPIRY=10
+
+try:
+    from django_rest_jwt.local_settings import *
+except ImportError:
+    pass
 
 SITE_ID = 1

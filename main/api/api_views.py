@@ -3,13 +3,15 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import ShopSerializer
-from django.contrib.auth.decorators import login_required
 from main.whatsapp import send_whatsapp
 from main.models import Slot,Shop,Booking
-from django.contrib.auth.mixins import LoginRequiredMixin
+from rest_framework.decorators import permission_classes, authentication_classes
+from user.authentication import UserAuthentication
+from user.permission import UserAccessPermission
 
-class ShopView(APIView, LoginRequiredMixin):
-    login_url = '/user/login/'
+class ShopView(APIView):
+    authentication_classes = (UserAuthentication,)
+    permission_classes = (UserAccessPermission,)
     def get(self, request,pin):
         user=request.user
         user_addresses=user.address.all()
@@ -51,7 +53,8 @@ def list_slots_for_shop(request, gst_id):
         'status':True,
         'payload':payload}, status=status.HTTP_200_OK)
 
-@login_required(login_url='/user/login/')
+@authentication_classes([UserAuthentication])
+@permission_classes([UserAccessPermission,])
 @api_view(['POST'])
 def book_slot(request):
     user=request.user
@@ -137,7 +140,8 @@ def book_slot(request):
                 'status':True,
                 'msg': 'Slot booked'}, status=status.HTTP_200_OK)
 
-@login_required(login_url='/user/login/')
+@authentication_classes([UserAuthentication])
+@permission_classes([UserAccessPermission,])
 @api_view(['GET'])
 def user_booked_slots(request):
     try:
@@ -162,7 +166,8 @@ def user_booked_slots(request):
         'payload':payload}, status=status.HTTP_200_OK)
 
 
-@login_required(login_url='/user/login/')
+@authentication_classes([UserAuthentication])
+@permission_classes([UserAccessPermission,])
 @api_view(['GET'])
 def get_shop_by_category_and_city(request, category):
     user=request.user
@@ -184,7 +189,8 @@ def get_shop_by_category_and_city(request, category):
     }, status=status.HTTP_200_OK)
 
 
-@login_required(login_url='/user/login/')
+@authentication_classes([UserAuthentication])
+@permission_classes([UserAccessPermission,])
 @api_view(['GET'])
 def get_shop_by_city(request):
     user=request.user

@@ -1,10 +1,31 @@
 from user.models import User
+from user.otp_helper import get_otp, send_otp
+from user.models import PhoneOTP
+from django.contrib.auth import authenticate
 from rest_framework import status
 from rest_framework.response import Response
-from user.auth_helpers import get_jwt_with_user
-from user.otp_helper import get_otp, send_otp
 from rest_framework.views import APIView
-from user.models import PhoneOTP, LoginOTP
+from user.serializers import UserLoginSerializer
+
+
+
+
+class LoginView(APIView):
+    """
+    View for login a user to your system.
+    **Example requests**:
+        POST /api/auth/login/
+    """
+
+    def post(self, request):
+        email = request.data.get('email', None)
+        password = request.data.get('password', None)
+
+        authenticated_user = authenticate(email=email, password=password)
+        if authenticated_user:
+            serializer = UserLoginSerializer(authenticated_user)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response("Invalid Credentials", status=status.HTTP_401_UNAUTHORIZED)
 
 # -------------------------------------------------------------------------------------------
 # ------------------------------OTP VIEWS----------------------------------------------------

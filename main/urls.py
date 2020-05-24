@@ -9,6 +9,7 @@ urlpatterns = [
     path('notifications/', views.NotificationView.as_view(), name='notifications'),
     path('shops-near-me/', views.ExploreView.as_view(), name='explore'),
     path('shops-slots/', views.SlotsView.as_view(), name='shop-slots'),
+    path('test/', views.TestView.as_view(), name='test'),
     path('api/shop-list/<int:pin>', api_views.ShopView.as_view(), name='shops'),
     path('api/shop-slots/<str:gst_id>', api_views.list_slots_for_shop, name='slots'),
     path('api/book-slot/', api_views.book_slot, name='shops'),

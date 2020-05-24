@@ -6,11 +6,15 @@ from django.contrib.auth.decorators import login_required
 from .models import User
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from rest_framework.decorators import permission_classes, authentication_classes
+from user.authentication import UserAuthentication
+from user.permission import UserAccessPermission
 
 from django.shortcuts import get_object_or_404
 # Create your views here.
 
-@login_required(login_url='/user/login/')
+@authentication_classes([UserAuthentication])
+@permission_classes([UserAccessPermission])
 @api_view(["POST"])
 def add_address(request):
     user=request.user
