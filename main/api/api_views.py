@@ -26,7 +26,13 @@ class ShopView(APIView, LoginRequiredMixin):
 #Get the list of slots for a shop given the shops gst id
 @api_view(['GET'])
 def list_slots_for_shop(request, gst_id):
-    shop=Shop.objects.get(gst_id=gst_id)
+    try:
+        shop=Shop.objects.get(gst_id=gst_id)
+    except:
+        return Response({
+            'status': False,
+            'error': 'Shop with the gst id not registered!'
+        }, status=status.HTTP_404_NOT_FOUND)
     if shop==None:
         return Response({
             'status': False,
@@ -154,3 +160,48 @@ def user_booked_slots(request):
     return Response({
         'status':True,
         'payload':payload}, status=status.HTTP_200_OK)
+
+
+@login_required(login_url='/user/login/')
+@api_view(['GET'])
+def get_shop_by_category_and_city(request, category):
+    user=request.user
+    payload=[]
+    addresses=user.address.all()
+    if not addresses.exists():
+        return Response({
+            'status': False,
+            'error': 'Please add your address!'}, status=status.HTTP_400_BAD_REQUEST)
+    for address in addresses:
+        city=address.city
+        shops=Shop.objects.filter(shop_city=city, shop_type=category)
+        if shops.exists():
+            for shop in shops:
+                payload.append(shop.to_dict())
+    return Response({
+        'status': True,
+        'payload': payload
+    }, status=status.HTTP_200_OK)
+
+
+@login_required(login_url='/user/login/')
+@api_view(['GET'])
+def get_shop_by_city(request):
+    user=request.user
+    payload=[]
+    addresses=user.address.all()
+    if not addresses.exists():
+        return Response({
+            'status': False,
+            'error': 'Please add your address!'}, status=status.HTTP_400_BAD_REQUEST)
+    for address in addresses:
+        city=address.city
+        shops=Shop.objects.filter(shop_city=city)
+        if shops.exists():
+            for shop in shops:
+                payload.append(shop.to_dict())
+    return Response({
+        'status': True,
+        'payload': payload
+    }, status=status.HTTP_200_OK)
+

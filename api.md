@@ -44,6 +44,8 @@
             "slot_id": <slot_id>, 
         }
       ```
-- GET(Booked slots for a given user): ```api/user-bookings```            
+- GET(Booked slots for a given user): ```api/user-bookings/```
+- GET(Shops by category): ```api/shops-by-category-and-city/<category-code>```
+           
     
         

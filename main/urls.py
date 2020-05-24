@@ -12,5 +12,7 @@ urlpatterns = [
     path('api/shop-list/<int:pin>', api_views.ShopView.as_view(), name='shops'),
     path('api/shop-slots/<str:gst_id>', api_views.list_slots_for_shop, name='slots'),
     path('api/book-slot/', api_views.book_slot, name='shops'),
-    path('api/user-bookings', api_views.user_booked_slots, name='user-slots')
+    path('api/user-bookings/', api_views.user_booked_slots, name='user-slots'),
+    path('api/shops-by-category-and-city/', api_views.get_shop_by_category_and_city, name='shops-by-category-and-city'),
+    path('api/shops-by-city/', api_views.get_shop_by_city, name='shops-by-city')
 ]

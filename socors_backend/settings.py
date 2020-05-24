@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'rest_framework_jwt',
     'user',
     'main',
     'djcelery',
@@ -145,10 +144,6 @@ DATETIME_FORMAT = '%d-%m-%Y %H:%M:%S'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-JWT_AUTH = {
-    "JWT_VERIFY_EXPIRATION": False,
-}
-
 
 BROKER_URL='redis://127.0.0.1:6379/0'
 BROKER_TRANSPORT='redis'
