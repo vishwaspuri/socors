@@ -7,7 +7,9 @@ from django.contrib.auth.decorators import login_required
 @api_view(["GET"])
 def profile_details(request):
     user=request.user
-    return Response(user.to_dict(), status=status.HTTP_200_OK)
+    return Response({
+        'status':True,
+        'user':user.to_dict()}, status=status.HTTP_200_OK)
 
 
 

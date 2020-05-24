@@ -131,14 +131,6 @@ def populate_soc_login_data(sociallogin,user,**kwargs):
     elif sociallogin.account.provider=='facebook':
         user.full_name=sociallogin.account.extra_data['name']
         user.save()
-    else:
-        print('normal')
-
-
-
-
-
-
 
 class Address(models.Model):
     user          =models.ForeignKey(User, on_delete=models.CASCADE, related_name='address')
