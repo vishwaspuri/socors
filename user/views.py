@@ -69,7 +69,7 @@ def add_address(request):
 
 
 class AddaddressView(TemplateView,LoginRequiredMixin):
-    model = User
+    model = User, Address
     login_url = '/user/login'
     template_name = 'addaddress.html'
 
