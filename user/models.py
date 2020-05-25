@@ -139,6 +139,7 @@ class Address(models.Model):
     street        =models.CharField(max_length=150)
     state         =models.CharField(max_length=25)
     pincode       =models.IntegerField(validators=[MaxValueValidator(999999)])
+    is_main       =models.BooleanField(default=False)
 
     def to_dict(self):
         add_dict = {

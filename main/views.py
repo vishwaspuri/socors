@@ -7,6 +7,8 @@ from user.permission import UserAccessPermission
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 # ----------------------------------------------------------------
 # -----------------GENERIC VIEWS----------------------------------
 # ----------------------------------------------------------------
@@ -34,6 +36,20 @@ class ExploreView(TemplateView,LoginRequiredMixin):
     model = User, Shop, Slot, Booking
     login_url = '/user/login'
     template_name = 'shopsnearme.html'
+
+
+def shop_near_me(request):
+    user=request.user
+    pin = 0
+    for address in user.address.all():
+        if address.is_main:
+            pin=address.pincode
+    print(pin)
+    shops=Shop.objects.filter(shop_pincode__exact=int(pin))
+    for shop in shops:
+        print(shop.shop_name)
+    return render(request, 'shopsnearme.html', {'shops':shops})
+
 
 class SlotsView(TemplateView,LoginRequiredMixin):
     model = User, Shop, Slot, Booking
