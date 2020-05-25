@@ -32,10 +32,6 @@ class MytimeslotsView(TemplateView,LoginRequiredMixin):
     login_url = '/user/login'
     template_name = 'mytimeslots.html'
 
-class ExploreView(TemplateView,LoginRequiredMixin):
-    model = User, Shop, Slot, Booking
-    login_url = '/user/login'
-    template_name = 'shopsnearme.html'
 
 
 def shop_near_me(request):
@@ -50,25 +46,8 @@ def shop_near_me(request):
         print(shop.shop_name)
     return render(request, 'shopsnearme.html', {'shops':shops})
 
+def shop_slots(request,gst_id):
+    shop=Shop.objects.get(gst_id=gst_id)
+    slots=Slot.objects.filter(shop=shop)
+    return render(request, 'shopslots.html', {'slots':slots})
 
-class SlotsView(TemplateView,LoginRequiredMixin):
-    model = User, Shop, Slot, Booking
-    login_url = '/user/login'
-    template_name = 'shopslots.html'
-
-
-class TestView(APIView):
-    """
-    Returns home text if the user is authenticated successfully and has permissions.
-    **Example requests**:
-        GET /api/home/
-    """
-
-    authentication_classes = (UserAuthentication,)
-    permission_classes = (UserAccessPermission,)
-
-    def get(self, request):
-        content = {
-            'message': 'Welcome '
-        }
-        return Response(content, status=status.HTTP_200_OK)

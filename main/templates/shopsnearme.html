@@ -72,7 +72,7 @@
                         <p class="shop_address">{{ shop.shop_area }}, {{ shop.shop_city }}</p>
                 </div>
                 <div class="d-flex flex-row-reverse">
-                    <button type="button" class="btn"><a href="{% url 'main:shop-slots' %}">Get Timeslot</a></button>
+                    <button type="button" class="btn"><a href="{% url 'main:shop-slots' gst_id=shop.gst_id %}">Get Timeslot</a></button>
                 </div>
             </div>
         </div>
