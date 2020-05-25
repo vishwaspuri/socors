@@ -1,4 +1,5 @@
 from user.models import User
+from main.models import Shop,Slot,Booking
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from user.authentication import UserAuthentication
@@ -15,27 +16,27 @@ class BaseView(TemplateView,LoginRequiredMixin):
     template_name = 'home.html'
 
 class MenuView(TemplateView,LoginRequiredMixin):
-    model=User
+    model=User, Shop, Slot, Booking
     login_url = '/user/login'
     template_name = 'menu.html'
 
 class NotificationView(TemplateView,LoginRequiredMixin):
-    model = User
+    model = User, Shop, Slot, Booking
     login_url = '/user/login'
     template_name = 'notifications.html'
 
 class MytimeslotsView(TemplateView,LoginRequiredMixin):
-    model = User
+    model = User, Shop, Slot, Booking
     login_url = '/user/login'
     template_name = 'mytimeslots.html'
 
 class ExploreView(TemplateView,LoginRequiredMixin):
-    model = User
+    model = User, Shop, Slot, Booking
     login_url = '/user/login'
     template_name = 'shopsnearme.html'
 
 class SlotsView(TemplateView,LoginRequiredMixin):
-    model = User
+    model = User, Shop, Slot, Booking
     login_url = '/user/login'
     template_name = 'shopslots.html'
 
