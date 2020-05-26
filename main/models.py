@@ -78,9 +78,13 @@ class Slot(models.Model):
         self.num_entries_left=self.shop.shop_capacity
 
 
-class Booking(models.Model):
-    user                  =models.ForeignKey(User, on_delete=models.CASCADE, related_name='bookings')
-    slot                  =models.ForeignKey(Slot, on_delete=models.CASCADE, related_name='bookings')
-    shop                  =models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='bookings')
-    is_message            =models.BooleanField(default=False)
+class PickUpBooking(models.Model):
+    user                  =models.ForeignKey(User, on_delete=models.CASCADE, related_name='pickupbookings')
+    slot                  =models.ForeignKey(Slot, on_delete=models.CASCADE, related_name='pickupbookings')
+    shop                  =models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='pickupbookings')
     message_for_shopkeeper=models.CharField(max_length=256, null=True)
+
+class BuyInBooking(models.Model):
+    user                  = models.ForeignKey(User, on_delete=models.CASCADE, related_name='buyinbookings')
+    slot                  = models.ForeignKey(Slot, on_delete=models.CASCADE, related_name='buyinbookings')
+    shop                  = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='buyinbookings')

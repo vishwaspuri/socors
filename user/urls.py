@@ -20,5 +20,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(
         next_page='/'
     ),name='logout'),
-    path('add-address/', AddAddressView, name='add-address')
+    path('add-address/', AddAddressView, name='add-address'),
 ]

@@ -5,7 +5,7 @@ from django.contrib.auth.models import (
 import uuid
 from django.core.validators import MaxValueValidator, RegexValidator
 from django.dispatch import receiver
-from allauth.account.signals import user_logged_in,user_signed_up
+from allauth.account.signals import user_signed_up
 
 
 class UserManager(BaseUserManager):
