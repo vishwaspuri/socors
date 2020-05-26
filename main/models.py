@@ -33,11 +33,11 @@ class Shop(models.Model):
     def to_dict(self):
         shop_type_dict={
             '1' : 'Groceries',
-            '2' : 'Fruits and Vegetables',
+            '2' : 'Fruits',
             '3' : 'Bakery',
-            '4' : 'Electronics and Electrical',
+            '4' : 'Electronics',
             '5' : 'Pharmacy',
-            '6' : 'Clothing and Apparels'
+            '6' : 'Clothing'
         }
         shop_dict = {
             "name": self.shop_name,
