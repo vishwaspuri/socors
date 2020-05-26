@@ -13,7 +13,7 @@
         }
         ```
 - OTP Verification:
-    - POST: ```user/api/otp```<br/>
+    - POST: ```user/api/otp/```<br/>
     ```
         {
             "phone": <ph_number>,
@@ -35,9 +35,9 @@
         ```
 ## Slot API's
 
-- GET(Shops in same pincode)        : ```api/shop-list/<int:pincode>```
-- GET(Shop details given the gst id): ```api/shop-slots/<str:gst_id>``` 
-- POST(Book Slot): ```api/book-slot```
+- GET(Shops in same pincode)        : ```api/shop-list/<int:pincode>/```
+- GET(Shop details given the gst id): ```api/shop-slots/<str:gst_id>/``` 
+- POST(Book Slot): ```api/book-slot/```
     - ```
         {
             "gst_id": <shop-gst-id>,
@@ -45,7 +45,7 @@
         }
       ```
 - GET(Booked slots for a given user): ```api/user-bookings/```
-- GET(Shops by category): ```api/shops-by-category-and-city/<category-code>```
+- GET(Shops by category): ```api/shops-by-category-and-city/<category-code>/```
            
-    
+- GET(Shop Search) ```api/shop-search/<Query>/```    
         

@@ -8,6 +8,7 @@ from main.models import Slot,Shop,Booking
 from rest_framework.decorators import permission_classes, authentication_classes
 from user.authentication import UserAuthentication
 from user.permission import UserAccessPermission
+from django.db.models import Q
 
 class ShopView(APIView):
     authentication_classes = (UserAuthentication,)
@@ -211,3 +212,17 @@ def get_shop_by_city(request):
         'payload': payload
     }, status=status.HTTP_200_OK)
 
+
+@api_view(['GET'])
+def search_for_shop(request, query):
+    if query==None:
+        return Response({
+            'status':False,
+            'error':'Empty Query'}, status=status.HTTP_400_BAD_REQUEST)
+    shops=Shop.objects.filter(Q(shop_name__contains=query) | Q(shop_area__contains=query))
+    payload=[]
+    for shop in shops:
+        payload.append(shop.to_dict())
+    return Response({
+        'status': True,
+        'payload': payload}, status=status.HTTP_200_OK)

@@ -15,5 +15,6 @@ urlpatterns = [
     path('api/user-bookings/', api_views.user_booked_slots, name='user-slots'),
     path('api/shops-by-category-and-city/', api_views.get_shop_by_category_and_city, name='shops-by-category-and-city'),
     path('api/shops-by-city/', api_views.get_shop_by_city, name='shops-by-city'),
-    path('shop-by-category/<int:cat>/', views.shop_by_cat, name='shop-by-cat')
+    path('shop-by-category/<int:cat>/', views.shop_by_cat, name='shop-by-cat'),
+    path('api/search-shop/<str:query>/',api_views.search_for_shop, name='search')
 ]
