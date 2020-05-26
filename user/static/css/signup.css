@@ -1,5 +1,4 @@
 body, ::placeholder{
-    background: url(../images/top.png);
     background-repeat: no-repeat;
     background-size: 100% 25.3vh;
     mix-blend-mode: normal;
@@ -8,6 +7,19 @@ body, ::placeholder{
     font-weight: 800;
     margin: 0;
 }
+
+div.swiper-button-next{
+    color: #2DA8CF;
+}
+
+.center{
+    background: url(../images/top.png);
+    background-repeat: no-repeat;
+    background-size: 100% 25.3vh;
+    mix-blend-mode: normal;
+    max-width: 100%;
+}
+
 
 div{
     text-align: center;
@@ -18,7 +30,8 @@ p{
     margin-top: 3.125vh;
 }
 
-h1{
+h1#signup{
+    text-align: left;
     color: white;
     font-size: 45px;
     font-weight: 600;
@@ -134,4 +147,47 @@ input:focus{
 .separator::after {
     margin-left: 3.33vw;
     margin-right: 20.8vw;
+}
+
+.otp{
+    text-align: center;
+}
+*{
+    font-family: 'Nunito', sans-serif;
+    font-family: 800;
+}
+
+img{
+    margin-top: 9vh;
+}
+
+.otp h1{
+    font-size: 30px;
+    margin-top: 2.2vh;
+}
+
+.otp input[type='text']{
+    width: 42px;
+    border: 0;
+    border-bottom: 3px solid black;
+    margin: 5vh 12px 12.5vh 12px;
+    font-size: 20px;
+    text-align: center;
+    outline: none;
+}
+
+input[type='submit']{
+    display: block;
+    background: #2DA8CF;
+    font-family: 'Nunito', sans-serif;
+    color: white;
+    font-weight: 800;
+    height: 6.25vh;
+    min-height: 40px;
+    width: 135px;
+    margin: 4.5vh auto 1.72vh auto;
+    border-radius: 9px;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.18);
+    border: 0;
+    font-size: 15px;
 }
