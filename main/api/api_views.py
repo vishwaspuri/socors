@@ -3,12 +3,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import ShopSerializer
-from main.whatsapp import send_whatsapp
-from main.models import Slot,Shop,BuyInBooking, PickUpBooking
+from main.models import Slot,Shop, PickUpBooking, PickUpNotification
+from user.models import User
 from rest_framework.decorators import permission_classes, authentication_classes
 from user.authentication import UserAuthentication
 from user.permission import UserAccessPermission
 from django.db.models import Q
+import datetime
+
 
 class ShopView(APIView):
     authentication_classes = (UserAuthentication,)
@@ -226,3 +228,26 @@ def search_for_shop(request, query):
     return Response({
         'status': True,
         'payload': payload}, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+def create_notification(request):
+    try:
+        pick_up_booking = PickUpBooking.objects.get(pick_up_id=request.data['pick_up_id'])
+    except:
+        return Response({
+            'status': False,
+            'error': 'Please send the pick-up id!'}, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        user            = User.objects.get(id= request.data['user_id'])
+    except:
+        return Response({
+            'status': False,
+            'error': 'Please send the user id!'}, status=status.HTTP_400_BAD_REQUEST)
+
+    notification                = PickUpNotification()
+    notification.user           = user
+    notification.pickup_booking = pick_up_booking
+    notification.save()
+    return Response({
+        'status': True,
+        'msg': 'Notification Created!'}, status=status.HTTP_200_OK)

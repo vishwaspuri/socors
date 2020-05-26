@@ -17,4 +17,5 @@ urlpatterns = [
     path('api/search-shop/<str:query>/',api_views.search_for_shop, name='search'),
     path('create-buy-in/<str:slot_id>',views.create_buy_in_booking, name='buy-in'),
     path('create-pickup-in/<str:slot_id>',views.create_pick_up_booking, name='pick-up'),
+    path('api/pickup-notification/', api_views.create_notification, name= 'pick-up-notification')
 ]

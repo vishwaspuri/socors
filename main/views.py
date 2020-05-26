@@ -1,5 +1,5 @@
 from user.models import User
-from main.models import Shop,Slot,BuyInBooking, PickUpBooking
+from main.models import Shop,Slot,BuyInBooking, PickUpBooking, PickUpNotification
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
@@ -19,7 +19,7 @@ class MenuView(TemplateView,LoginRequiredMixin):
     template_name = 'menu.html'
 
 class NotificationView(TemplateView,LoginRequiredMixin):
-    model = User, Shop, Slot
+    model = User, Shop, Slot, PickUpNotification
     login_url = '/user/login'
     template_name = 'notifications.html'
 

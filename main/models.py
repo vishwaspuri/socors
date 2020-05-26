@@ -79,12 +79,23 @@ class Slot(models.Model):
 
 
 class PickUpBooking(models.Model):
+    pick_up_id            =models.UUIDField(primary_key=True ,default=uuid.uuid4(), editable=False)
     user                  =models.ForeignKey(User, on_delete=models.CASCADE, related_name='pickupbookings')
     slot                  =models.ForeignKey(Slot, on_delete=models.CASCADE, related_name='pickupbookings')
     shop                  =models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='pickupbookings')
     message_for_shopkeeper=models.CharField(max_length=256, null=True)
 
 class BuyInBooking(models.Model):
+    buy_in_id             = models.UUIDField(primary_key=True, default=uuid.uuid4(), editable=False)
     user                  = models.ForeignKey(User, on_delete=models.CASCADE, related_name='buyinbookings')
     slot                  = models.ForeignKey(Slot, on_delete=models.CASCADE, related_name='buyinbookings')
     shop                  = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='buyinbookings')
+
+
+class PickUpNotification(models.Model):
+    pickup_booking        = models.ForeignKey(PickUpBooking, on_delete=models.CASCADE, related_name='pickupnotif')
+    user                  = models.ForeignKey(User, on_delete=models.CASCADE, related_name='pickupnotif')
+    notif_time            = models.TimeField(auto_now=True)
+
+    class Meta:
+        ordering=['-notif_time']
