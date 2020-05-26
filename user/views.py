@@ -13,6 +13,7 @@ from .forms import AddressForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
+from .addresshelper import make_prior_address_not_main
 # Create your views here.
 
 @authentication_classes([UserAuthentication])
@@ -85,23 +86,12 @@ class RegisterView(TemplateView,LoginRequiredMixin):
     login_url = '/user/login'
     template_name = 'signup.html'
 
-# class AddAddressView(CreateView):
-#     template_name = 'addaddress.html'
-#     model=Address
-#     form_class = AddressForm
-#     def is_valid(self,form):
-#         address=form.save(commit=False)
-#         address.user=User.objects.get(id=self.request.user.id)
-#         address.is_main=True
-#         address.save()
-#         return HttpResponseRedirect('/user/user-details/')
-
-
 
 def AddAddressView(request):
     if request.method == "POST":
         form = AddressForm(request.POST)
         if form.is_valid():
+            make_prior_address_not_main(request.user.id)
             address = form.save(commit=False)
             address.user= User.objects.get(id=request.user.id)
             address.is_main = True

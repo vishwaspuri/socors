@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+
 # ----------------------------------------------------------------
 # -----------------GENERIC VIEWS----------------------------------
 # ----------------------------------------------------------------
@@ -40,10 +41,7 @@ def shop_near_me(request):
     for address in user.address.all():
         if address.is_main:
             pin=address.pincode
-    print(pin)
     shops=Shop.objects.filter(shop_pincode__exact=int(pin))
-    for shop in shops:
-        print(shop.shop_name)
     return render(request, 'shopsnearme.html', {'shops':shops})
 
 def shop_slots(request,gst_id):
@@ -51,3 +49,9 @@ def shop_slots(request,gst_id):
     slots=Slot.objects.filter(shop=shop)
     return render(request, 'shopslots.html', {'slots':slots})
 
+def shop_by_cat(request, cat):
+    user=request.user
+    address=user.address.get(is_main=True)
+    city=address.city
+    shops=Shop.objects.filter(shop_city=city, shop_type=cat)
+    return render(request, 'shopsnearme.html', {'shops':shops})

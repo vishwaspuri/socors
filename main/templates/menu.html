@@ -58,7 +58,7 @@
             <div class="row">
                 <div class="line left">
                     <div class="top">
-                        <img class="ico groc" src="{% static 'images/grocs.png' %}" alt="">
+                        <a href="{% url 'main:shop-by-cat' cat=1 %}"> <img class="ico groc" src="{% static 'images/grocs.png' %}" alt=""></a>
                     </div>
                     <div class="bottom">
                         Groceries
@@ -66,7 +66,7 @@
                 </div>
                 <div class="line right">
                     <div class="top">
-                        <img class="ico" src="{% static 'images/veggies.png' %}" alt="">
+                        <a href="{% url 'main:shop-by-cat' cat=2 %}"><img class="ico" src="{% static 'images/veggies.png' %}" alt=""></a>
                     </div>
                     <div class="bottom">
                         Fruits and Vegetables
@@ -76,7 +76,7 @@
             <div class="row">
                 <div class="line left">
                     <div class="top">
-                        <img class="ico" src="{% static 'images/cake.png' %}" alt="">
+                        <a href="{% url 'main:shop-by-cat' cat=3 %}"><img class="ico" src="{% static 'images/cake.png' %}" alt=""></a>
                     </div>
                     <div class="bottom">
                         Bakery
@@ -84,7 +84,7 @@
                 </div>
                 <div class="line right">
                     <div class="top">
-                        <img class="ico" src="{% static 'images/elec.png' %}" alt="">
+                        <a href="{% url 'main:shop-by-cat' cat=4 %}"><img class="ico" src="{% static 'images/elec.png' %}" alt=""></a>
                     </div>
                     <div class="bottom">
                         Electronics and Electrical
@@ -94,7 +94,7 @@
             <div class="row">
                 <div class="line left">
                     <div class="top">
-                        <img class="ico" src="{% static 'images/pharm.png' %}" alt="">
+                        <a href="{% url 'main:shop-by-cat' cat=5 %}"><img class="ico" src="{% static 'images/pharm.png' %}" alt=""></a>
                     </div>
                     <div class="bottom">
                         Pharmacy
@@ -102,7 +102,7 @@
                 </div>
                 <div class="line right">
                     <div class="top">
-                        <img class="ico" src="{% static 'images/clothes.png' %}" alt="">
+                        <a href="{% url 'main:shop-by-cat' cat=6 %}"><img class="ico" src="{% static 'images/clothes.png' %}" alt=""></a>
                     </div>
                     <div class="bottom">
                         Clothing and Apparels
