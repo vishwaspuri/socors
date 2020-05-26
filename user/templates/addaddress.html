@@ -58,39 +58,49 @@
         </div>
             
     
-            <form action="" method="POST">
+            <form method="POST" action="/user/add-address/">
+                {% csrf_token %}
                 <label for="city" class="lab">City</label>
-                <select name="City" id="city" class="inp" required>
-                    <option value=""></option>
-                    <option value="----">----</option>
-                </select>
-    
+                <input type="text" name="city" id="city" class="inp" required>
+{#                <select name="city" id="city" class="inp" required>#}
+{#                    <option value="sfdfsd">sfdfsdf</option>#}
+{#                    <option value="----">----</option>#}
+{#                </select>#}
+
                 <label for="area" class="lab">Area</label>
-                <input type="text" name="Area" id="area" class="inp" required>
-                
+                <input type="text" name="area" id="area" class="inp" required>
+
                 <label for="street" class="lab">Street</label>
-                <input type="text" name="Street" id="street" class="inp" required>
+                <input type="text" name="street" id="street" class="inp" required>
 
                 <label for="state" class="lab">State</label>
-                <select name="State" id="state" class="inp lab" required>
-                    <option value=""></option>
-                    <option>Andaman and Nicobar Islands</option>
-                </select>
-                
-    
+                <input type="text" name="state" id="state" class="inp" required>
+
+
                 <div class="flex">
                     <div class="child"></div>
                     <div class="child">
                         <label for="pincode" class="lab">Pincode</label>
-                        <input type="text" name="Pincode" id="pincode" pattern="[0-9]{6}" class="inp" required>
+                        <input type="text" name="pincode" id="pincode" pattern="[0-9]{6}" class="inp" required>
                     </div>
-    
-                    
+
+                {% if form.errors %}
+                    <br>
+                    <br>
+                    <p >
+                        Form not filled correctly!
+                    </p>
+                {% endif %}
                 </div>
                 <br>
-                <div class="center"><input type="submit" value="submit" id="submit"></div>
-                
+                <div class="center"><input type="submit" value="submit" id="submit" formmethod="post"></div>
+
             </form>
+{#        <form>#}
+{#            <form method="POST" >{% csrf_token %}#}
+{#        {{ form.as_p }}#}
+{#        <button type="submit" class="save btn btn-default" formmethod="post">Save</button>#}
+{#            </form>#}
     </div>
     
 

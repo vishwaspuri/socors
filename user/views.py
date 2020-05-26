@@ -4,12 +4,14 @@ from rest_framework import status
 from .models import Address
 from django.contrib.auth.decorators import login_required
 from .models import User
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework.decorators import permission_classes, authentication_classes
 from user.authentication import UserAuthentication
 from user.permission import UserAccessPermission
-
+from .forms import AddressForm
+from django.http import HttpResponseRedirect, HttpResponse
+from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 # Create your views here.
 
@@ -83,4 +85,28 @@ class RegisterView(TemplateView,LoginRequiredMixin):
     login_url = '/user/login'
     template_name = 'signup.html'
 
+# class AddAddressView(CreateView):
+#     template_name = 'addaddress.html'
+#     model=Address
+#     form_class = AddressForm
+#     def is_valid(self,form):
+#         address=form.save(commit=False)
+#         address.user=User.objects.get(id=self.request.user.id)
+#         address.is_main=True
+#         address.save()
+#         return HttpResponseRedirect('/user/user-details/')
 
+
+
+def AddAddressView(request):
+    if request.method == "POST":
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            address = form.save(commit=False)
+            address.user= User.objects.get(id=request.user.id)
+            address.is_main = True
+            address.save()
+            return HttpResponseRedirect('/user/profile/')
+    else:
+        form = AddressForm()
+    return render(request, 'addaddress.html', {'form': form})
