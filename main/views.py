@@ -2,12 +2,8 @@ from user.models import User
 from main.models import Shop,Slot,Booking
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from user.authentication import UserAuthentication
-from user.permission import UserAccessPermission
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
 from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 
 # ----------------------------------------------------------------
@@ -52,6 +48,8 @@ def shop_slots(request,gst_id):
 def shop_by_cat(request, cat):
     user=request.user
     address=user.address.get(is_main=True)
+    if not address.exists():
+        return HttpResponseRedirect('user/add-address/')
     city=address.city
     shops=Shop.objects.filter(shop_city=city, shop_type=cat)
     return render(request, 'shopsnearme.html', {'shops':shops})
