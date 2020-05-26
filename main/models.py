@@ -52,7 +52,7 @@ class Shop(models.Model):
             "shop_address_area": self.shop_area,
             "shop_address_street": self.shop_street,
             "shop_address_state": self.shop_state,
-            "shop_type": shop_type_dict['1']
+            "shop_type": shop_type_dict[str(self.shop_type)]
         }
         return shop_dict
 
