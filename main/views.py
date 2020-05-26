@@ -49,9 +49,10 @@ def shop_slots(request,gst_id):
 
 def shop_by_cat(request, cat):
     user=request.user
-    address=user.address.get(is_main=True)
-    if address==None:
-        return HttpResponseRedirect('user/add-address/')
+    try:
+        address=user.address.get(is_main=True)
+    except:
+        return HttpResponseRedirect('/user/add-address/')
     city=address.city
     shops=Shop.objects.filter(shop_city=city, shop_type=cat)
     return render(request, 'shopsnearme.html', {'shops':shops})
