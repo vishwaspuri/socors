@@ -83,7 +83,6 @@
                         <form method="post" action="{% url 'main:buy-in' slot.slot_id %}">
                             {% csrf_token %}
                             <input type="hidden" name="next" value="{{ next }}" />
-                            <br><br>
                             <input class="btn btn-info" type="submit" value="Buy-in" id="submit">
                         </form>
                     </div>
@@ -104,11 +103,12 @@
               <form class="d-flex flex-row" action="{% url 'main:pick-up' slot_id=slot.slot_id %}" method="POST">
                 {% csrf_token %}
                 <p class="align-self-start" >Enter your order below</p>
-              <input class="order-details" type="text" name="message_for_shopkeeper">
-              <input type="hidden" name="next" value="{{ next }}" />
+              <input class="order-details" type="text" name="message_for_shopkeeper"><br><br>
+              <input type="hidden" name="next" value="{{ next }}" >
               <button type="submit" class="btn btn-info" data-toggle="modal" data-target=".confirmation">Confirm</button>
+              <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
             </form>
-            <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
+
             </div></div>
         </div>
       </div>
@@ -140,9 +140,6 @@
                         <div class="col-4">
                             <p class="lgn"><img src="{% static 'images/avail.png' %}" alt="" class="lg">Available</p>
                         </div>
-{#                        <div class="col-4">#}
-{#                            <p class="lgn"><img src="images/warn.png" alt="" class="lg">Almost Full</p>#}
-{#                        </div>#}
                         <div class="col-4">
                             <p class="lgn"><img src="{% static 'images/full.png' %}" alt="" class="lg">Full</p>
                         </div>
