@@ -5,11 +5,13 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import PickUpForm
+
+
 # ------------------------------------------------------------------------------
 # -----------------GENERIC VIEWS FOR TEMPLATES----------------------------------
 # ------------------------------------------------------------------------------
 
-class BaseView(LoginRequiredMixin,TemplateView):
+class BaseView(TemplateView):
     login_url = '/user/login/'
     template_name = 'home.html'
 
@@ -45,7 +47,7 @@ def shop_near_me(request):
 def shop_slots(request,gst_id):
     shop=Shop.objects.get(gst_id=gst_id)
     slots=Slot.objects.filter(shop=shop)
-    return render(request, 'shopslots.html', {'slots':slots})
+    return render(request, 'shopslots.html', {'slots':slots, 'shop': shop})
 
 def shop_by_cat(request, cat):
     user=request.user
@@ -58,13 +60,17 @@ def shop_by_cat(request, cat):
     return render(request, 'shopsnearme.html', {'shops':shops})
 
 def create_buy_in_booking(request, slot_id):
-    slot = Slot.objects.get(slot_id=slot_id)
-    user = request.user
-    shop = slot.shop
-    if slot.num_entries_left:
+    if request.method== "POST":
+        slot = Slot.objects.get(slot_id=slot_id)
+        user = request.user
+        shop = slot.shop
         slot.num_entries_left=slot.num_entries_left-1
         slot.save()
-        BuyInBooking(slot=slot, shop=shop, user=user)
+        booking=BuyInBooking()
+        booking.user=user
+        booking.slot=slot
+        booking.shop=shop
+        booking.save()
         return HttpResponseRedirect('/mytimeslots/')
 
 def create_pick_up_booking(request, slot_id):

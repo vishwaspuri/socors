@@ -162,7 +162,7 @@ p.text{
 }
 
 .notif{
-    background: url(./../nav_imgs/notif.png);
+    background: url(./../images/notif.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;

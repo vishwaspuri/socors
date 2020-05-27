@@ -15,16 +15,6 @@ $(document).ready(function(){
                 open=false;
             }
         });
-   
-        if(h1Margin<='65px'){
-            $('h1').addClass('h1MinMargin');
-            $('h1').removeClass('h1margin');
-        }
-
-        if(h1Margin>='65px'){
-            $('h1').addClass('h1margin');
-            $('h1').removeClass('h1MinMargin');
-        }
 
         for(var i=0;i<timeButtons.length;i++){
             if(timeButtons[i].classList.contains('btn-danger')){
@@ -40,7 +30,7 @@ $(document).ready(function(){
     divPicture.on("click", $('sup'),function(event){
               
               if((!name.html().includes('<input')) &&(event.target.localName== "sup" || event.target.localName == "img")){
-                  name.html("<input id='nameEdit' type='text'><sup><img id='edit_name' src='../images/edit_icon.png' alt=></sup>");
+                  name.html("<input id='nameEdit' type='text'><sup><img id='edit_name' src='./../static/images/edit_icon.png' alt=></sup>");
                   var nameInput=$('#nameEdit')[0];
                   nameInput.value=currentName;
               }
@@ -48,7 +38,7 @@ $(document).ready(function(){
               else if((name.html().includes('<input')) &&(event.target.localName== "sup" || event.target.localName == "img")){
                   var nameInput=$('#nameEdit')[0];
                   currentName=nameInput.value;
-                  name.html(currentName+'<sup><img id="edit_name" src="../images/edit_icon.png" alt=""></sup>');
+                  name.html(currentName+'<sup><img id="edit_name" src="./../static/images/edit_icon.png" alt=""></sup>');
              
               }
   });  
