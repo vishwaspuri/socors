@@ -16,8 +16,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-xxl navbar-dark bg justify-content-xxl-start fixed-top">
-        <a class="navbar-brand order-0 ml-xxl-0 ml-2 mr-auto" href="#">SOCORS</a>
-        <button class="notif"></button>
+        <a class="navbar-brand order-0 ml-xxl-0 ml-2 mr-auto" href="{% url 'main:menu' %}">SOCORS</a>
         <button id="tri" class="navbar-toggler align-self-start" type="button">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -45,6 +44,9 @@
               <li class="nav-item">
                 <a class="link" href="{% url 'main:notifications' %}" tabindex="-1" aria-disabled="true">Notifications</a>
               </li>
+              <li class="nav-item">
+                <a class="link" href="{% url 'user:logout' %}" tabindex="-1" aria-disabled="true">Logout</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -71,6 +73,7 @@
 
 
 
+
         <div class="line">
             <div class="row">
             
@@ -79,23 +82,16 @@
                 </div>
                 <div class="col-10"><p>New store found near you. Tap to check more about it.</p></div>
             </div>
-            <div class="d-flex flex-row-reverse">
-                <p class="time">14 min</p>
-            </div>
-        
         </div>
         <div class="line">
             <div class="row">
-            
+
                 <div class="col-2">
                     <img src="{% static 'images/star.png' %}" alt="">
                 </div>
-                <div class="col-10"><p>New store found near you. Tap to check more about it.</p></div>
+                <div class="col-10"><p>Welcome to socors!</p></div>
             </div>
-            <div class="d-flex flex-row-reverse">
-                <p class="time">14 min</p>
-            </div>
-        
+
         </div>
     </div>
     <script

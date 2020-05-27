@@ -69,17 +69,17 @@ def add_address(request):
         'address':address.to_dict()}, status=status.HTTP_201_CREATED)
 
 
-class AddaddressView(TemplateView,LoginRequiredMixin):
+class AddaddressView(LoginRequiredMixin,TemplateView):
     model = User, Address
     login_url = '/user/login'
     template_name = 'addaddress.html'
 
-class ProfileView(TemplateView,LoginRequiredMixin):
+class ProfileView(LoginRequiredMixin,TemplateView):
     model = User
     login_url = '/user/login'
     template_name = 'profile.html'
 
-class RegisterView(TemplateView,LoginRequiredMixin):
+class RegisterView(LoginRequiredMixin,TemplateView):
     model = User
     login_url = '/user/login'
     template_name = 'signup.html'

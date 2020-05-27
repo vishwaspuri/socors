@@ -9,7 +9,6 @@ from rest_framework.decorators import permission_classes, authentication_classes
 from user.authentication import UserAuthentication
 from user.permission import UserAccessPermission
 from django.db.models import Q
-import datetime
 
 
 class ShopView(APIView):

@@ -9,23 +9,23 @@ from .forms import PickUpForm
 # -----------------GENERIC VIEWS FOR TEMPLATES----------------------------------
 # ------------------------------------------------------------------------------
 
-class BaseView(TemplateView,LoginRequiredMixin):
-    login_url = '/user/login'
+class BaseView(LoginRequiredMixin,TemplateView):
+    login_url = '/user/login/'
     template_name = 'home.html'
 
-class MenuView(TemplateView,LoginRequiredMixin):
+class MenuView(LoginRequiredMixin,TemplateView):
     model=User, Shop, Slot
-    login_url = '/user/login'
+    login_url = '/user/login/'
     template_name = 'menu.html'
 
-class NotificationView(TemplateView,LoginRequiredMixin):
+class NotificationView(LoginRequiredMixin,TemplateView):
     model = User, Shop, Slot, PickUpNotification
-    login_url = '/user/login'
+    login_url = '/user/login/'
     template_name = 'notifications.html'
 
-class MytimeslotsView(TemplateView,LoginRequiredMixin):
+class MytimeslotsView(LoginRequiredMixin,TemplateView):
     model = User, Shop, Slot, BuyInBooking,PickUpBooking
-    login_url = '/user/login'
+    login_url = '/user/login/'
     template_name = 'mytimeslots.html'
 
 # ----------------------------------------------------------------

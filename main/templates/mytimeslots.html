@@ -16,8 +16,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-xxl navbar-dark bg justify-content-xxl-start fixed-top">
-        <a class="navbar-brand order-0 ml-xxl-0 ml-2 mr-auto" href="#">SOCORS</a>
-        <button class="notif"></button>
+        <a class="navbar-brand order-0 ml-xxl-0 ml-2 mr-auto" href="{% url 'main:menu' %}">SOCORS</a>
         <button id="tri" class="navbar-toggler align-self-start" type="button">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -44,6 +43,9 @@
               </li>
               <li class="nav-item">
                 <a class="link" href="{% url 'main:notifications' %}" tabindex="-1" aria-disabled="true">Notifications</a>
+              </li>
+              <li class="nav-item">
+                <a class="link" href="{% url 'user:logout' %}" tabindex="-1" aria-disabled="true">Logout</a>
               </li>
             </ul>
           </div>
