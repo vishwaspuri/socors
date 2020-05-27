@@ -83,6 +83,7 @@
                         <form method="post" action="{% url 'main:buy-in' slot.slot_id %}">
                             {% csrf_token %}
                             <input type="hidden" name="next" value="{{ next }}" />
+                            <br><br>
                             <input class="btn btn-info" type="submit" value="Buy-in" id="submit">
                         </form>
                     </div>
