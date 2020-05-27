@@ -79,7 +79,7 @@ class ProfileView(LoginRequiredMixin,TemplateView):
     login_url = '/user/login'
     template_name = 'profile.html'
 
-class RegisterView(LoginRequiredMixin,TemplateView):
+class RegisterView(TemplateView):
     model = User
     login_url = '/user/login'
     template_name = 'signup.html'

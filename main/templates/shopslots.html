@@ -100,16 +100,19 @@
                 </button>
               </form>
               <div class="modal-body">
-                <form class="d-flex flex-row" action="{% url 'main:pick-up' slot_id=slot.slot_id %}" method="POST">
+                <form class="d-flex flex-row" action="{% url 'main:pick-up' slot_id=slot.slot_id %}" method="POST" style="display: inline-grid;">
                     {% csrf_token %}
                     <p class="align-self-start" >Enter your order below</p>
-                    <input class="order-details" type="text" name="message_for_shopkeeper" required>
-                    <input type="hidden" name="next" value="{{ next }}" >
-                    <br>
-                    <button type="submit" class="btn btn-info">Confirm</button>
+                    <div class="text">
+                        <input class="order-details" type="text" name="message_for_shopkeeper" required>
+                    </div>
+                    <div class="button">
+                        <br><br>
+                        <input type="hidden" name="next" value="{{ next }}" >
+                        <button type="submit" class="btn btn-info">Confirm</button>
+                    </div>
                 </form>
                 <br>
-                <button type="button" class="btn btn-info" data-dismiss="modal">Cancel</button>
               </div>
           </div>
         </div>
