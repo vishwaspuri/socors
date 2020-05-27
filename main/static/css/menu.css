@@ -1,16 +1,97 @@
 body{
     height: 100%;
-    /* width: 100%; */
     margin: 0;
 }
 
+.content{
+    margin-top: 5.5vh;
+}
+
+div.load-more{
+    color: #2DA8CF;
+    font-weight: normal;
+}
+
+.btn a, .btn a:hover{
+    color: white;
+    text-decoration: none;
+}
+
+img#edit_name{
+    width: 9px;
+    height: 9px;
+}
+
+div.shop{
+    margin: 0 auto 3.9vh 5vw;
+    padding-left: 5.5vw;
+    width: 87.7vw;
+    height: 21vh;
+    min-height: 165px;
+    background: white;
+    box-shadow: 3px 3px 19px rgba(0, 0, 0, 0.14);
+    border-radius: 14px;
+}
+
+.col-3{
+    margin-right: 4.1vw;
+}
+
+.status{
+    margin-top: 2vh;
+    font-size: 13px;
+}
+
+.shop img{
+    height: 60%;
+    min-height: fit-content;
+    width: auto;
+    margin-top: 2.5vh;
+}
+
+.shop_address{
+    font-size: 11px;
+}
+
+*, button.btn{
+    font-family: 'Nunito', sans-serif;
+    text-align: center;
+    font-weight: 800;
+}
+button.btn{
+    background: #2DA8CF;
+    color: white;
+    font-size: 12px;
+    border-radius: 0;
+    height: 15.6%;
+    width: 30%;
+    min-width: 100px;
+    align-self: end;
+}
+
+button.disabled{
+    background: #B8B6AE;
+}
+
+.shop_name{
+    font-size: 17px;
+    margin-top: 4.8vh;
+}
+
+.open{
+    color: green;
+}
+
+.closed{
+    color: red;
+}
 *{
     font-family: 'Nunito', sans-serif;
     text-align: center;
 }
 
 input[type^="search"]{
-    background-image: url(images/search.png);
+    background-image: url(../images/search.png);
     background-repeat: no-repeat;
     background-position: 4% 50%;
     border: 1px solid #2DA8CF;
@@ -70,20 +151,12 @@ img#edit_name{
     margin: 2.35vh 9.1vw 2.35vh 3.33vw;
 }
 
-.inputmargin{
-    margin-top: 13.125vh;
-}
-
-.inputMinMargin{
-    margin-top: 80px;
-}
-
 input:focus{
     outline: none;
 }
 
 .notif{
-    background: url(./../nav_imgs/notif.png);
+    background: url(../images/notif.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
@@ -188,3 +261,31 @@ p{
         display: block;
     }
 }
+
+@media (max-height: 500px){
+    .inputmargin{
+        margin-top: 80px;
+    }
+    #h1{
+        margin-top: 20vh;
+        font-weight: 800;
+        color: black;
+        font-size: 18px;
+        line-height: 5.3vh;
+    }
+}
+
+@media (min-height: 501px){
+    .inputmargin{
+        margin-top: 13.125vh;
+    }
+    #h1{
+        margin-top: 10vh;
+        font-weight: 800;
+        color: black;
+        font-size: 18px;
+        line-height: 5.3vh;
+    }
+}
+
+

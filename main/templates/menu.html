@@ -16,7 +16,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-xxl navbar-dark bg justify-content-xxl-start fixed-top">
-        <a class="navbar-brand order-0 ml-xxl-0 ml-2 mr-auto" href="#">SOCORS</a>
+        <a class="navbar-brand order-0 ml-xxl-0 ml-2 mr-auto" href="{% url 'main:menu' %}">SOCORS</a>
         <button class="notif"></button>
         <button id="tri" class="navbar-toggler align-self-start" type="button">
           <span class="navbar-toggler-icon"></span>
@@ -25,7 +25,7 @@
           
           <div class="picture">
             <img src="{% static 'images/user_dp.png' %}" alt="profile_picture" class="dp">
-            <p id="nav_name" class="mb-0">{{ user.full_name }}<a href="{% url 'user:profile' %}"> <img id="edit_name" src="{% static 'images/edit_icon.png' %}" alt=""></a></p></p>
+            <p id="nav_name" class="mb-0">{{ user.full_name }}<a href="{% url 'user:profile' %}"><img id="edit_name" src="{% static 'images/edit_icon.png' %}" alt=""></a></p></p>
           </div>
 
           <div class="list">
@@ -53,7 +53,7 @@
     <div class="overlay"></div>
 
     <div class="content">
-            <input class="search_input inputmargin" type="search" placeholder="Enter shop name, product name or product type">
+            <input id="search_input" class="inputmargin" type="search" placeholder="Enter shop name">
             
             <div class="row">
                 <div class="line left">
