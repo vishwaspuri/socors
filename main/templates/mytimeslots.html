@@ -61,7 +61,7 @@
           <div class="row">
             <div class="col-7 align-self-center shop-name">{{ booking.shop.shop_name }}</div>
             <div class="col-5">
-              <div class="row time-slot justify-content-around"><p>{{ booking.slot.slot_start_time }} to {{ booking.slot.slot_stop_time }}</p></div>
+              <div class="row time-slot justify-content-around"><p>{{ booking.slot.slot_start_time|time }} to {{ booking.slot.slot_stop_time|time }}</p></div>
               <div class="row more-info justify-content-around" data-toggle="modal" data-target=".modal"><p>tap to view more</p></div>
             </div>
           </div>
