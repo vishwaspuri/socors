@@ -64,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'main.Middleware.RedirectAuthenticatedUsersFromHomePage',
 ]
 
 ROOT_URLCONF = 'socors_backend.urls'
