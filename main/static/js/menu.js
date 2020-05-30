@@ -10,12 +10,12 @@ var startString= '<div class="shop row">'+
 var midString1= '</span></div></div>';
                             
 var midString2= '<div class="col-7">'+
-                    '<div class="row">'+
+                    '<div class="row justify-content-center">'+
                         '<p class="shop_name">';             
 
 var midString3='</p>'+
             '</div>'+
-            '<div class="row">'+
+            '<div class="row justify-content-center">'+
                 '<p class="shop_address">';
                 
 var midString4='</p>'+
