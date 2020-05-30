@@ -1,6 +1,5 @@
 var open=false;
 var numPages=0;
-var btnClass=' "';
 var textIndent=parseInt($('input').css('text-indent'))/100;
 var searchWidth=textIndent*parseInt($('input').css('width'));
 var startString= '<div class="shop row">'+
@@ -74,13 +73,14 @@ $(document).ready(function(){
                             var k=shops.payload.length;
                             for(var i=numPages*10;i<numPages*10+10;i++){
                                 if(i<k){
+                                    var btnClass=' "';
                                     var shopStatus='open';
                                     var d= new Date();
                                     if(d.getHours()<shops.payload[i].start_time.slice(0,2)|| d.getHours()>shops.payload[i].stop_time.slice(0,2)){
                                         shopStatus="closed";
                                     }
                                     if(shopStatus=="closed"){
-                                        btnClass=' disabled" disabled';
+                                        btnClass=' disabled" disabled="true"';
                                     }
                                     output+=startString+shopStatus+'">'+shopStatus.charAt(0).toUpperCase()+shopStatus.slice(1)+midString1+midString2+shops.payload[i].name+midString3+shops.payload[i].shop_address_street+" "+shops.payload[i].shop_address_area+" "+shops.payload[i].shop_address_city+" "+ shops.payload[i].shop_address_state+midString4+btnClass+endString+'https://vishwastest.pythonanywhere.com/shops-slots/'+shops.payload[i].gst_id+'/'+lastString;
                                 }
