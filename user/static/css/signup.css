@@ -191,3 +191,12 @@ input[type='submit']{
     border: 0;
     font-size: 15px;
 }
+
+.login{
+    color: #2DA8CF;
+    text-decoration: none;
+}
+
+.bottom{
+    margin-top: 1vh;
+}
