@@ -133,6 +133,14 @@ span img{
     margin: 3.6vh auto 1.875vh 5vw;
 }
 
+.modal{
+    margin-top: 25vh;
+}
+
+.pick-or-buy{
+    margin-top: 40vh;
+}
+
 .bt{
     box-sizing: border-box;
 }
