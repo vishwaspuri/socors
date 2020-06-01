@@ -206,3 +206,6 @@ p{
         display: block;
     }
 }
+
+button.disabled a{
+pointer-events: none;}
