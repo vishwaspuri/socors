@@ -207,5 +207,7 @@ p{
     }
 }
 
-button.disabled a{
-pointer-events: none;}
+/*a{*/
+/*    color: white;*/
+/*    text-decoration: none;*/
+/*}*/
