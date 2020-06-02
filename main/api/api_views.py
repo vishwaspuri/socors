@@ -254,12 +254,12 @@ def create_notification(request):
 
 @api_view(['GET'])
 def get_shop_details(request, gst_id):
-    shop = Shop.objects.get(gst_id=gst_id)
-    if shop==None:
+    try:
+        shop = Shop.objects.get(gst_id=gst_id)
+    except:
         return Response({
-            "status":False,
+            "status": False,
             "detail": "Shop with this gst_id not found!"
         }, status=status.HTTP_404_NOT_FOUND)
-    else:
-        payload=shop.to_dict()
-        return Response(payload, status=status.HTTP_404_NOT_FOUND)
+    payload=shop.to_dict()
+    return Response(payload, status=status.HTTP_404_NOT_FOUND)
