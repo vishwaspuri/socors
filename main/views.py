@@ -5,7 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import PickUpForm
-
+from main.shopkeeper_helpers import send_pick_up_to_shopkeeper, send_buy_in_to_shopkeeper
 
 # ------------------------------------------------------------------------------
 # -----------------GENERIC VIEWS FOR TEMPLATES----------------------------------
@@ -71,6 +71,7 @@ def create_buy_in_booking(request, slot_id):
         booking.slot=slot
         booking.shop=shop
         booking.save()
+        send_buy_in_to_shopkeeper(str(booking.slot.slot_id), str(booking.buy_in_id), str(booking.user.id), str(booking.user.full_name))
         return HttpResponseRedirect('/mytimeslots/')
 
 def create_pick_up_booking(request, slot_id):
@@ -83,6 +84,7 @@ def create_pick_up_booking(request, slot_id):
             pickup.slot = slot
             pickup.shop = slot.shop
             pickup.save()
+            send_pick_up_to_shopkeeper(str(pickup.slot.slot_id), str(pickup.pick_up_id), str(pickup.user.id), str(pickup.user.full_name), str(pickup.message_for_shopkeeper))
             return HttpResponseRedirect('/mytimeslots/')
     else:
         form = PickUpForm()

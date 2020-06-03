@@ -1,21 +1,22 @@
-# from __future__ import absolute_import
-# from socors_backend.celery import app
+from __future__ import absolute_import
+from socors_backend.celery import app
 from .models import Shop, Slot
 from datetime import timedelta,datetime, date
-import uuid
+from main.shopkeeper_helpers import create_slot
 
 
+
+
+@app.task
 def create_slots_for_the_day():
     shops = Shop.objects.all()
-    today = date.today()
     for shop in shops:
         slot_duration = shop.slot_duration
         shop_start_time = shop.start_time
         shop_stop_time = shop.stop_time
         num_working_hrs=datetime.combine(date.today(), shop_stop_time) - datetime.combine(date.today(), shop_start_time)
         num_slots_required = int(num_working_hrs.total_seconds()/(60*slot_duration))
-        print(num_slots_required)
-        st = shop_stop_time
+        st = shop_start_time
         for i in range(0, num_slots_required):
             slot = Slot()
             slot.shop = shop
@@ -26,3 +27,4 @@ def create_slots_for_the_day():
             slot.default_entries_left()
             slot.save()
             st = slot_stop.time()
+            create_slot(slot.slot_id, shop.gst_id,slot.slot_start_time, slot.slot_stop_time)

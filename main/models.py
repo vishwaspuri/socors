@@ -61,14 +61,10 @@ class Shop(models.Model):
 
 class Slot(models.Model):
     shop             =models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='slots')
-    slot_id          =models.CharField(max_length=32,primary_key=True)
+    slot_id          =models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     slot_start_time  =models.DateTimeField()
     slot_stop_time   =models.DateTimeField()
     num_entries_left =models.IntegerField()
-
-    def __init__(self):
-        super(Slot, self).__init__()
-        self.slot_id = str(uuid.uuid4())
 
     def to_dict(self):
         slot_dict={

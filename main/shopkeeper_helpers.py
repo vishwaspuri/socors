@@ -1,7 +1,7 @@
 import requests
 
 
-BASE_URL='http://127.0.0.1:8000'
+BASE_URL='https://vp7.pythonanywhere.com'
 
 
 def send_buy_in_to_shopkeeper(slot_id, buyin_id, user_id, user_name):
@@ -30,7 +30,6 @@ def send_pick_up_to_shopkeeper(slot_id, pickup_id, user_id, user_name, message):
     }
     res = requests.post(url=url, data=payload)
     res_json = res.json()
-    print(res_json)
     if res_json['status'] == False:
         return False
     else:
