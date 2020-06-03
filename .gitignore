@@ -6,3 +6,4 @@ db.sqlite3
 celerybeat.pid
 *.sqlite3
 *__pycache__
+.fuse_hidden000002fa00000004
