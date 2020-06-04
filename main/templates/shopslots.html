@@ -65,9 +65,9 @@
             <div class="buttons">
                 <div class="d-flex flex-row justify-content-around">
                     {% if slot.num_entries_left %}
-                    <button type="button" class="bt" data-toggle="modal" data-target=".choose">{{ slot.slot_start_time }}- {{ slot.slot_stop_time }}</button>
+                    <button type="button" class="bt" data-toggle="modal" data-target=".choose">{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button>
                     {% else %}
-                    <button type="button" class="bt btn-danger" data-toggle="modal" >{{ slot.slot_start_time }}- {{ slot.slot_stop_time }}</button>
+                    <button type="button" class="bt btn-danger" data-toggle="modal" >{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button>
                     {% endif %}
                 </div>
             </div>      
