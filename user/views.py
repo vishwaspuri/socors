@@ -74,6 +74,12 @@ class AddaddressView(LoginRequiredMixin,TemplateView):
     login_url = '/user/login'
     template_name = 'addaddress.html'
 
+class AfterAddressView(LoginRequiredMixin,TemplateView):
+    model = User, Address
+    login_url = '/user/login'
+    template_name = 'afteraddressprofile.html'
+
+
 class ProfileView(LoginRequiredMixin,TemplateView):
     model = User
     login_url = '/user/login'
@@ -94,7 +100,7 @@ def AddAddressView(request):
             address.user= User.objects.get(id=request.user.id)
             address.is_main = True
             address.save()
-            return HttpResponseRedirect('/user/profile/')
+            return HttpResponseRedirect('/user/after-address-profile/')
     else:
         form = AddressForm()
     return render(request, 'addaddress.html', {'form': form})
