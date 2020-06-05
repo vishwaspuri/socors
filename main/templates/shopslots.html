@@ -64,7 +64,6 @@
         {% for slot in slots %}
             {% with block_class=slot.class_name %}
                 {% with pickup_class=slot.pickup_class_name %}
-            <div class="container">
             <div class="buttons">
                 <div class="d-flex flex-row justify-content-around">
                     {% if slot.num_entries_left %}
@@ -142,7 +141,6 @@
         </div>
       </div>
     </div>
-                    </div>
             {% endwith %}
          {% endwith %}
     {% endfor %}
