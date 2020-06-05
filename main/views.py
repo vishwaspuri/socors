@@ -66,13 +66,18 @@ def create_buy_in_booking(request, slot_id):
         shop = slot.shop
         slot.num_entries_left=slot.num_entries_left-1
         slot.save()
-        booking=BuyInBooking()
-        booking.user=user
-        booking.slot=slot
-        booking.shop=shop
-        booking.save()
-        send_buy_in_to_shopkeeper(str(booking.slot.slot_id), str(booking.buy_in_id), str(booking.user.id), str(booking.user.full_name))
-        return HttpResponseRedirect('/mytimeslots/')
+        try:
+            buyin = BuyInBooking.objects.get(slot=slot, user=user)
+            return HttpResponseRedirect('/mytimeslots/')
+        except:
+            buyin=BuyInBooking()
+            buyin.user=user
+            buyin.slot=slot
+            buyin.shop=shop
+            buyin.save()
+            print(buyin.buy_in_id)
+            send_buy_in_to_shopkeeper(str(slot.slot_id), str(buyin.buy_in_id), str(user.id), str(user.full_name))
+            return HttpResponseRedirect('/mytimeslots/')
 
 def create_pick_up_booking(request, slot_id):
     if request.method == "POST":
@@ -84,7 +89,7 @@ def create_pick_up_booking(request, slot_id):
             pickup.slot = slot
             pickup.shop = slot.shop
             pickup.save()
-            send_pick_up_to_shopkeeper(str(pickup.slot.slot_id), str(pickup.pick_up_id), str(pickup.user.id), str(pickup.user.full_name), str(pickup.message_for_shopkeeper))
+            send_pick_up_to_shopkeeper(str(slot.slot_id), str(pickup.pick_up_id), str(pickup.user.id), str(pickup.user.full_name), str(pickup.message_for_shopkeeper))
             return HttpResponseRedirect('/mytimeslots/')
     else:
         form = PickUpForm()

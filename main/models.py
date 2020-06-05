@@ -66,6 +66,13 @@ class Slot(models.Model):
     slot_stop_time   =models.DateTimeField()
     num_entries_left =models.IntegerField()
 
+    def class_name(self):
+        return self.slot_id
+
+    def pickup_class_name(self):
+        payload='pickup'+str(self.slot_id)
+        return payload
+
     def to_dict(self):
         slot_dict={
             "slot_id": self.slot_id,

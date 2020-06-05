@@ -56,16 +56,18 @@
 
     <div class="content">
         <h1 id="h1" class="d-flex justify-content-center h1margin">{{ shop.shop_name }}</h1>
-       
+
         <div class="timeslots container-fluid">
             <div class="header d-flex align-items-start">
                 <h5>Timeslots</h5>
             </div>
         {% for slot in slots %}
+            {% with block_class=slot.class_name %}
+                {% with pickup_class=slot.pickup_class_name %}
             <div class="buttons">
                 <div class="d-flex flex-row justify-content-around">
                     {% if slot.num_entries_left %}
-                    <button type="button" class="bt" data-toggle="modal" data-target=".choose">{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button>
+                    <button type="button" class="bt" data-toggle="modal" data-target=".{{ block_class }}">{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button>
                     {% else %}
                     <button type="button" class="bt btn-danger" data-toggle="modal" >{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button>
                     {% endif %}
@@ -73,11 +75,11 @@
             </div>      
         </div>
 
-        <div class="choose modal fade pickup-or-buy" tabindex="-1" role="dialog">
+        <div class="{{ block_class }} modal fade pickup-or-buy" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <button class="btn btn-info" data-toggle="modal" data-target=".pickup">Pick-up</button>
+                        <button class="btn btn-info" data-toggle="modal" data-target=".{{ pickup_class }}">Pick-up</button>
                         <br>
                         <br>
                         <form method="post" action="{% url 'main:buy-in' slot.slot_id %}">
@@ -89,8 +91,8 @@
                 </div>
             </div>
         </div>
-      
-      <div class="pickup modal fade" tabindex="-1" role="dialog">
+
+      <div class="{{ pickup_class }} modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
               <form class="modal-header d-flex flex-row justify-content-center">
@@ -139,6 +141,8 @@
         </div>
       </div>
     </div>
+            {% endwith %}
+         {% endwith %}
     {% endfor %}
     <div class="row">
         <div class="col-4">
