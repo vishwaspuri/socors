@@ -67,7 +67,8 @@ class Slot(models.Model):
     num_entries_left =models.IntegerField()
 
     def class_name(self):
-        return self.slot_id
+        payload = 'buyin' + str(self.slot_id)
+        return payload
 
     def pickup_class_name(self):
         payload='pickup'+str(self.slot_id)
