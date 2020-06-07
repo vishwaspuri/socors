@@ -91,7 +91,6 @@
 
         {% for address in user.address.all %}
            <div class="address one">
-            <img class="editAdd" src="{% static 'images/edit.png' %}" alt="edit">
             <div class="d-flex">
               <div class="rad"><input type="radio" name="selectedAddress"></div>
               <div class="addr">
@@ -107,34 +106,6 @@
             <br>
             <a href="{% url 'user:add-address' %}"><p class="header">Please add address first!</p></a>
         {% endif %}
-{#          <div class="address one">#}
-{#            <img class="editAdd" src="{% static 'images/edit.png' %}" alt="edit">#}
-{#            <div class="d-flex">#}
-{#              <div class="rad"><input type="radio" name="selectedAddress"></div>#}
-{#              <div class="addr">#}
-{#                <p>Street: <span class="streeT">Streetname</span></p>#}
-{#                <p>Area:<span class="areA">AREA</span></p>#}
-{#                <p>City:<span class="citY">CITY</span></p>#}
-{#                <p><span class="state">State:</span><span class="statE">STATENAME</span><span class="pincode">Pincode:</span><span class="PIN">111111</span></p>#}
-{#              </div>#}
-{#            </div>#}
-{#          </div>#}
-{#          <div class="address two">#}
-{#            <img class="editAdd" src="{% static 'images/edit.png' %}" alt="edit">#}
-{#            <div class="d-flex">#}
-{#              <div class="rad"><input type="radio" name="selectedAddress"></div>#}
-{#              <div class="addr">#}
-{#                <p>Street: <span class="streeT"></span></p>#}
-{#                <p>Area:<span class="areA"></span></p>#}
-{#                <p>City:<span class="citY"></span></p>#}
-{#                <p><span class="state">State:</span><span class="statE"></span><span class="pincode">Pincode:</span><span class="PIN"></span></p>#}
-{#              </div>#}
-{#            </div>#}
-{#          </div>#}
-{#        #}
-{#        </div>#}
-{#      </div>#}
-      <input type="submit" value="Update Profile" id="submit">
     </div>
 
 
