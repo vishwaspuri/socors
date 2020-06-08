@@ -93,7 +93,7 @@ class PickUpBooking(models.Model):
     user                  =models.ForeignKey(User, on_delete=models.CASCADE, related_name='pickupbookings')
     slot                  =models.ForeignKey(Slot, on_delete=models.CASCADE, related_name='pickupbookings')
     shop                  =models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='pickupbookings')
-    message_for_shopkeeper=models.CharField(max_length=256, null=True)
+    message_for_shopkeeper=models.TextField(max_length=256, null=True)
 
 class BuyInBooking(models.Model):
     buy_in_id             = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
