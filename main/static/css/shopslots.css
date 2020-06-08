@@ -142,20 +142,19 @@ span img{
 }
 
 .bt{
-    box-sizing: border-box;
-}
-
-.bt{
-    border: 0;
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.18);
-    height: 4.35vh;
-    width: 21.6%;
-    min-height: 25px;
-    min-width: max-content;
+    border:0;
+    box-shadow: 1px 2px 4px rgba(0,0,0,0.18);
+    height: 5vh;
+    width: 25vw;
+    min-height: 30px;
     margin-bottom: 2.4vh;
     font-weight: normal;
     font-size: 14px;
+    box-sizing: border-box;
+    margin-left: 5px;
+    margin-right: 5px;
 }
+
 
 .legend{
     margin-top: 6.1vh;
