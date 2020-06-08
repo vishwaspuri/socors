@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import PickUpForm
 from main.shopkeeper_helpers import send_pick_up_to_shopkeeper, send_buy_in_to_shopkeeper
-
+from datetime import datetime
 # ------------------------------------------------------------------------------
 # -----------------GENERIC VIEWS FOR TEMPLATES----------------------------------
 # ------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ def shop_near_me(request):
 
 def shop_slots(request,gst_id):
     shop=Shop.objects.get(gst_id=gst_id)
-    slots=Slot.objects.filter(shop=shop)
+    slots=Slot.objects.filter(shop=shop, slot_start_time__day=datetime.today().day, slot_start_time__month=datetime.today().month)
     return render(request, 'shopslots.html', {'slots':slots, 'shop': shop})
 
 def shop_by_cat(request, cat):

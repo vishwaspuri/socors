@@ -59,24 +59,25 @@
         <div class="header d-flex align-items-start">
                 <h5>Timeslots</h5>
         </div>
-        <table>
+        <table style="margin-left:auto;margin-right:auto;">
         {% for slot in slots %}
             {% with block_class=slot.class_name %}
                 {% with pickup_class=slot.pickup_class_name %}
 
         {% if forloop.counter0|divisibleby:3 %}<tr>{% endif %}
+        <td>
         <div class="timeslots container-fluid">
             <div class="buttons">
                 <div class="d-flex flex-row justify-content-around">
                     {% if slot.num_entries_left %}
-                        <td><button type="button" class="bt" data-toggle="modal" data-target=".{{ block_class }}">{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button></td>
+                        <button type="button" class="bt" data-toggle="modal" data-target=".{{ block_class }}">{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button>
                     {% else %}
-                        <td><button type="button" class="bt btn-danger" data-toggle="modal" >{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button></td>
+                        <button type="button" class="bt btn-danger" data-toggle="modal" >{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button>
                     {% endif %}
-
                 </div>
             </div>
         </div>
+        </td>
         {% if forloop.counter|divisibleby:3 or forloop.last %}</tr>{% endif %}
         <div class="{{ block_class }} modal fade pickup-or-buy" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
