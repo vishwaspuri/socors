@@ -4,6 +4,10 @@ body{
     width: 100vw;
 }
 
+.swiper-container{
+    height: 90vh;
+}
+
 div.swiper-button-next{
     background-color: #2DA8CF;
     border-radius: 50%;

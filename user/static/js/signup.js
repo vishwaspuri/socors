@@ -120,4 +120,21 @@ $(document).ready(function(){
             request.setRequestHeader('Content-type', 'application/json');
             request.send(reqJSON);
         })
+    
+    var eyePos=0.87*parseInt($('#password').css('width'));
+    var i=0;
+    $('#password').on("click", function(event){
+        if(event.offsetX>eyePos){
+            if(i==0){
+                $('#password').css("background-image","url(images/show.png)");
+                $('#password')[0].attributes[0].value="text";
+                i=1;
+            }
+            else{
+                $('#password').css("background-image","url(images/hide.png)");
+                $('#password')[0].attributes[0].value="password";
+                i=0;
+            }
+        }
+    })
 });

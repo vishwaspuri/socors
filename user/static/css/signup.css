@@ -42,6 +42,7 @@ h1#signup{
 }
 
 input{
+    font-family: 'Nunito', sans-serif;
     width: 67.5%;
     border: 0;
     border-bottom: 2px solid #000000;
@@ -50,9 +51,9 @@ input{
     font-size: 16px;
     font-weight: 800;
     outline: none;
+    padding-left: 5px;
 }
-
-input[type='password']{
+#password, #confirm-password{
     margin: 4.33vh 0 0 5.7vw;
 }
 
@@ -63,6 +64,12 @@ input[type='password']{
 input:focus{
     font-family: 'Nunito', sans-serif;
     outline: none;
+}
+#password{
+    background-image: url("images/show.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 99%;
 }
 
 .name_ico{
