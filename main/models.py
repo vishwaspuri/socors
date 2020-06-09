@@ -65,6 +65,7 @@ class Slot(models.Model):
     slot_start_time  =models.DateTimeField()
     slot_stop_time   =models.DateTimeField()
     num_entries_left =models.IntegerField()
+    is_break         =models.BooleanField(default=False)
 
     def class_name(self):
         payload = 'buyin' + str(self.slot_id)
@@ -109,3 +110,9 @@ class PickUpNotification(models.Model):
 
     class Meta:
         ordering=['-notif_time']
+
+
+class BreakDay(models.Model):
+    shop                  = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='breakday')
+    day                   = models.DateField(null= False)
+

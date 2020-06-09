@@ -18,5 +18,9 @@ urlpatterns = [
     path('create-buy-in/<str:slot_id>',views.create_buy_in_booking, name='buy-in'),
     path('create-pickup-in/<str:slot_id>',views.create_pick_up_booking, name='pick-up'),
     path('api/pickup-notification/', api_views.create_notification, name= 'pick-up-notification'),
-    path('api/get-shop-details/<str:gst_id>/', api_views.get_shop_details, name='et-shop-details')
+    path('api/get-shop-details/<str:gst_id>/', api_views.get_shop_details, name='get-shop-details'),
+    path('api/change-shop-start-time/<str:gst_id>/', api_views.change_shop_start_time, name= 'change-shop-start-time'),
+    path('api/change-shop-stop-time/<str:gst_id>/', api_views.change_shop_stop_time, name= 'change-shop-stop-time'),
+    path('api/add-break-day/<str:gst_id>/', api_views.add_day_break, name= 'add-daybreak'),
+    path('is-next-day-off/<str:gst_id>/', api_views.is_next_day_off, name='is-next-day-off')
 ]

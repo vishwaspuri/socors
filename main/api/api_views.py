@@ -3,13 +3,13 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import ShopSerializer
-from main.models import Slot,Shop, PickUpBooking, PickUpNotification
+from main.models import Slot,Shop, PickUpBooking, PickUpNotification, BreakDay
 from user.models import User
 from rest_framework.decorators import permission_classes, authentication_classes
 from user.authentication import UserAuthentication
 from user.permission import UserAccessPermission
 from django.db.models import Q
-
+from datetime import datetime, timedelta
 
 class ShopView(APIView):
     authentication_classes = (UserAuthentication,)
@@ -263,3 +263,91 @@ def get_shop_details(request, gst_id):
         }, status=status.HTTP_404_NOT_FOUND)
     payload=shop.to_dict()
     return Response(payload, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(["POST"])
+def change_shop_start_time(request, gst_id):
+    try:
+        shop = Shop.objects.get(gst_id=gst_id)
+    except:
+        return Response({
+            "status": False,
+            "detail": "Shop with this gst_id not found!"
+        }, status=status.HTTP_404_NOT_FOUND)
+    try:
+        new_start_time = request.data['start_time']
+    except:
+        return Response({
+            "status": False,
+            "detail": "Please send the new start-time!"
+        }, status=status.HTTP_400_BAD_REQUEST)
+    shop.start_time = new_start_time
+    shop.save()
+    return Response({
+        "status": True,
+        "detail": "Start Time updated!"
+    }, status=status.HTTP_200_OK)
+
+@api_view(["POST"])
+def change_shop_stop_time(request, gst_id):
+    try:
+        shop = Shop.objects.get(gst_id=gst_id)
+    except:
+        return Response({
+            "status": False,
+            "detail": "Shop with this gst_id not found!"
+        }, status=status.HTTP_404_NOT_FOUND)
+    try:
+        new_stop_time = request.data['stop_time']
+    except:
+        return Response({
+            "status": False,
+            "detail": "Please send the new stop-time!"
+        }, status=status.HTTP_400_BAD_REQUEST)
+    shop.stop_time = new_stop_time
+    shop.save()
+    return Response({
+        "status": True,
+        "detail": "Start Time updated!"
+    }, status=status.HTTP_200_OK)
+
+
+@api_view(["POST"])
+def add_day_break(request, gst_id):
+    try:
+        shop = Shop.objects.get(gst_id=gst_id)
+    except:
+        return Response({
+            "status": False,
+            "detail": "Shop with this gst_id not found!"
+        }, status=status.HTTP_404_NOT_FOUND)
+    date = datetime.today() + timedelta(hours=24)
+    if not BreakDay.objects.filter(shop=shop, day=date).exists():
+        new_break = BreakDay()
+        new_break.shop = shop
+        new_break.day = date
+        new_break.save()
+        return Response({
+            "status": True
+        }, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['GET'])
+def is_next_day_off(request, gst_id):
+    try:
+        shop = Shop.objects.get(gst_id=gst_id)
+    except:
+        return Response({
+            "status": False,
+            "detail": "Shop with this gst_id not found!"},status=status.HTTP_404_NOT_FOUND)
+    date = datetime.today() + timedelta(hours=24)
+    if not BreakDay.objects.filter(shop=shop, day=date).exists():
+        return Response({
+            "status": True,
+            "is_off":False
+        }, status=status.HTTP_200_OK)
+    else:
+        return Response({
+            "status": True,
+            "is_off": True
+        }, status=status.HTTP_200_OK)
+
