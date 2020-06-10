@@ -2,7 +2,7 @@ from user.models import User
 from main.models import Shop,Slot,BuyInBooking, PickUpBooking, PickUpNotification
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponseRedirect
 from .forms import PickUpForm
 from main.shopkeeper_helpers import send_pick_up_to_shopkeeper, send_buy_in_to_shopkeeper
@@ -29,6 +29,13 @@ class MytimeslotsView(LoginRequiredMixin,TemplateView):
     model = User, Shop, Slot, BuyInBooking,PickUpBooking
     login_url = '/user/login/'
     template_name = 'mytimeslots.html'
+
+class MytimeslotsView(LoginRequiredMixin,TemplateView):
+    model = User, Shop, Slot, BuyInBooking,PickUpBooking
+    login_url = '/user/login/'
+    template_name = 'mytimeslots.html'
+
+
 
 # ----------------------------------------------------------------
 # -----------------ACTION VIEWS-----------------------------------
@@ -65,7 +72,8 @@ def pick_up_view(request, slot_id):
         # print(pickup.pick_up_id)
         send_pick_up_to_shopkeeper(str(slot.slot_id), str(pickup.pick_up_id), str(pickup.user.id), str(pickup.user.full_name), str(pickup.message_for_shopkeeper))
 
-        return redirect('main:mytimeslots')
+        url = reverse('main:my-timeslots-post-confirmation', kwargs={'slot_id': slot.slot_id})
+        return HttpResponseRedirect(url)
     else:
         slot = Slot.objects.get(slot_id=slot_id)
         return render(request, 'pickupform.html', {"slot_id": slot.slot_id})
@@ -83,7 +91,6 @@ def shop_near_me(request):
 
 def shop_slots(request,gst_id):
     shop=Shop.objects.get(gst_id=gst_id)
-    #
     slots=Slot.objects.filter(shop=shop, slot_start_time__day = datetime.today().day, slot_start_time__month = datetime.today().month,is_break=False)
     return render(request, 'shopslots.html', {'slots':slots, 'shop': shop})
 
@@ -115,7 +122,8 @@ def create_buy_in_booking(request, slot_id):
             buyin.save()
             print(buyin.buy_in_id)
             send_buy_in_to_shopkeeper(str(slot.slot_id), str(buyin.buy_in_id), str(user.id), str(user.full_name))
-            return HttpResponseRedirect('/mytimeslots/')
+            url = reverse('main:my-timeslots-post-confirmation', kwargs={'slot_id': slot.slot_id})
+            return HttpResponseRedirect(url)
 
 def create_pick_up_booking(request, slot_id):
     if request.method == "POST":
@@ -128,7 +136,14 @@ def create_pick_up_booking(request, slot_id):
             pickup.shop = slot.shop
             pickup.save()
             send_pick_up_to_shopkeeper(str(slot.slot_id), str(pickup.pick_up_id), str(pickup.user.id), str(pickup.user.full_name), str(pickup.message_for_shopkeeper))
-            return HttpResponseRedirect('/mytimeslots/')
+            return HttpResponseRedirect('/mytimeslots')
     else:
         form = PickUpForm()
     return render(request, 'shopslots.html', {'form': form})
+
+
+def my_timeslots_post_confirmation(request,slot_id):
+    fin_slot = Slot.objects.get(slot_id=slot_id)
+    return render(request, 'mytimeslotswithconfirmation.html', {
+        "fin_slot":fin_slot
+    })

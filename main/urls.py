@@ -24,5 +24,6 @@ urlpatterns = [
     path('api/add-break-day/<str:gst_id>/', api_views.add_day_break, name= 'add-daybreak'),
     path('is-next-day-off/<str:gst_id>/', api_views.is_next_day_off, name='is-next-day-off'),
     path('api/add-break/<str:gst_id>/', api_views.create_break, name='create-break'),
-    path('pick-up-form/<str:slot_id>/', views.pick_up_view, name='pick-up-form')
+    path('pick-up-form/<str:slot_id>/', views.pick_up_view, name='pick-up-form'),
+    path('mytimeslots-post-confirmation/<str:slot_id>/', views.my_timeslots_post_confirmation, name='my-timeslots-post-confirmation')
 ]
