@@ -351,3 +351,37 @@ def is_next_day_off(request, gst_id):
             "is_off": True
         }, status=status.HTTP_200_OK)
 
+@api_view(['POST'])
+def create_break(request, gst_id):
+    try:
+        shop = Shop.objects.get(gst_id=gst_id)
+    except:
+        return Response({
+            "status": False,
+            "detail": "Shop with this gst_id not found!"
+        }, status=status.HTTP_404_NOT_FOUND)
+    try:
+        start_time = request.data['start_time']
+    except:
+        return Response({
+            "status": False,
+            "detail": "Start time not sent properly."
+        }, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        stop_time = request.data['stop_time']
+    except:
+        return Response({
+            "status": False,
+            "detail": "Stop time not sent properly."
+        }, status=status.HTTP_400_BAD_REQUEST)
+    # Creating datetime object(dto) from time object
+    start_time_dto = datetime.combine(date=datetime.today(), time=start_time)
+    stop_time_dto = datetime.combine(date=datetime.today(), time=stop_time)
+    slots = Slot.objects.filter(shop= shop, slot_start_time__lte=start_time_dto, slot_stop_time__gte=stop_time_dto)
+    for slot in slots:
+        slot.is_break = True
+        slot.save()
+    return Response({
+        "status": True,
+        "detail":"Break added!"
+    })
