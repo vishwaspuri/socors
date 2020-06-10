@@ -2,6 +2,7 @@ import requests
 
 
 BASE_URL='https://vp7.pythonanywhere.com'
+# BASE_URL='http://127.0.0.1:8000'
 
 
 def send_buy_in_to_shopkeeper(slot_id, buyin_id, user_id, user_name):
