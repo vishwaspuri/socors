@@ -62,7 +62,6 @@
         <table style="margin-left:auto;margin-right:auto;">
         {% for slot in slots %}
             {% with block_class=slot.class_name %}
-                {% with pickup_class=slot.pickup_class_name %}
 
         {% if forloop.counter0|divisibleby:3 %}<tr>{% endif %}
                     {% if slot.num_entries_left %}
@@ -75,7 +74,9 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <button class="btn btn-info" data-toggle="modal" data-target=".{{ pickup_class }}">Pick-up</button>
+                        <form action="{% url 'main:pick-up-form' slot_id=slot.slot_id %}" method="get">
+                            <button class="btn btn-info" type="submit">Pick-up</button>
+                        </form>
                         <br>
                         <br>
                         <form method="post" action="{% url 'main:buy-in' slot.slot_id %}">
@@ -87,57 +88,7 @@
                 </div>
             </div>
         </div>
-
-      <div class="{{ pickup_class }} modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-              <form class="modal-header d-flex flex-row justify-content-center">
-                <h5 class="modal-title">Pick-up</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-              </form>
-              <div class="modal-body">
-                <form class="d-flex flex-row" action="{% url 'main:pick-up' slot_id=slot.slot_id %}" method="POST" style="display: inline-grid;">
-                    {% csrf_token %}
-                    <p class="align-self-start" >Enter your order below</p>
-                    <div class="text">
-                        <input class="order-details" type="text" name="message_for_shopkeeper" required>
-                    </div>
-                    <div class="btn-info">
-                        <br><br>
-                        <input type="hidden" name="next" value="{{ next }}" >
-                        <button type="submit" class="btn btn-info">Confirm</button>
-                    </div>
-                </form>
-              </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="confirmation modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <form class="modal-header d-flex flex-row justify-content-center">
-              <h5 class="modal-title">Your slot is confirmed: {{ slot.get_next_by_slot_start_time }} - {{ slot.get_next_by_slot_stop_time }}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </form>
-            <div class="modal-body">
-              <div class="d-flex flex-row">
-                <p class="tick"><img src="{% static 'images/conf.png' %}" alt="confirmation_icon"></p>
-              </div>
-            </div>
-            <form class="modal-footer justify-content-around">
-              <button type="button" class="btn btn-info" data-dismiss="modal">Ok</button>
-            </form>
-          </div>
-        </div>
-      </div>
             {% endwith %}
-         {% endwith %}
     {% endfor %}
         </table>
     <div class="row">

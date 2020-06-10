@@ -1,0 +1,62 @@
+body{
+    width: 100%;
+}
+*{
+    font-family: "Nunito", sans-serif;
+}
+
+h1{
+    margin-left: 10px;
+}
+
+.center{
+    text-align: center;
+}
+
+#submit{
+    background: #2DA8CF;
+    color: white;
+    font-weight: 800;
+    border: none;
+    width: 100px;
+    height: 35px;
+}
+
+table{
+    width: 90%;
+    text-align: center;
+}
+
+th, td{
+    width: 30%;
+}
+tr{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+input{
+    border: 1px solid black;
+    border-radius: 9px;
+    height: 30px;
+    padding-left: 5px;
+}
+
+input.text{
+    width: 25vw;
+
+}
+
+.quantity{
+    width: 15vw;
+}
+
+.plus-icon{
+    height: 27px;
+}
+
+p{
+    margin-left: 15px;
+    color: #2DA8CF;
+    font-weight: 800;
+}

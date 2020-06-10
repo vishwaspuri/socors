@@ -22,5 +22,7 @@ urlpatterns = [
     path('api/change-shop-start-time/<str:gst_id>/', api_views.change_shop_start_time, name= 'change-shop-start-time'),
     path('api/change-shop-stop-time/<str:gst_id>/', api_views.change_shop_stop_time, name= 'change-shop-stop-time'),
     path('api/add-break-day/<str:gst_id>/', api_views.add_day_break, name= 'add-daybreak'),
-    path('is-next-day-off/<str:gst_id>/', api_views.is_next_day_off, name='is-next-day-off')
+    path('is-next-day-off/<str:gst_id>/', api_views.is_next_day_off, name='is-next-day-off'),
+    path('api/add-break/<str:gst_id>/', api_views.create_break, name='create-break'),
+    path('pick-up-form/<str:slot_id>/', views.pick_up_view, name='pick-up-form')
 ]

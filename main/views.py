@@ -2,7 +2,7 @@ from user.models import User
 from main.models import Shop,Slot,BuyInBooking, PickUpBooking, PickUpNotification
 from django.views.generic import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from .forms import PickUpForm
 from main.shopkeeper_helpers import send_pick_up_to_shopkeeper, send_buy_in_to_shopkeeper
@@ -34,6 +34,43 @@ class MytimeslotsView(LoginRequiredMixin,TemplateView):
 # -----------------ACTION VIEWS-----------------------------------
 # ----------------------------------------------------------------
 
+def pick_up_view(request, slot_id):
+    if request.method == 'POST':
+        data = request.POST.dict()
+        items_dict      = {k:v for (k,v) in data.items() if k.startswith('item')}
+        quantity_dict   = {k:v for (k,v) in data.items() if k.startswith('qty')}
+        remark_dict     = {k:v for (k,v) in data.items() if k.startswith('remark')}
+        order = 'Order is\n'
+        for key,item in items_dict.items():
+            key_number = key[4:]
+            quatity_name = 'qty'+str(key_number)
+            remark_name  = 'remark'+str(key_number)
+            if quatity_name in quantity_dict:
+                quantity = quantity_dict[quatity_name]
+            else:
+                quantity = 'N/A'
+            if  remark_name in remark_dict:
+                remark = remark_dict[remark_name]
+            else:
+                remark = 'N/A'
+            order = order + 'Item:' + str(item) + ' Quantity:' + str(quantity) + ' Remark:' + str(remark) + '\n'
+        # print(order)
+        slot = Slot.objects.get(slot_id=slot_id)
+        pickup = PickUpBooking()
+        pickup.user = request.user
+        pickup.slot = slot
+        pickup.shop = slot.shop
+        pickup.message_for_shopkeeper = order
+        pickup.save()
+        # print(pickup.pick_up_id)
+        send_pick_up_to_shopkeeper(str(slot.slot_id), str(pickup.pick_up_id), str(pickup.user.id), str(pickup.user.full_name), str(pickup.message_for_shopkeeper))
+
+        return redirect('main:mytimeslots')
+    else:
+        slot = Slot.objects.get(slot_id=slot_id)
+        return render(request, 'pickupform.html', {"slot_id": slot.slot_id})
+
+
 
 def shop_near_me(request):
     user=request.user
@@ -46,7 +83,8 @@ def shop_near_me(request):
 
 def shop_slots(request,gst_id):
     shop=Shop.objects.get(gst_id=gst_id)
-    slots=Slot.objects.filter(shop=shop, slot_start_time__day=datetime.today().day, slot_start_time__month=datetime.today().month, is_break=False)
+    #
+    slots=Slot.objects.filter(shop=shop, slot_start_time__day = datetime.today().day, slot_start_time__month = datetime.today().month,is_break=False)
     return render(request, 'shopslots.html', {'slots':slots, 'shop': shop})
 
 def shop_by_cat(request, cat):
