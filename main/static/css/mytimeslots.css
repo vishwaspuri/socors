@@ -264,3 +264,7 @@ p{
         display: block;
     }
 }
+
+.shop_image, .timeslot{
+    padding-left: 15px;
+}
