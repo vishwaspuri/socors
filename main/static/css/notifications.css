@@ -145,6 +145,14 @@ p{
 .bg{
     background: #2DA8CF;
 }
+
+a.more,a.more:hover{
+    color: black;
+}
+a.more:hover{
+    text-decoration: none;
+}
+
 @media (max-width: 4000px){
     .mobileMenu{
         transform: translateX(100%);

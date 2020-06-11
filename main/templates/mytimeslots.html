@@ -104,7 +104,7 @@
     {% endfor %}
     {% for booking in user.pickupbookings.all %}
         {% with block_class=booking.class_name %}
-                <div class="line">
+        <div class="line">
           <div class="row">
             <div class="col-7 align-self-center shop-name">{{ booking.shop.shop_name }}</div>
             <div class="col-5">
