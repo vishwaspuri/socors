@@ -76,7 +76,7 @@
                 <div class="col-3">
                     <div class="row justify-content-around"><img src="{% static 'images/shop.png' %}" class="shop_image" alt="shop_img">
                     </div>
-                    <div class="row timeslot justify-content-around"><p>Timeslot: <span class="open">{{ booking.slot.slot_start_time }} to {{ booking.slot.slot_stop_time }}</span></p></div>
+                    <div class="row timeslot justify-content-around"><p>Timeslot: <span class="open">{{ booking.slot.slot_start_time|time }} to {{ booking.slot.slot_stop_time|time }}</span></p></div>
                 </div>
                 
                 <div class="col-7">
@@ -133,7 +133,7 @@
                             <p class="shop_details">{{ booking.shop.shop_area }}, {{ booking.shop.shop_city }}</p>
                     </div>
                     <div class="row">
-                      <p class="shop_details">Timings: {{ booking.shop.start_time }} to {{ booking.shop.stop_time }}</p>
+                      <p class="shop_details">Timings: {{ booking.shop.start_time|time }} to {{ booking.shop.stop_time|time }}</p>
                     </div>
                 </div>
             </div>

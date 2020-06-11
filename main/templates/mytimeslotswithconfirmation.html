@@ -112,7 +112,7 @@
                             <p class="shop_details">{{ booking.shop.shop_area }}, {{ booking.shop.shop_city }}</p>
                     </div>
                     <div class="row">
-                      <p class="shop_details">Timings: {{ booking.shop.start_time }} to {{ booking.shop.stop_time }}</p>
+                      <p class="shop_details">Timings: {{ booking.shop.start_time|time }} to {{ booking.shop.stop_time|time }}</p>
                     </div>
 {#                    <div class="d-flex flex-row-reverse align-items-center justify-content-start">#}
 {#                        <span class="location"><img src="{% static 'images/loc.png' %}" alt="location"></span>#}
@@ -158,7 +158,7 @@
                             <p class="shop_details">{{ booking.shop.shop_area }}, {{ booking.shop.shop_city }}</p>
                     </div>
                     <div class="row">
-                      <p class="shop_details">Timings: {{ booking.shop.start_time }} to {{ booking.shop.stop_time }}</p>
+                      <p class="shop_details">Timings: {{ booking.shop.start_time|time }} to {{ booking.shop.stop_time|time }}</p>
                     </div>
                 </div>
             </div>
