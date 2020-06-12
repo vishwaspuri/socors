@@ -2,6 +2,7 @@ from django.db import models
 from user.models import User
 from django.core.validators import MaxValueValidator
 import uuid
+import datetime
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 
@@ -67,6 +68,11 @@ class Slot(models.Model):
     num_entries_left =models.IntegerField()
     is_break         =models.BooleanField(default=False)
 
+    def is_today(self):
+        if self.slot_start_time.date() == datetime.datetime.today().date():
+            return True
+        else:
+            return False
     def class_name(self):
         payload = 'buyin' + str(self.slot_id)
         return payload

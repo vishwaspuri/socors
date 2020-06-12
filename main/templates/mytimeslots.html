@@ -57,6 +57,7 @@
     <div class="content">
         <h1 id="h1" class="d-flex align-self-start h1margin">My Time Slots</h1>
     {% for booking in user.buyinbookings.all %}
+        {% if booking.slot.is_today %}
         {% with block_class=booking.class_name %}
         <div class="line">
           <div class="row">
@@ -101,8 +102,10 @@
         </div>
      </div>
         {% endwith %}
+        {% endif %}
     {% endfor %}
     {% for booking in user.pickupbookings.all %}
+        {% if booking.slot.is_today %}
         {% with block_class=booking.class_name %}
         <div class="line">
           <div class="row">
@@ -142,6 +145,7 @@
         </div>
      </div>
         {% endwith %}
+        {% endif %}
     {% endfor %}
     <script
 			  src="https://code.jquery.com/jquery-3.5.1.min.js"

@@ -375,13 +375,13 @@ def create_break(request, gst_id):
             "status": False,
             "detail": "Stop time not sent properly."
         }, status=status.HTTP_400_BAD_REQUEST)
+    all_slots = Slot.objects.filter(shop=shop)
+    all_slots.update(is_break=False)
     # Creating datetime object(dto) from time object
     start_time_dto = datetime.combine(date=datetime.today(), time=datetime.strptime(start_time, '%H:%M:%S').time())
     stop_time_dto = datetime.combine(date=datetime.today(), time=datetime.strptime(stop_time, '%H:%M:%S').time())
     slots = Slot.objects.filter(shop= shop, slot_start_time__lte=start_time_dto, slot_stop_time__gte=stop_time_dto)
-    for slot in slots:
-        slot.is_break = True
-        slot.save()
+    slots.update(is_break=True)
     return Response({
         "status": True,
         "detail":"Break added!"
