@@ -1,7 +1,7 @@
 import requests
 
 
-BASE_URL='https://vp7.pythonanywhere.com'
+BASE_URL='http://shop.socorsnearyou.xyz'
 # BASE_URL='http://127.0.0.1:8000'
 
 
