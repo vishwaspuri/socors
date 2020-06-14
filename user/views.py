@@ -109,4 +109,4 @@ class PrivacyPolicyView(TemplateView):
     template_name='privacy_policy.html'
 
 class TermsConditionsView(TemplateView):
-    template_name='terms_n_conditions.html'
+    template_name='terms_and_conditions.html'
