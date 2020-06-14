@@ -98,7 +98,7 @@ $(document).ready(function(){
                     
                         const OTPstring=JSON.stringify(OTPRequestData);
                         console.log(OTPstring)
-                        OTPrequest.open('post',"https://socorsnearyou.xyz/user/api/otp/");
+                        OTPrequest.open('post',transferProtocol+"://socorsnearyou.xyz/user/api/otp/");
                         OTPrequest.setRequestHeader('Content-type', 'application/json');
                         OTPrequest.send(OTPstring);
                     })
@@ -116,7 +116,7 @@ $(document).ready(function(){
             }
         
             const reqJSON=JSON.stringify(requestData)
-            request.open('post', 'https://socorsnearyou.xyz/user/api/validate-phone/');
+            request.open('post', transferProtocol+'://socorsnearyou.xyz/user/api/validate-phone/');
             request.setRequestHeader('Content-type', 'application/json');
             request.send(reqJSON);
         })
