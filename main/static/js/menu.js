@@ -63,7 +63,7 @@ $(document).ready(function(){
             var searchQuery=document.getElementById("search_input").value;
                 document.querySelector('.content').innerHTML='';        
                 var xhr=new XMLHttpRequest();
-                xhr.open("GET",'https://vishwastest.pythonanywhere.com/api/search-shop/'+searchQuery+'/', true);
+                xhr.open("GET",baseURL+'api/search-shop/'+searchQuery+'/', true);
                 xhr.onload=function(){
                     if(this.status==200){
                         var shops=JSON.parse(this.responseText);
@@ -82,7 +82,7 @@ $(document).ready(function(){
                                     if(shopStatus=="closed"){
                                         btnClass=' disabled" disabled="true"';
                                     }
-                                    output+=startString+shopStatus+'">'+shopStatus.charAt(0).toUpperCase()+shopStatus.slice(1)+midString1+midString2+shops.payload[i].name+midString3+shops.payload[i].shop_address_street+" "+shops.payload[i].shop_address_area+" "+shops.payload[i].shop_address_city+" "+ shops.payload[i].shop_address_state+midString4+btnClass+endString+'https://vishwastest.pythonanywhere.com/shops-slots/'+shops.payload[i].gst_id+'/'+lastString;
+                                    output+=startString+shopStatus+'">'+shopStatus.charAt(0).toUpperCase()+shopStatus.slice(1)+midString1+midString2+shops.payload[i].name+midString3+shops.payload[i].shop_address_street+" "+shops.payload[i].shop_address_area+" "+shops.payload[i].shop_address_city+" "+ shops.payload[i].shop_address_state+midString4+btnClass+endString+baseURL+'shops-slots/'+shops.payload[i].gst_id+'/'+lastString;
                                 }
                                 
                             }
