@@ -123,3 +123,10 @@ input:focus{
     margin-left: 3.33vw;
     margin-right: 20.8vw;
 }
+.login{
+    text-decoration: none;
+}
+
+.login,.tnc,.policy{
+    color: #2DA8CF;
+}

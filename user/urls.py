@@ -1,7 +1,7 @@
 from django.urls import path
 from user.api import auth
 from django.contrib.auth.views import LogoutView, LoginView
-from .views import add_address, AddaddressView, ProfileView, RegisterView,AddAddressView, AfterAddressView
+from .views import add_address, AddaddressView, ProfileView, RegisterView,AddAddressView, AfterAddressView, TermsConditionsView, PrivacyPolicyView
 from .api.auth import ValidatePhoneSendOTP, validateOTP
 from .api.api_views import profile_details
 
@@ -22,4 +22,6 @@ urlpatterns = [
         next_page='/'
     ),name='logout'),
     path('add-address/', AddAddressView, name='add-address'),
+    path('privacy-policy/', PrivacyPolicyView.as_view(), name='privacy-policy'),
+    path('terms-and-conditions/', TermsConditionsView.as_view(), name='terms-n-conditions')
 ]

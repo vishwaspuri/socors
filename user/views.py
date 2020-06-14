@@ -104,3 +104,9 @@ def AddAddressView(request):
     else:
         form = AddressForm()
     return render(request, 'addaddress.html', {'form': form})
+
+class PrivacyPolicyView(TemplateView):
+    template_name='privacy_policy.html'
+
+class TermsConditionsView(TemplateView):
+    template_name='terms_n_conditions.html'
