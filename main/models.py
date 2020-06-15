@@ -94,6 +94,12 @@ class Slot(models.Model):
     def default_entries_left(self):
         self.num_entries_left=self.shop.shop_capacity
 
+    def is_slot_in_shop_time(self):
+        now = datetime.datetime.now()
+        if self.slot_start_time > now:
+            return True
+        else
+            return False 
 
 class PickUpBooking(models.Model):
     pick_up_id            =models.UUIDField(primary_key=True ,default=uuid.uuid4, editable=False)
