@@ -98,7 +98,7 @@ class Slot(models.Model):
         now = datetime.datetime.now()
         if self.slot_start_time > now:
             return True
-        else
+        else:
             return False 
 
 class PickUpBooking(models.Model):
