@@ -30,10 +30,10 @@
 
         </form>
         
-        <p class="separator">OR</p>
+        {% comment %} <p class="separator">OR</p>
         <p>Log In With</p>
         <i><a href="{% provider_login_url "facebook" method="js_sdk" %}" class="icon fb"></a></i>
-        <i><a href="{% provider_login_url "google" %}" class="icon google"></a></i>
+        <i><a href="{% provider_login_url "google" %}" class="icon google"></a></i> {% endcomment %}
     </div>
 </body>
 </html>
