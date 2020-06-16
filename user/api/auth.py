@@ -45,13 +45,13 @@ class ValidatePhoneSendOTP(APIView):
             full_name = request.data['full_name']
             email = request.data['email']
         except KeyError:
-            return Response({'error': 'Either full name or email is not Provided'}, status=status.HTTP_403_FORBIDDEN)
+            return Response({'detail': 'Either full name or email is not Provided'}, status=status.HTTP_403_FORBIDDEN)
         try:
             password = request.data['password']
         except KeyError:
-            return Response({'error': 'Either first name or email is not Provided'}, status=status.HTTP_403_FORBIDDEN)
+            return Response({'detail': 'Either first name or email is not Provided'}, status=status.HTTP_403_FORBIDDEN)
         if User.objects.filter(email=email).count() != 0:
-            return Response({'error': 'A User is already registered with this email id'},
+            return Response({'detail': 'A User is already registered with this email id'},
                             status=status.HTTP_403_FORBIDDEN)
 
         if phone_number:
