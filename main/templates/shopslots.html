@@ -61,7 +61,6 @@
         </div>
         <table style="margin-left:auto;margin-right:auto;">
         {% for slot in slots %}
-        {% if slot.is_slot_in_shop_time %}
             {% with block_class=slot.class_name %}
 
         {% if forloop.counter0|divisibleby:3 %}<tr>{% endif %}
@@ -90,7 +89,6 @@
             </div>
         </div>
             {% endwith %}
-        {% endif %}
         {% endfor %}
         </table>
     <div class="row">

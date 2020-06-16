@@ -91,7 +91,14 @@ def shop_near_me(request):
 
 def shop_slots(request,gst_id):
     shop=Shop.objects.get(gst_id=gst_id)
-    slots=Slot.objects.filter(shop=shop, slot_start_time__day = datetime.today().day, slot_start_time__month = datetime.today().month,is_break=False)
+    slots=Slot.objects.filter(
+        shop=shop, 
+        slot_start_time__day = datetime.today().day, 
+        slot_start_time__month = datetime.today().month,
+        is_break=False)
+    for slot in slots:
+        if not slot.is_slot_in_shop_time():
+            slots.remove(slot)
     return render(request, 'shopslots.html', {'slots':slots, 'shop': shop})
 
 def shop_by_cat(request, cat):
