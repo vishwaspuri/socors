@@ -1,5 +1,9 @@
 $(document).ready(function(){
 
+    var swipeWrapper=document.querySelector('.swiper-wrapper');
+    var wide=swipeWrapper.clientWidth;
+    var shiftDist=wide;
+    var shift="(-"+String(shiftDist)+"px,0px,0px)";
     var $submitBtn = $("#submit");
     var $passwordBox = $("#password");
     var $confirmBox = $("#confirm-password");
@@ -64,7 +68,7 @@ $(document).ready(function(){
                 var responseJSON= JSON.parse(request.responseText);
                 if(responseJSON.status){
                         document.getElementsByClassName("center")[1].innerHTML="<p>Swipe to Continue</p>";
-                        document.getElementsByClassName("otp")[0].innerHTML='<img src=holding_mobile_phone alt="hand_holding_mobile"><h1>Enter OTP</h1><div id="otp-form">'+
+                        document.getElementsByClassName("otp")[0].innerHTML='<img src="../static/images/holding_mobile_phone.jpg" alt="hand_holding_mobile"><h1>Enter OTP</h1><div id="otp-form">'+
                             '<input id="one" type="text" onkeypress="focusTwo()" required>'+
                             '<input id="two" type="text" onkeypress="focusThree()" required>'+
                             '<input id="three" type="text" onkeypress="focusFour()" required>'+
@@ -72,7 +76,8 @@ $(document).ready(function(){
                     
                             '<input type="submit" value="submit" id="otp-submit">'+
                         '</div>';
-
+                        swipeWrapper.style.transform="translate3d"+shift;
+                        swipeWrapper.style.transitionDuration="300ms";
                         const OTPform={
                         phone: form.phone.value,
                         otp: document.getElementById("otp-form"),
@@ -86,8 +91,12 @@ $(document).ready(function(){
                         OTPrequest.onload=function(){
                             const OTPresponse=JSON.parse(this.responseText);
                             if(OTPresponse.status==true){
-                                document.getElementById("next").classList.add("swiper-button-next");
-                                document.getElementById("next").classList.remove("swiper-button-disabled");
+                                document.getElementById("next").classList.add("swiper-button-next")
+                                document.getElementById("next").classList.remove("swiper-button-disabled")
+                                document.getElementsByClassName("center")[2].innerHTML="<p>Click <a href='https://socorsnearyou.xyz/user/login/'>here</a> to login</p>"
+                            }
+                            else{
+                                document.getElementsByClassName("center")[2].innerHTML="<p>"+OTPresponse.detail+"</p>"
                             }
                         }
                     
@@ -98,13 +107,18 @@ $(document).ready(function(){
                     
                         const OTPstring=JSON.stringify(OTPRequestData);
                         console.log(OTPstring)
-                        OTPrequest.open('post',transferProtocol+"://socorsnearyou.xyz/user/api/otp/");
+                        OTPrequest.open('post',"https://socorsnearyou.xyz/user/api/otp/");
                         OTPrequest.setRequestHeader('Content-type', 'application/json');
                         OTPrequest.send(OTPstring);
                     })
                 }
                 else{
-                    console.log(this.responseText)
+                    if(responseJSON.status==false){
+                        document.getElementsByClassName("center")[1].innerHTML="<p>"+responseJSON.detail+"</p>"
+                    }
+                    else{
+                        document.getElementsByClassName("center")[1].innerHTML="<p>"+responseJSON.error+"</p>"
+                    }
                 }
             }
         
@@ -116,25 +130,8 @@ $(document).ready(function(){
             }
         
             const reqJSON=JSON.stringify(requestData)
-            request.open('post', transferProtocol+'://socorsnearyou.xyz/user/api/validate-phone/');
+            request.open('post', 'https://socorsnearyou.xyz/user/api/validate-phone/');
             request.setRequestHeader('Content-type', 'application/json');
             request.send(reqJSON);
         })
-    
-    var eyePos=0.87*parseInt($('#password').css('width'));
-    var i=0;
-    $('#password').on("click", function(event){
-        if(event.offsetX>eyePos){
-            if(i==0){
-                $('#password').css("background-image","url(images/show.png)");
-                $('#password')[0].attributes[0].value="text";
-                i=1;
-            }
-            else{
-                $('#password').css("background-image","url(images/hide.png)");
-                $('#password')[0].attributes[0].value="password";
-                i=0;
-            }
-        }
-    })
 });

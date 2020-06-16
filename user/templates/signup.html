@@ -13,8 +13,8 @@
 </head>
 <body>
 <script>
-    transferProtocol="https";
-    holding_mobile_phone="{% static 'images/holding_mobile_phone.jpg' %}"
+    {% comment %} transferProtocol="https"; {% endcomment %}
+    {% comment %} holding_mobile_phone="{% static 'images/holding_mobile_phone.jpg' %}" {% endcomment %}
 </script>
 
 <div class="swiper-container">
@@ -39,9 +39,7 @@
                 
                 <input type="submit" value="submit" id="submit">
     
-                <div class="center">
-
-                </div>
+                <div class="center"></div>
             </div>
             
             {% comment %} <p class="separator">OR</p>
@@ -55,7 +53,7 @@
         <div class="swiper-slide"><div class="otp">
 
             
-        </div></div>
+        </div><div class="center"></div></div>
         
     </div>
     <div id="pagination-btn">
