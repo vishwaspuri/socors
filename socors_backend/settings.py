@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '*eeg@^jc*%$^tmsvd7tw07+md$%c4e21#y!!%10%#6u99!j3ks'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 
 
@@ -98,15 +98,25 @@ WSGI_APPLICATION = 'socors_backend.wsgi.application'
 
 
 
-if DEBUG:
-    DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-else:
-    DATABASES = {
+# if DEBUG:
+#     DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+# else:
+#     DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'socorsuserapp',
+#         'USER': 'socorsadmin',
+#         'PASSWORD': 'socors@123',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     }
+# }
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'socorsuserapp',
@@ -115,7 +125,6 @@ else:
         'HOST': 'localhost',
         'PORT': '',
     }
-}
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
