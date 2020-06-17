@@ -62,76 +62,101 @@ $(document).ready(function(){
         }
                 
         form.submit.addEventListener("click", function(){
-            const request = new XMLHttpRequest();
+            if(phonenumber(document.querySelector("#phone").value)){
+                document.getElementsByClassName("center")[1].innerHTML="";
+                const request = new XMLHttpRequest();
         
-            request.onload= function(){
-                var responseJSON= JSON.parse(request.responseText);
-                if(responseJSON.status){
-                        document.getElementsByClassName("center")[1].innerHTML="<p>Swipe to Continue</p>";
-                        document.getElementsByClassName("otp")[0].innerHTML='<img src="holding_mobile_phone" alt="hand_holding_mobile"><h1>Enter OTP</h1><div id="otp-form">'+
-                            '<input id="one" type="text" onkeypress="focusTwo()" required>'+
-                            '<input id="two" type="text" onkeypress="focusThree()" required>'+
-                            '<input id="three" type="text" onkeypress="focusFour()" required>'+
-                            '<input id="four" type="text" required>'+
-                    
-                            '<input type="submit" value="submit" id="otp-submit">'+
-                        '</div>';
-                        swipeWrapper.style.transform="translate3d"+shift;
-                        swipeWrapper.style.transitionDuration="300ms";
-                        const OTPform={
-                        phone: form.phone.value,
-                        otp: document.getElementById("otp-form"),
-                        submit: document.getElementById("otp-submit")
-                    }
-
-                    
-                    OTPform.submit.addEventListener("click", function(){
-                        const OTPrequest= new XMLHttpRequest();
-                    
-                        OTPrequest.onload=function(){
-                            const OTPresponse=JSON.parse(this.responseText);
-                            if(OTPresponse.status==true){
-                                document.getElementById("next").classList.add("swiper-button-next")
-                                document.getElementById("next").classList.remove("swiper-button-disabled")
-                                document.getElementsByClassName("center")[2].innerHTML="<p>Click <a href='https://socorsnearyou.xyz/user/login/'>here</a> to login</p>"
-                            }
-                            else{
-                                document.getElementsByClassName("center")[2].innerHTML="<p>"+OTPresponse.detail+"</p>"
-                            }
+                request.onload= function(){
+                    var responseJSON= JSON.parse(request.responseText);
+                    if(responseJSON.status){
+                            document.getElementsByClassName("center")[1].innerHTML="<p>Swipe to Continue</p>";
+                            document.getElementsByClassName("otp")[0].innerHTML='<img src="images/holding_mobile_phone.jpg" alt="hand_holding_mobile"><h1>Enter OTP</h1><div id="otp-form">'+
+                                '<input id="one" type="text" onkeypress="focusTwo()" required>'+
+                                '<input id="two" type="text" onkeypress="focusThree()" required>'+
+                                '<input id="three" type="text" onkeypress="focusFour()" required>'+
+                                '<input id="four" type="text" required>'+
+                        
+                                '<input type="submit" value="submit" id="otp-submit">'+
+                            '</div>';
+                            swipeWrapper.style.transform="translate3d"+shift;
+                            swipeWrapper.style.transitionDuration="300ms";
+                            const OTPform={
+                            phone: form.phone.value,
+                            otp: document.getElementById("otp-form"),
+                            submit: document.getElementById("otp-submit")
                         }
-                    
-                        const OTPRequestData={
-                            "phone": form.phone.value,
-                            "otp": OTPform.otp.children[0].value+OTPform.otp.children[1].value+OTPform.otp.children[2].value+OTPform.otp.children[3].value
-                        }
-                    
-                        const OTPstring=JSON.stringify(OTPRequestData);
-                        console.log(OTPstring)
-                        OTPrequest.open('post',"https://socorsnearyou.xyz/user/api/otp/");
-                        OTPrequest.setRequestHeader('Content-type', 'application/json');
-                        OTPrequest.send(OTPstring);
-                    })
-                }
-                else{
-                    if(responseJSON.status==false){
-                        document.getElementsByClassName("center")[1].innerHTML="<p>"+responseJSON.detail+"</p>"
+    
+                        
+                        OTPform.submit.addEventListener("click", function(){
+                            const OTPrequest= new XMLHttpRequest();
+                        
+                            OTPrequest.onload=function(){
+                                const OTPresponse=JSON.parse(this.responseText);
+                                if(OTPresponse.status==true){
+                                    document.getElementsByClassName("center")[2].innerHTML="<p class='red'>Click <a href=''>here</a> to login</p>"
+                                }
+                                else{
+                                    showError(OTPresponse.detail)
+                                }
+                            }
+                        
+                            const OTPRequestData={
+                                "password": form.password.value,
+                                "phone": form.phone.value,
+                                "otp": OTPform.otp.children[0].value+OTPform.otp.children[1].value+OTPform.otp.children[2].value+OTPform.otp.children[3].value
+                            }
+                        
+                            const OTPstring=JSON.stringify(OTPRequestData);
+                            OTPrequest.open('post',"https://socorsnearyou.xyz/user/api/otp/");
+                            OTPrequest.setRequestHeader('Content-type', 'application/json');
+                            OTPrequest.send(OTPstring);
+                        })
                     }
                     else{
-                        document.getElementsByClassName("center")[1].innerHTML="<p>"+responseJSON.error+"</p>"
+                           showError(responseJSON.detail);
                     }
                 }
+            
+                const requestData={
+                    "phone": form.phone.value,
+                    "full_name": form.full_name.value,
+                    "email": form.email.value,
+                    "password": form.password.value
+                }
+            
+                const reqJSON=JSON.stringify(requestData)
+                request.open('post', 'https://socorsnearyou.xyz/user/api/validate-phone/');
+                request.setRequestHeader('Content-type', 'application/json');
+                request.send(reqJSON);
             }
-        
-            const requestData={
-                "phone": form.phone.value,
-                "full_name": form.full_name.value,
-                "email": form.email.value,
-                "password": form.password.value
+            else{
+                document.getElementsByClassName("center")[1].innerHTML="<p class='red'>Mobile Number must be 10 digits without special characters and spaces</p>"
             }
-        
-            const reqJSON=JSON.stringify(requestData)
-            request.open('post', 'https://socorsnearyou.xyz/user/api/validate-phone/');
-            request.setRequestHeader('Content-type', 'application/json');
-            request.send(reqJSON);
+           
         })
+
+        function showError(text){
+            var modalBox=document.querySelector('.modal');
+            var body=document.querySelector('body');
+            document.querySelector('.modal-body').innerHTML="<span>"+text+"</span>";
+            modalBox.classList.add('show');
+            body.classList.add('modal-open');
+            modalBox.style.display="block";
+            body.addEventListener('click', function(){
+                modalBox.style.display="none";
+                modalBox.classList.remove('show');
+                body.classList.remove('modal-open')
+            })
+        }
+        function phonenumber(inputtxt){
+            var phoneno = /^\d{10}$/;
+            if( inputtxt.match(phoneno))
+                    {
+                return true;
+                    }
+                else
+                    {
+                    return false;
+                    }
+        }
 });

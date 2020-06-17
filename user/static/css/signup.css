@@ -6,11 +6,17 @@ body, ::placeholder{
     font-family: 'Nunito', sans-serif;
     font-weight: 800;
     margin: 0;
-    height: 130vh;
 }
 
-div.swiper-button-next{
-    color: #2DA8CF;
+.red{
+    background: rgba(255,0,0,0.8);
+    color: white;
+}
+
+.modal-body{
+    background: rgba(255,0,0,0.8);
+    color: white;
+    font-size: 25px;
 }
 
 .center{
@@ -20,7 +26,6 @@ div.swiper-button-next{
     mix-blend-mode: normal;
     max-width: 100%;
 }
-
 
 div{
     text-align: center;
@@ -42,7 +47,6 @@ h1#signup{
 }
 
 input{
-    font-family: 'Nunito', sans-serif;
     width: 67.5%;
     border: 0;
     border-bottom: 2px solid #000000;
@@ -51,9 +55,9 @@ input{
     font-size: 16px;
     font-weight: 800;
     outline: none;
-    padding-left: 5px;
 }
-#password, #confirm-password{
+
+input[type='password']{
     margin: 4.33vh 0 0 5.7vw;
 }
 
@@ -64,12 +68,6 @@ input{
 input:focus{
     font-family: 'Nunito', sans-serif;
     outline: none;
-}
-#password{
-    background-image: url("images/show.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: 99%;
 }
 
 .name_ico{
@@ -125,6 +123,14 @@ input:focus{
     height: 64px;
 }
 
+.display{
+    display: block;
+}
+
+.none{
+    display: none;
+}
+
 .icon{
     background-repeat: no-repeat;
     background-size: contain;
@@ -143,13 +149,11 @@ input:focus{
     content: '';
     flex: 1;
     border-bottom: 3px solid #2DA8CF;
-    /* width: 10%; */
 }
 
 .separator::before {
     margin-right: 3.33vw;
     margin-left: 20.8vw;
-    /* width: 10%; */
 }
 
 .separator::after {
@@ -200,11 +204,6 @@ input[type='submit']{
     font-size: 15px;
 }
 
-.login{
-    color: #2DA8CF;
+a{
     text-decoration: none;
-}
-
-.bottom{
-    margin-top: 1vh;
 }
