@@ -1,13 +1,13 @@
 {% load static %}
-{% load socialaccount %}
-{% providers_media_js %}
+{% comment %} {% load socialaccount %}
+{% providers_media_js %} {% endcomment %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/signup.css">
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
     <title>Sign Up</title>
@@ -94,6 +94,6 @@
           },
       
         })
-        </script>
+    </script>
 </body>
 </html>

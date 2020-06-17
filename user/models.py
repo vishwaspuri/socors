@@ -155,6 +155,14 @@ class Address(models.Model):
 class PhoneOTP(models.Model):
     phone_regex  = RegexValidator(regex=r'^\(|\)|\d{10}$', message='Phone number not correct!')
     phone        = models.CharField(validators=[phone_regex], max_length=10)
+    # Email and fullnme fields
+    email        = models.EmailField(
+        verbose_name='email address',
+        max_length=255,
+        unique=True,
+        null=True
+    )
+    full_name    = models.CharField(max_length=60, unique=False, null=True)
     otp          = models.CharField(max_length= 9, blank= True, null=True)
     count        = models.IntegerField(default=0)
     validated    = models.BooleanField(default=False)

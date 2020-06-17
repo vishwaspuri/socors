@@ -53,7 +53,7 @@ class ValidatePhoneSendOTP(APIView):
         except KeyError:
             return Response({
                 'status':False,
-                'detail': 'Either full name or email is not Provided'}, status=status.HTTP_403_FORBIDDEN)
+                'detail': 'Password is not Provided'}, status=status.HTTP_403_FORBIDDEN)
         if User.objects.filter(email=email).count() != 0:
             return Response({'detail': 'A User is already registered with this email id'},
                             status=status.HTTP_403_FORBIDDEN)
@@ -62,12 +62,6 @@ class ValidatePhoneSendOTP(APIView):
             phone = str(phone_number)
             user = User.objects.filter(ph_number__iexact=phone)
             if not user.exists():
-                new_user = User(full_name=full_name, email=email)
-                new_user.ph_number=phone
-                new_user.set_password(password)
-                new_user.save()
-                new_user.refresh_from_db()
-                new_user.save()
                 key=get_otp(phone)
                 if key:
                     old=PhoneOTP.objects.filter(phone__iexact= phone)
@@ -75,7 +69,7 @@ class ValidatePhoneSendOTP(APIView):
                         old=old.first()
                         count=old.count
                         if count>9:
-                            new_user.delete()
+                            # new_user.delete()
                             return Response({
                                         'status': False,
                                         'detail': 'You have reached otp response limit. Please contact customer service!'
@@ -92,7 +86,9 @@ class ValidatePhoneSendOTP(APIView):
                     else:
                         otp_object = PhoneOTP.objects.create(
                             phone=phone,
-                            otp=key
+                            otp=key,
+                            full_name=full_name,
+                            email=email
                         )
                         send_otp(phone, 'USER', key)
                         otp_object.save()
@@ -125,26 +121,29 @@ class validateOTP(APIView):
         except:
             return Response({
                 'status': False,
-                'detail': 'Phone number is not given in the post request'
+                'detail': 'Phone number is not given in the post request.'
             }, status=status.HTTP_403_FORBIDDEN)
+        try:
+            password = request.data['password']
+        except KeyError:
+            return Response({
+                'status':False,
+                'detail': 'Password is not provided.'}, status=status.HTTP_403_FORBIDDEN)
         phone=str(phone)
         otp_sent=str(otp_sent)
         actual_otp=PhoneOTP.objects.filter(phone__iexact= phone).first()
         if (str(actual_otp.otp)==otp_sent):
-            user=User.objects.filter(ph_number__iexact=phone).first()
-            actual_otp.validated=True
-            actual_otp.save()
-            if user:
-                return Response({
+            new_user = User(full_name=actual_otp.full_name, email=actual_otp.email)
+            new_user.ph_number=phone
+            new_user.set_password(password)
+            new_user.save()
+            new_user.refresh_from_db()
+            new_user.save()
+            return Response({
                     'status': True,
                     'msg': 'redirect to login',
-                    'username': user.full_name,
-                    'email': user.email},status=status.HTTP_201_CREATED)
-            else:
-                return Response({
-                    'status': False,
-                    'detail': 'Fill the user form first!'
-                }, status=status.HTTP_403_FORBIDDEN)
+                    'username': new_user.full_name,
+                    'email': new_user.email},status=status.HTTP_201_CREATED)
         else:
             return Response({
                 'status': False,

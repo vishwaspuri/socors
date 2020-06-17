@@ -70,7 +70,7 @@ $(document).ready(function(){
                     var responseJSON= JSON.parse(request.responseText);
                     if(responseJSON.status){
                             document.getElementsByClassName("center")[1].innerHTML="<p>Swipe to Continue</p>";
-                            document.getElementsByClassName("otp")[0].innerHTML='<img src="images/holding_mobile_phone.jpg" alt="hand_holding_mobile"><h1>Enter OTP</h1><div id="otp-form">'+
+                            document.getElementsByClassName("otp")[0].innerHTML='<h1>Enter OTP</h1><div id="otp-form">'+
                                 '<input id="one" type="text" onkeypress="focusTwo()" required>'+
                                 '<input id="two" type="text" onkeypress="focusThree()" required>'+
                                 '<input id="three" type="text" onkeypress="focusFour()" required>'+
@@ -93,7 +93,7 @@ $(document).ready(function(){
                             OTPrequest.onload=function(){
                                 const OTPresponse=JSON.parse(this.responseText);
                                 if(OTPresponse.status==true){
-                                    document.getElementsByClassName("center")[2].innerHTML="<p class='red'>Click <a href=''>here</a> to login</p>"
+                                    document.getElementsByClassName("center")[2].innerHTML="<p class='red'>Click <a href='https://socorsnearyou.xyz/user/login/'>here</a> to login</p>"
                                 }
                                 else{
                                     showError(OTPresponse.detail)
