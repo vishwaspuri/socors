@@ -9,3 +9,5 @@ celerybeat.pid
 .fuse_hidden000002fa00000004
 .fuse_hidden000002fa0000000c
 .vscode
+dump.rdb
+socors_backend/.env
