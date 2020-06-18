@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from celery.schedules import crontab
-from dotenv.main import load_dotenv
-load_dotenv()
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -24,8 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
-DEBUG = os.getenv('DEBUG')
+SECRET_KEY = '*eeg@^jc*%$^tmsvd7tw07+md$%c4e21#y!!%10%#6u99!j3ks'
+DEBUG = False
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
@@ -109,9 +107,9 @@ else:
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('DATABASE_NAME'),
-        'USER': os.getenv('DATABASE_USERNAME'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD'),
+        'NAME': 'socorsuserapp',
+        'USER': 'socorsadmin',
+        'PASSWORD': 'socors@123',
         'HOST': 'localhost',
         'PORT': '',
     }
@@ -170,7 +168,7 @@ DATETIME_FORMAT = '%d-%m-%Y %H:%M:%S'
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-BROKER_URL= os.getenv('BROKER_URL')
+BROKER_URL= 'redis://127.0.0.1:6379/0'
 BROKER_TRANSPORT='redis'
 CELERYBEAT_SCHEDULER='djcelery.schedulers.DatabaseScheduler'
 
