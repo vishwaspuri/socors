@@ -36,11 +36,10 @@ div.swiper-button-next.swiper-button-disabled{
 
 div.swiper-button-next.swiper-button-disabled::after{
     content: url(../images/register.png);
-    padding-top: 40px;
+    padding-top: 20px;
 }
 
 div.swiper-button-next::after{
-    margin-bottom:15px;
     background-repeat: no-repeat;
     content: url(../images/next.png);
 }
@@ -78,12 +77,7 @@ h1{
     font-family: 'Open Sans', sans-serif;
     font-size: 39px;
     font-weight: 700;
-    margin: 6vh auto 2vh auto;
-    width: 73.8vw;
-}
-
-div.swiper-pagination-bullets{
-    margin-bottom: 11.25vh;
+	padding: 0 20px 0 20px;
 }
 
 span.swiper-pagination-bullet{
@@ -93,6 +87,7 @@ span.swiper-pagination-bullet{
     border-radius: 18px;
     background: #C4C4C4;
     margin-right: 3vw ;
+	opacity: 0.9;
 }
 
 span.swiper-pagination-bullet-active{
@@ -106,12 +101,16 @@ span.swiper-pagination-bullet-active{
 
 .center+img{
     width: 90vw;
-    max-width: 500px;
     position: relative;
-    top: -240px;
+    top: -50vw;
 }
 
 .center img{
-    width: 63.8vw;
-    max-width: 400px;
+    width: 60vw;
+    position: relative;
+    top: 10vw;
+}
+
+div.swiper-pagination-bullets{
+	bottom: 80px !important;
 }
