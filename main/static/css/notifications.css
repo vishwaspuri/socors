@@ -5,7 +5,7 @@ body{
 
 *{
     font-family: 'Nunito', sans-serif;
-    text-align: center;
+    text-align: left;
     font-weight: 800;
 }
 
@@ -20,15 +20,19 @@ div p{
 }
 
 .line{
-    height: 9.2vh;
-    min-height: 80px;
+    height: auto;
     box-shadow: 3px 3px 19px rgba(0, 0, 0, 0.14);
     border-radius: 7px;
-    font-size: 14px;
+    font-size: 15px;
     margin-bottom: 1.5vh;
 }
-.col-2, .col-10{
-    margin-top: 2vh;
+.row{
+	padding: 15px 15px;
+	align-items: center;
+}
+
+.col-10{
+    padding-left: 0 !important;
 }
 
 #nameEdit{
