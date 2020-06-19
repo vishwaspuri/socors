@@ -64,6 +64,7 @@
             <div class="col-3">
                 <div class="row"><img src="{% static 'images/shop.png' %}" alt="shop_img">
                 </div>
+				<div class="shop_status">Status: <span>Open</span></div>
             </div>
 
             <div class="col-7">
@@ -75,7 +76,7 @@
                 </div>
                 <div class="d-flex flex-row-reverse">
                     <form action="{% url 'main:shop-slots' gst_id=shop.gst_id %}">
-                        <input type="submit" class="btn btn-info" value="Get Timeslot">
+                        <input type="submit" class="btn btn-info btn-overide" value="Get Timeslot">
                     </form>
                 </div>
 
