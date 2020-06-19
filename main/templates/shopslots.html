@@ -61,14 +61,22 @@
         </div>
         <table style="margin-left:auto;margin-right:auto;">
         {% for slot in slots %}
-        {% if slot.is_slot_in_shop_time %}
+
             {% with block_class=slot.class_name %}
 
         {% if forloop.counter0|divisibleby:3 %}<tr>{% endif %}
-                    {% if slot.num_entries_left %}
-                        <td><button type="button" class="bt" data-toggle="modal" data-target=".{{ block_class }}">{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button></td>
+                    {% if slot.is_slot_in_shop_time %}
+                        {% if slot.num_entries_left %}
+                            <td><button type="button" class="bt" data-toggle="modal" data-target=".{{ block_class }}">{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button></td>
+                        {% else %}
+                            <td><button type="button" class="bt btn-danger" disabled>{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button></td>
+                        {% endif %}
                     {% else %}
-                        <td><button type="button" class="bt btn-danger" data-toggle="modal" >{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button></td>
+                        {% if slot.num_entries_left %}
+                            <td><button type="button" class="bt" disabled>{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button></td>
+                        {% else %}
+                            <td><button type="button" class="bt btn-danger" disabled>{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button></td>
+                        {% endif %}
                     {% endif %}
         {% if forloop.counter|divisibleby:3 or forloop.last %}</tr>{% endif %}
         <div class="{{ block_class }} modal fade pickup-or-buy" tabindex="-1" role="dialog">
@@ -90,7 +98,6 @@
             </div>
         </div>
             {% endwith %}
-        {% endif %}
         {% endfor %}
         </table>
     <div class="row">
