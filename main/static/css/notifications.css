@@ -19,6 +19,10 @@ div p{
     margin-bottom: 0;
 }
 
+#nav_name{
+	text-align: center;
+}
+
 .line{
     height: auto;
     box-shadow: 3px 3px 19px rgba(0, 0, 0, 0.14);
