@@ -61,6 +61,10 @@ div.details{
 
 }
 
+.modal-body{
+	padding-top: 0 !important;
+}
+
 .box{
     position: absolute;
     top: 30vh;
@@ -268,4 +272,22 @@ p{
 
 .shop_image, .timeslot{
     padding-left: 15px;
+}
+
+.buttons {
+    display: flex;
+    font-size: 10px;
+    text-decoration: none;
+    border: none;
+    color: #FFFFFF;
+    position: absolute;
+    bottom: 0;
+    right: -10px;
+    font-weight: normal;
+}
+
+.buttons submit {
+    background: #2da8cf;
+    padding: 2px 5px;
+    margin-right: 5px;
 }
