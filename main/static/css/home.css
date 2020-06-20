@@ -114,3 +114,7 @@ span.swiper-pagination-bullet-active{
 div.swiper-pagination-bullets{
 	bottom: 80px !important;
 }
+
+.swiper-button-next:after{
+	font-size: unset !important;
+}
