@@ -42,7 +42,7 @@ $(document).ready(function(){
         var navName=name.text();
 
         if((!name.html().includes('<input')) &&(event.target.localName== "sup" || event.target.localName == "img")){
-            name.html("<input id='nameEdit' type='text'><sup><img id='edit_name' src='./../nav_imgs/edit_icon.png' alt=></sup>");
+            name.html("<input id='nameEdit' type='text'><sup><img id='edit_name' src='../static/images/edit_icon.png' alt=></sup>");
             var nameInput=$('#nameEdit')[0];
             nameInput.value=navName;
         }
@@ -50,8 +50,8 @@ $(document).ready(function(){
         else if((name.html().includes('<input')) &&(event.target.localName== "sup" || event.target.localName == "img")){
             var nameInput=$('#nameEdit')[0];
             navName=nameInput.value;
-            name.html(navName+'<sup><img id="edit_name" src="./../nav_imgs/edit_icon.png" alt=""></sup>');
-            h2NameChange.html(navName+'<sup><img id="edit_name" src="images/edit.png" alt=""></sup>');
+            name.html(navName+'<sup><img id="edit_name" src="../static/images/edit_icon.png" alt=""></sup>');
+            h2NameChange.html(navName+'<sup><img id="edit_name" src="../static/images/edit.png" alt=""></sup>');
         }
     }); 
 
@@ -62,7 +62,7 @@ $(document).ready(function(){
         var navName=name.text();
 
         if(!(h2NameChange.html().includes('<input'))&& (event.target.localName=='sup')){
-            h2NameChange.html('<input id="h2NameEdit" type="text"><sup><img id="edit_name" src="images/edit.png" alt=></sup>');
+            h2NameChange.html('<input id="h2NameEdit" type="text"><sup><img id="edit_name" src="../static/images/edit.png" alt=></sup>');
             var nameInput=$('#h2NameEdit')[0];
             nameInput.value=h2Name;
         }
@@ -71,7 +71,7 @@ $(document).ready(function(){
             var nameInput=$('#h2NameEdit')[0];
             h2Name=nameInput.value;
             h2NameChange.html(h2Name+'<sup><img id="edit_name" src="images/edit.png" alt=""></sup>');
-            name.html(h2Name+'<sup><img id="edit_name" src="./../nav_imgs/edit_icon.png" alt=""></sup>');
+            name.html(h2Name+'<sup><img id="edit_name" src="../static/images/edit_icon.png alt=""></sup>');
         }
 
     });

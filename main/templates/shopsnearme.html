@@ -67,7 +67,11 @@
             <div class="col-3">
                 <div class="row"><img src="{% static 'images/shop.png' %}" alt="shop_img">
                 </div>
-				<div class="shop_status">Status: <span>Open</span></div>
+        {% if shop.is_shop_open %}
+          <div class="shop_status" >Status: <span style="color: green;">Open</span></div>
+        {% else %}
+          <div class="shop_status" >Status: <span style="color: red;">Closed</span></div>
+        {% endif %}  
             </div>
 
             <div class="col-7">

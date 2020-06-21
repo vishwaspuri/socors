@@ -58,6 +58,13 @@ class Shop(models.Model):
             "shop_type": shop_type_dict[str(self.shop_type)]
         }
         return shop_dict
+    
+    def is_shop_open(self):
+        time = datetime.datetime.now().time()
+        if time>self.start_time and time<self.stop_time:
+            return True
+        else:
+            return False
 
 
 class Slot(models.Model):

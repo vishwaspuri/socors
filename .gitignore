@@ -11,3 +11,4 @@ celerybeat.pid
 .vscode
 dump.rdb
 socors_backend/.env
+win_env
