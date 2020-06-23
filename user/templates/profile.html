@@ -59,24 +59,27 @@
 
 
     <div class="content">
-      <h1 id="h1" class="d-flex align-self-start h1margin">Profile</h1>
-
+		<div class="pt-2 row"> 
+			<h1 id="h1" class="col-4">My Profile</h1>
+			<a class="btn offset-4" href="#">Edit Profile</a>
+		</div>
       <div class="user_photo">
         <img class="userDP" src="{% static 'images/userDP.png' %}" alt="profile_photo">
-        <img class="edit-btn" src="{% static 'images/cam.png' %}" alt="edit">
+        <!-- <img class="edit-btn" src="{% static 'images/cam.png' %}" alt="edit"> -->
       </div>
 
       <div class="details">
         <h2>{{ user.full_name }}<sup><img id="edit_name" src="{% static 'images/edit.png' %}" alt=""></sup></h2>
 
         <div class="first">
+		  <p class="header text-center"><strong>Contact Information</strong></p>
           <p>Mobile no: <span class="number"> +91-{{ user.ph_number }}</span></p>
           <p>E-mail: <span class="email">{{ user.email }}</span></p>
           <!-- <img id="num-mail" class="edit" src="{% static 'images/edit.png' %}" alt="edit"> -->
         </div>
         {% if user.address.exists %}
         <div class="addresses">
-          <p class="header">Address</p>
+          <p class="header"><strong>Address</strong></p>
 
         {% for address in user.address.all %}
            <div class="address one">
