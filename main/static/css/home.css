@@ -14,7 +14,7 @@ div.swiper-button-next{
     width: 40px;
     height: 40px;
     position: absolute;
-    top:87vh;
+    top:81vh;
     right: 20px;
 }
 
@@ -25,7 +25,7 @@ div.swiper-button-disabled{
     border-radius: 19px;
     border: 0;
     position: absolute;
-    top:87vh;
+    top:81vh;
     right: 20px;
 }
 
@@ -112,7 +112,7 @@ span.swiper-pagination-bullet-active{
 }
 
 div.swiper-pagination-bullets{
-	bottom: 80px !important;
+	bottom: 110px !important;
 }
 
 .swiper-button-next:after{

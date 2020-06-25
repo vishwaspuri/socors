@@ -12,8 +12,7 @@ body{
     font-weight: 800;
     color: black;
     font-size: 18px;
-    line-height: 5.3vh;
-    padding-bottom: 4.2vh;
+    padding: 1vh 0 0 20px;
 }
 div h2{
     margin-top: 0.5vh;
@@ -78,7 +77,7 @@ img#edit_name{
     margin-bottom: 0;
 }
 .header{
-    margin-bottom: 1.5vh;
+    margin-bottom: 0vh;
     text-decoration: underline;
     font-size: 15px;
 }
@@ -100,7 +99,7 @@ img#edit_name{
 .address{
     background: rgba(255, 255, 255, 0.92);
     border-bottom: 1px solid rgba(0,0,0,0.14);
-    padding-bottom: 1.5vh;
+    padding: 2vh 0.5vh 1.5vh 0.5vh;
 }
 
 .first p{
@@ -138,7 +137,7 @@ img#edit_name{
     height: 8.6vh;
     width: 80vw;
     max-width: 500px;
-    min-height: 55px;
+    min-height: 90px;
     background: white;
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.21);
     border-radius: 7px;
@@ -282,4 +281,8 @@ p{
     .overlay.open{
         display: block;
     }
+}
+a.btn {
+    background: #2DA8CF;
+    color: #FFF;
 }
