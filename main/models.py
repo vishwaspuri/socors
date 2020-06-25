@@ -66,6 +66,17 @@ class Shop(models.Model):
         else:
             return False
 
+    def are_next_day_slots_created(self):
+        today = datetime.datetime.now().today()
+        tomorrow = today + datetime.timedelta(hours=24)
+        tomorrow = tomorrow.date()
+        required_time = datetime.datetime.combine(time=datetime.time(hour=0, minute=1, second=0), date=tomorrow)
+        slots = self.slots.filter(slot_start_time__gte=required_time)
+        if not slots:
+            return False
+        else:
+            return True
+
 
 class Slot(models.Model):
     shop             =models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='slots')
@@ -141,3 +152,8 @@ class BreakDay(models.Model):
     shop                  = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='breakday')
     day                   = models.DateField(null= False)
 
+    class Meta:
+        unique_together = (
+            'shop',
+            'day'
+        )

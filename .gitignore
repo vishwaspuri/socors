@@ -12,3 +12,5 @@ celerybeat.pid
 dump.rdb
 socors_backend/.env
 win_env
+venv
+celerybeat-schedule

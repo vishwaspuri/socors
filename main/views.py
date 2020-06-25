@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect, reverse
 from django.http import HttpResponseRedirect
 from .forms import PickUpForm
 from main.shopkeeper_helpers import send_pick_up_to_shopkeeper, send_buy_in_to_shopkeeper
-from datetime import datetime
+from datetime import datetime, timedelta
 # ------------------------------------------------------------------------------
 # -----------------GENERIC VIEWS FOR TEMPLATES----------------------------------
 # ------------------------------------------------------------------------------
@@ -91,12 +91,21 @@ def shop_near_me(request):
 
 def shop_slots(request,gst_id):
     shop=Shop.objects.get(gst_id=gst_id)
-    slots=Slot.objects.filter(
-        shop=shop, 
-        slot_start_time__day = datetime.today().day, 
-        slot_start_time__month = datetime.today().month,
-        is_break=False)
-    return render(request, 'shopslots.html', {'slots':slots, 'shop': shop})
+    if shop.stop_time < datetime.today().time():
+        tomorrow = datetime.today()+timedelta(days=1)
+        slots = Slot.objects.filter(
+            shop= shop,
+            slot_start_time__day= tomorrow.day,
+            slot_stop_time__month= tomorrow.month,
+        )
+        return render(request, 'shopslots.html', {'slots': slots, 'shop': shop, 'date': tomorrow.date()})
+    else:
+        slots=Slot.objects.filter(
+            shop=shop,
+            slot_start_time__day = datetime.today().day,
+            slot_start_time__month = datetime.today().month,
+            is_break=False)
+        return render(request, 'shopslots.html', {'slots':slots, 'shop': shop, 'date': datetime.today().date()})
 
 def shop_by_cat(request, cat):
     user=request.user
