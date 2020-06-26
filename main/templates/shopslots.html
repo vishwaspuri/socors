@@ -73,6 +73,7 @@
                     {% if slot.is_slot_in_shop_time %}
                         {% if slot.num_entries_left %}
                             <form action="{% url 'main:pick-up-form' slot_id=slot.slot_id %}" method="POST">
+                                {% csrf_token %}
                                 <td><button type="submit" class="bt">{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button></td>
                             </form>
                         {% else %}
