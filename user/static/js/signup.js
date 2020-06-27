@@ -71,9 +71,9 @@ $(document).ready(function(){
                     if(responseJSON.status){
                             document.getElementsByClassName("center")[1].innerHTML="<p>Swipe to Continue</p>";
                             document.getElementsByClassName("otp")[0].innerHTML='<h1>Enter OTP</h1><div id="otp-form">'+
-                                '<input id="one" type="text" onkeypress="focusTwo()" required>'+
-                                '<input id="two" type="text" onkeypress="focusThree()" required>'+
-                                '<input id="three" type="text" onkeypress="focusFour()" required>'+
+                                '<input id="one" type="text" oninput="focusTwo()" required>'+
+                                '<input id="two" type="text" oninput="focusThree()" required>'+
+                                '<input id="three" type="text" oninput="focusFour()" required>'+
                                 '<input id="four" type="text" required>'+
                         
                                 '<input type="submit" value="submit" id="otp-submit">'+
