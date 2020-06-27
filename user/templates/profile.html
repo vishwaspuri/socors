@@ -61,7 +61,7 @@
     <div class="content">
 		<div class="pt-2 row"> 
 			<h1 id="h1" class="col-4">My Profile</h1>
-			<a class="btn offset-4" href="edit_profile.html">Edit Profile</a>
+			<!-- <a class="btn offset-4" href="edit_profile.html">Edit Profile</a> -->
 		</div>
       <div class="user_photo">
         <img class="userDP" src="{% static 'images/userDP.png' %}" alt="profile_photo">
@@ -79,7 +79,8 @@
         </div>
         {% if user.address.exists %}
         <div class="addresses">
-          <p class="header"><strong>Address</strong></p>
+			<form>
+			<p class="header"><strong>Address</strong></p>
 
         {% for address in user.address.all %}
            <div class="address one">
@@ -93,11 +94,15 @@
               </div>
             </div>
           </div>
+		  <div class="row">
+            <button type="submit" class="btn btn-primary offset-5">Save</button>
+		  </div>
         {% endfor %}
         {% else %}
             <br>
             <a href="{% url 'user:add-address' %}"><p class="header">Please add address first!</p></a>
         {% endif %}
+			</form>
     </div>
 
 
