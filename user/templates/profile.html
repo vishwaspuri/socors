@@ -61,7 +61,7 @@
     <div class="content">
 		<div class="pt-2 row"> 
 			<h1 id="h1" class="col-4">My Profile</h1>
-			<!-- <a class="btn offset-4" href="edit_profile.html">Edit Profile</a> -->
+			<a class="btn offset-4" href="{% url 'user:update-profile' %}">Edit Profile</a>
 		</div>
       <div class="user_photo">
         <img class="userDP" src="{% static 'images/userDP.png' %}" alt="profile_photo">
