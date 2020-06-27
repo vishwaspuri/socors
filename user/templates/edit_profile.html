@@ -24,7 +24,7 @@
           
           <div class="picture">
             <img src="{% static 'images/user_dp.png' %}" alt="profile_picture" class="dp">
-              <p id="nav_name" class="mb-0">{{ user.full_name }}<a href="{% url 'user:profile' %}"> <img id="edit_name" src="{% static 'images/edit_icon.png' %}" alt=""></a></p></p>
+              <p id="nav_name" class="mb-0">{{ user.full_name }}<a href="{% url 'user:update-profile' %}"> <img id="edit_name" src="{% static 'images/edit_icon.png' %}" alt=""></a></p></p>
           </div>
 
           <div class="list">
@@ -63,8 +63,8 @@
 			<h1 id="h1" class="col-4 offset-1">Edit Profile</h1>
 		</div>
 		
-		<form class="p-1 mt-4">
-			
+		<form class="p-1 mt-4" method="POST" action="{% url 'user:update-profile' %}">
+			{% csrf_token %}
 			<div class="form-group row">
                 <label for="profile" class="col-3 col-form-label">Profile Picture</label>
                 <div class="col-9 align-self-center row">
@@ -75,20 +75,20 @@
 			<div class="form-group row">
                 <label for="name" class="col-3 col-form-label">Name</label>
                 <div class="col-9">
-                    <input type="text" class="form-control text-left" id="name" name="name" value="{{ user.full_name }}">
+                    <input type="text" class="form-control text-left"  placeholder="{{ user.full_name }}" id="name" name="full_name" value="{{ user.full_name }}">
                 </div>
 			</div>
 			<div class="form-group row">
                 <label for="telnum" class="col-3 col-form-label">Phone</label>
 				<div class="col-9">
-					<input type="tel" class="form-control text-left" id="telnum" name="telnum" value="{{ user.ph_number }}">
+					<input type="tel" class="form-control text-left" id="telnum" name="ph_number" placeholder="{{ user.ph_number }}" value="{{ user.ph_number }}">
 				</div>
 			</div>
 			
 			<div class="form-group row">
 				<label for="emailid" class="col-3 col-form-label">Email</label>
 				<div class="col-9">
-                    <input type="email" class="form-control text-left" id="emailid" name="emailid" value="{{ user.email }}">
+                    <input type="email" class="form-control text-left" id="emailid" name="email" value="{{ user.email }}">
                 </div>
             </div>	
 			
@@ -100,7 +100,9 @@
             </div>
 			
 		</form>
-		
+        <p>
+            {{ errors }}
+        </p>
 	</div>
 	
 

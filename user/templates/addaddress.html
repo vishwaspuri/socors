@@ -25,7 +25,7 @@
           
           <div class="picture">
             <img src="{% static 'images/user_dp.png' %}" alt="profile_picture" class="dp">
-            <p id="nav_name" class="mb-0">{{ user.full_name }}<a href="{% url 'user:profile' %}"> <img id="edit_name" src="{% static 'images/edit_icon.png' %}" alt=""></a></p></p>
+            <p id="nav_name" class="mb-0">{{ user.full_name }}<a href="{% url 'user:update-profile' %}"> <img id="edit_name" src="{% static 'images/edit_icon.png' %}" alt=""></a></p></p>
           </div>
 
           <div class="list">
@@ -34,10 +34,10 @@
                 <a class="link" href="{% url 'user:profile' %}">My Profile</a>
               </li>
 			  <li class="nav-item">
-                <a class="link" href="{% url 'main:explore' %}">Home</a>
+                <a class="link" href="{% url 'main:menu' %}">Home</a>
               </li>
               <li class="nav-item">
-                <a class="link" href="{% url 'main:menu' %}">Explore</a>
+                <a class="link" href="{% url 'main:explore' %}">Explore</a>
               </li>
               <li class="nav-item">
                 <a class="link" href="{% url 'main:mytimeslots' %}" tabindex="-1" aria-disabled="true">My Timeslots</a>

@@ -6,3 +6,4 @@ class PickUpForm(forms.ModelForm):
     class Meta(object):
         model = PickUpBooking
         fields = ['message_for_shopkeeper']
+

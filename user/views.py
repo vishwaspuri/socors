@@ -8,10 +8,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from rest_framework.decorators import permission_classes, authentication_classes
 from user.authentication import UserAuthentication
 from user.permission import UserAccessPermission
-from .forms import AddressForm
+from .forms import AddressForm, ProfileUpdateForm
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .addresshelper import make_prior_address_not_main
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 @authentication_classes([UserAuthentication])
@@ -110,3 +111,37 @@ class PrivacyPolicyView(TemplateView):
 
 class TermsConditionsView(TemplateView):
     template_name='terms_and_conditions.html'
+
+@login_required
+def update_profile(request):
+    if request.method =="POST":
+        form = ProfileUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return  HttpResponseRedirect('/user/profile/')
+        else:
+            errors = form.errors
+            # print(errors)
+            return render(request, 'edit_profile.html', {
+                'errors': errors
+            })
+    else:
+        form = ProfileUpdateForm()
+        return render(request, 'edit_profile.html', {
+            'form': form
+        })
+
+@login_required
+def change_main_address(request):
+    if request.method=="POST":
+        try:
+            pk_address=request.POST['selectedAddress']
+        except:
+            return redirect('/user/profile/')
+        address = Address.objects.get(id = pk_address)
+        make_prior_address_not_main(request.user.id)
+        address.is_main = True
+        address.save()
+        return redirect('/user/profile/')
+    else:
+        return render(request, 'profile.html')

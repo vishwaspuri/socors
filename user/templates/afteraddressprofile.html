@@ -24,7 +24,7 @@
 
           <div class="picture">
             <img src="{% static 'images/user_dp.png' %}" alt="profile_picture" class="dp">
-              <p id="nav_name" class="mb-0">{{ user.full_name }}<a href="{% url 'user:profile' %}"> <img id="edit_name" src="{% static 'images/edit_icon.png' %}" alt=""></a></p></p>
+              <p id="nav_name" class="mb-0">{{ user.full_name }}<a href="{% url 'user:update-profile' %}"> <img id="edit_name" src="{% static 'images/edit_icon.png' %}" alt=""></a></p></p>
           </div>
 
           <div class="list">

@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from .forms import PickUpForm
 from main.shopkeeper_helpers import send_pick_up_to_shopkeeper, send_buy_in_to_shopkeeper
 from datetime import datetime, timedelta
+
 # ------------------------------------------------------------------------------
 # -----------------GENERIC VIEWS FOR TEMPLATES----------------------------------
 # ------------------------------------------------------------------------------
@@ -160,3 +161,5 @@ def my_timeslots_post_confirmation(request,slot_id):
     return render(request, 'mytimeslotswithconfirmation.html', {
         "fin_slot":fin_slot
     })
+
+
