@@ -8,201 +8,17 @@ body{
     text-align: center;
 }
 
-#h1{
+.content .row h1{
     font-weight: 800;
     color: black;
     font-size: 18px;
     padding: 1vh 0 0 20px;
 }
-div h2{
-    margin-top: 0.5vh;
-}
-
-.pincode{
-    padding-left: 5vw;
-}
-
-.editAdd{
-    position: relative;
-    left: 142px;
-    width: auto;
-}
-
-#nameEdit{
-    width: 50vw ;
-    height: 25px;
-    border: 0;
-    border-bottom: 1px solid white;
-    background-color: #2DA8CF;
-    color: white;
-}
-
-#h2NameEdit{
-    width: 80vw;
-    max-width: 300px;
-    height: 25px;
-    border: 0;
-    border-bottom: 1px solid black;
-}
-
-input#number, input#email{
-    border: 0;
-    border-bottom: 1px solid black;
-    
-}
-
-.addr input{
-    margin-bottom:0;
-    border:0;
-    border-bottom:1px solid black;
-    width: 70px;
-    padding:0;
-    margin-left: 7px;
-    height: 15px;
-}
-
-.addr input.streeT, .addr input.areA, .addr input.citY{
-    width: 250px;
-}
-
-img#edit_name{
-    width: 9px;
-    height: 9px;
-}
-
-.addr p{
-    text-align: left;
-    margin-left: 2.5vw;
-    font-size: 13px;
-    margin-bottom: 0;
-}
-.header{
-    margin-bottom: 0vh;
-    text-decoration: underline;
-    font-size: 15px;
-}
-
-.rad{
-    
-    box-sizing: border-box;
-    margin-left: 3.33vw;
-}
-
-.addresses{
-    width: 80vw;
-    max-width: 500px;
-    box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.13);
-    border-radius: 13px;
-    margin: 2vh auto 0 auto;
-}
-
-.address{
-    background: rgba(255, 255, 255, 0.92);
-    border-bottom: 1px solid rgba(0,0,0,0.14);
-    padding: 2vh 0.5vh 1.5vh 0.5vh;
-}
-
-.first p{
-    text-align: left;
-    margin-bottom: 0.9vh;
-    font-size: 14px;
-}
-
-.first p:nth-of-type(1){
-    padding-top: 0.4vh;
-}
-
-#submit{
-    background: #2DA8CF;
-    font-family: 'Nunito', sans-serif;
-    color: white;
-    font-weight: 800;
-    height: 6.25vh;
-    min-height: 40px;
-    width: 135px;
-    margin: 3.4vh auto 1.72vh auto;
-    border-radius: 9px;
-    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.18);
-    border: 0;
-    font-size: 15px;
-}
-
-.edit{
-    position: relative;
-    top:-58px;
-    left: 130px;
-}
-
-.first{
-    height: 8.6vh;
-    width: 80vw;
-    max-width: 500px;
-    min-height: 90px;
-    background: white;
-    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.21);
-    border-radius: 7px;
-    margin: 0 auto 0 auto;
-    padding-left: 5.5vw;
-}
-
-.userDP{
-    border-radius: 50%;
-    height: 115px;
-    width: auto;
-    min-height: 95px;
-}
-
-.edit-btn{
-    position: relative;
-    top: -100px;
-    left: 47px;
-    z-index: +1;
-}
-
-.user_photo{
-    height: 17.8vh;
-    min-height: 95px;
-    width: min-content;
-    margin: 0 auto;
-}
-.h1margin{
-    margin: 11.9vh 0 -2vh 5vw;
-}
-
-.h1MinMargin{
-    margin: 70px 0 -2vh 5vw;
-}
-
-.notif{
-    background: url(../images/notif.png);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    height: 65%;
-    width: 7.8%;
-    border: 0;
-    margin-top: 0;
-    margin-right: 15px;
-    padding: 0;
-}
-
-.navbar-toggler{
-    margin-top: 0.9vh
-}
-.navbar-toggler-icon{
-    color: white;
-}
-
-#tri{
-    border: 0;
-}
-
 .navbar{
     font-weight: 800;
     height: 9.5vh;
     min-height: 55px;
 }
-
 .picture{
     height: 24vh;
     min-height: 150px;
@@ -211,23 +27,6 @@ img#edit_name{
     font-size: 24px;
     line-height: 35px;
 }
-p{
-    margin-bottom: 0.8vh;
-}
-
-.dp{
-    height: 13.6vh;
-    width: auto;
-    min-height: 100px;
-    margin: 1.1vh auto 0 auto;
-}
-
-.tiny{
-    font-size: 13px;
-    line-height: 15px;
-    font-weight: normal;
-}
-
 .list{
     background: white;
     width: 100%;
@@ -245,9 +44,21 @@ p{
 .nav-item{
     padding-bottom: 3vh;
 }
+.navbar-toggler{
+    margin-top: 0.9vh
+}
+#tri{
+    border: 0;
+}
+.dp{
+    height: 13.6vh;
+    width: auto;
+    min-height: 100px;
+    margin: 1.1vh auto 0 auto;
+}
 
-.content{
-    margin-top: 9.5vh;
+.navbar-toggler-icon{
+    color: white;
 }
 .mobileMenu{
     width: 64vw;
@@ -282,7 +93,79 @@ p{
         display: block;
     }
 }
-a.btn {
-    background: #2DA8CF;
-    color: #FFF;
+
+
+
+.content{
+    margin-top: 9.5vh;
+}
+.edit-btn{
+    position: relative;
+    top: -100px;
+    left: 47px;
+    z-index: +1;
+}
+
+.userDP{
+    border-radius: 50%;
+    height: 115px;
+    width: auto;
+    min-height: 95px;
+}
+.user_photo{
+    height: 17.8vh;
+    min-height: 95px;
+    width: min-content;
+    margin: 0 auto;
+}
+
+.header{
+	font-family: Nunito;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 14px;
+	color: #2DA8CF;
+}
+
+#gen_info > .row{
+	margin-bottom:25px;
+}
+#gen_info .row .col .row span{
+	font-family: Nunito;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 19px;
+	color: #000000;
+}
+#gen_info .row .col .row:first-of-type span{
+	font-family: Nunito;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 9px;
+	line-height: 12px;
+	color: #000000;
+	opacity: 0.39;
+}
+.address{
+	border: 2px solid rgba(45,168,205,0.5);
+	box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.21);
+}
+.address span{
+	font-family: Nunito;
+	font-style: normal;
+	font-size: 12px;
+	line-height: 16px;
+}
+a.btn, button.btn{
+	background: #2DA8CF;
+	box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.18);
+	border-radius: 3px;
+	min-width: fit-content;
+}
+a.btn, button.btn{
+	font-size:12px;
+}
+#update{
+	font-size:16px;
 }

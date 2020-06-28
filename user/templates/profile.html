@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="../static/css/profile.css">
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
@@ -12,6 +12,7 @@
       crossorigin="anonymous"
     />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Profile</title>
 </head>
 <body>
@@ -59,56 +60,228 @@
 
 
     <div class="content">
-		<div class="pt-2 row"> 
-			<h1 id="h1" class="col-4">My Profile</h1>
-			<a class="btn offset-4" href="{% url 'user:update-profile' %}">Edit Profile</a>
+		<div class="row"> 
+			<h1 class="col-4">Profile</h1>
 		</div>
-      <div class="user_photo">
-        <img class="userDP" src="{% static 'images/userDP.png' %}" alt="profile_photo">
-        <!-- <img class="edit-btn" src="{% static 'images/cam.png' %}" alt="edit"> -->
-      </div>
+		<div class="user_photo">
+        <img class="userDP" src="../static/images/userDP.png" alt="profile_photo">
+        <img class="edit-btn" src="../static/images/cam.png" alt="edit">
+		</div>
+	    <br>
+		
+		<div id="gen_info" class="ml-4">
+			<div class="row mb-4 ml-1">
+				<div class="header">General Information</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-3">
+					<i class="fa fa-user" id="name" aria-hidden="true" style="font-size: 30px;"></i>
+				</div>
+				<div class="col">
+					<div class="row">
+						<span>Name</span>
+					</div>
+					<div class="row">
+						<span>{{ user.full_name }}</span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-3">
+					<i class="fa fa-mobile text-primary" id="phone_num" aria-hidden="true" style="font-size: 40px;"></i>
+				</div>
+				<div class="col">
+					<div class="row">
+						<span>Mobile No.</span>
+					</div>
+					<div class="row">
+						<span>{{ user.ph_number }}</span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-3">
+					<i class="fa fa-envelope text-success" id="email" aria-hidden="true" style="font-size: 25px;"></i>
+				</div>
+				<div class="col">
+					<div class="row">
+						<span>Email-ID</span>
+					</div>
+					<div class="row">
+						<span>{{ user.email }}</span>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-4 offset-4">
+				<a class="btn btn-block  text-white" data-toggle="modal" data-target="#EditModal1">Edit</a>
+				</div>
+			</div>		
+		</div>
+		
+		<div id="addresses" class="ml-4">
+			<div class="row ml-1 mb-2">
+				<div class="header">Address</div>
+			</div>
+			<div class="row mr-1">
+				<div class="col-12">
+					<div class="address">
+						<div class="row ml-2 mt-2">
+							<span><strong>Street :</strong></span>
+							<span>{{ address.street }}</span>
+						</div>
+						<div class="row ml-2">
+							<span><strong>Area: </strong></span>
+							<span>{{ address.area }}</span>
+						</div>
+						<div class="row ml-2">
+							<span><strong>City: </strong></span>
+							<span>{{ address.city }}</span>
+						</div>
+						<div class="row ml-2">
+							<span><strong>State: </strong></span>
+							<span>{{ address.state }}</span>
+							<span class="pl-2"><strong>Pincode: </strong></span>
+							<span>{{ address.pincode }}</span>
+						</div>
+						<form>
+							<div class="row m-3">
+							<div class="col-5 offset-1">
+								<a class="btn btn-block text-white" data-toggle="modal" data-target="#EditModal2">Edit</a>
+							</div>							
+							<div class="col-5">
+								<button class="btn btn-block text-white" type="submit">Remove</button>
+							</div>	
+						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-3 ml-2">
+			<form class="col-6 offset-3">
+				<button type="submit" class="btn text-white" id="update">Update Profile</button>			
+			</form>
+		</div>
+		
+	</div>
+		
+		<!--Modals-->
+		
+		<!--Edit Modal 1-->
+		
+		<div id="EditModal1" class="modal fade" role="dialog">
+			<div class="modal-dialog modal-lg" role="content">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header bg-primary">
+						<h4 class="modal-title text-white">Edit General Information </h4>
+						<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<form class="p-1 mt-4" method="POST" action="{% url 'user:update-profile' %}">
+							{% csrf_token %}
+							
+							<div class="form-group row">
+								<label for="name" class="col-3 col-form-label">Name</label>
+								<div class="col-9">
+									<input type="text" class="form-control text-left"  placeholder="{{ user.full_name }}" id="name" name="full_name" value="{{ user.full_name }}">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="telnum" class="col-3 col-form-label">Phone</label>
+								<div class="col-9">
+									<input type="tel" class="form-control text-left" id="telnum" name="ph_number" placeholder="{{ user.ph_number }}" value="{{ user.ph_number }}">
+								</div>
+							</div>
+							
+							<div class="form-group row">
+								<label for="emailid" class="col-3 col-form-label">Email</label>
+								<div class="col-9">
+									<input type="email" class="form-control text-left" id="emailid" name="email" value="{{ user.email }}">
+								</div>
+							</div>	
+							
+							
+							<div class="form-group row">
+								<div class="offset-4 col-4 mt-3">
+									<button type="submit" class="btn btn-block text-white">Save</button>
+								</div>
+							</div>
+							
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!--Edit Modal 2-->
+		
 
-      <div class="details">
-        <h2>{{ user.full_name }}<sup><a href="{% url 'user:update-profile' %}"><img id="edit_name" src="{% static 'images/edit.png' %}" alt=""></a></sup></h2>
-        <div class="first">
-		  <p class="header text-center"><strong>Contact Information</strong></p>
-          <p>Mobile no: <span class="number"> +91-{{ user.ph_number }}</span></p>
-          <p>E-mail: <span class="email">{{ user.email }}</span></p>
-          </div>
-        {% if user.address.exists %}
-        <div class="addresses">
-            <form action="{% url 'user:change-main-address' %}" method="POST">
-                {% csrf_token %}
-                <p class="header"><strong>Address</strong></p>
-                {% for address in user.address.all %}
-                   <div class="address one">
-                    <div class="d-flex">
-                        {% if address.is_main %}
-                            <div class="rad"><input type="radio" name="selectedAddress" value="{{ address.id }}" checked="checked"></div>
-                        {% else %}
-                            <div class="rad"><input type="radio" name="selectedAddress" value="{{ address.id }}"></div>
-                        {% endif %}
-                        <div class="addr">
-                            <p>Street: <span class="streeT">{{ address.street }}</span></p>
-                            <p>Area:<span class="areA">{{ address.area }}</span></p>
-                            <p>City:<span class="citY">{{ address.city }}</span></p>
-                            <p><span class="state">State:</span><span class="statE">{{ address.state }}</span><span class="pincode">Pincode:</span><span class="PIN">{{ address.pincode }}</span></p>
-                          </div>
-                    </div>
-                  </div>
-                {% endfor %}
-                {% else %}
-                    <br>
-                    <a href="{% url 'user:add-address' %}"><p class="header">Please add address first!</p></a>
-                {% endif %}
-                <div class="row">
-                    <button type="submit" class="btn btn-primary offset-5">Save</button>
-                </div>
-            </form>
-        </div>
-
-
-
+		
+		<div id="EditModal2" class="modal fade" role="dialog">
+			<div class="modal-dialog modal-lg" role="content">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header bg-primary">
+						<h4 class="modal-title text-white">Edit Address</h4>
+						<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						<form class="p-1 mt-4" method="POST" action="{% url 'user:update-profile' %}">
+							{% if address.is_main %}
+							<span class="badge badge-success mb-4">Current Address</span>
+							{% else %}
+							<div class="form-group row">									
+								<label for="select" class=" col-3 form-label">Make Current Addres</label>
+							</div>
+							{% endif %}
+							<div class="form-group row">
+								<label for="street" class="col-3 col-form-label">Street:</label>
+								<div class="col-9">
+									<input type="text" class="form-control text-left"  placeholder="{{ address.street }}" id="street" name="street" value="{{ address.street }}">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="area" class="col-3 col-form-label">Area:</label>
+								<div class="col-9">
+									<input type="text" class="form-control text-left"  placeholder="{{ address.area }}" id="area" name="area" value="{{ address.area }}">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="city" class="col-3 col-form-label">City:</label>
+								<div class="col-9">
+									<input type="text" class="form-control text-left"  placeholder="{{ address.city }}" id="city" name="city" value="{{ address.city }}">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="state" class="col-3 col-form-label">State:</label>
+								<div class="col-9">
+									<input type="text" class="form-control text-left"  placeholder="{{ address.state }}" id="state" name="state" value="{{ address.state }}">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label for="pincode" class="col-3 col-form-label">Pincode:</label>
+								<div class="col-9">
+									<input type="text" class="form-control text-left"  placeholder="{{ address.pincode }}" id="pincode" name="pincode" value="{{ address.pincode }}">
+								</div>
+							</div>
+					
+							<div class="form-group row">
+								<div class="col-5 mt-3 offset-1">
+									<button type="submit" class="btn btn-block  text-white">Save</button>
+								</div>
+								<div class="col-5 mt-3">
+									<button type="submit" class="btn btn-block text-white">Remove</button>
+								</div>
+							</div>
+							
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
     <script
@@ -121,6 +294,7 @@
               integrity="sha256-OUFW7hFO0/r5aEGTQOz9F/aXQOt+TwqI1Z4fbVvww04="
               crossorigin="anonymous"
             ></script>
-    <script src="{% static 'js/profile.js' %}"></script>
+
+    <script src="../static/js/profile.js"></script>
 </body>
 </html>
