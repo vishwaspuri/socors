@@ -141,6 +141,12 @@ class Address(models.Model):
     pincode       =models.IntegerField(validators=[MaxValueValidator(999999)])
     is_main       =models.BooleanField(default=False)
 
+    def class_name(self):
+        return 'address'+str(self.id)
+
+    def make_address_main(self):
+        pass
+
     def to_dict(self):
         add_dict = {
             'city':self.city,

@@ -145,3 +145,25 @@ def change_main_address(request):
         return redirect('/user/profile/')
     else:
         return render(request, 'profile.html')
+
+
+def remove_address(request):
+    if request.method == 'POST':
+        try:
+            address_id = request.POST['address_pk']
+        except:
+            return redirect('/user/profile/')
+        address = Address.objects.get(id = address_id)
+        print(address)
+        address.delete()
+        return redirect('/user/profile/')
+
+@login_required
+def edit_address(request):
+    if request.method=='POST':
+        address = Address.objects.get(id = request.POST['address_id'])
+        form = AddressForm(request.POST, instance=address)
+        if form.is_valid():
+            form.save()
+            return redirect('/user/profile/')
+

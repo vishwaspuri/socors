@@ -1,7 +1,7 @@
 from django.urls import path
 from user.api import auth
 from django.contrib.auth.views import LogoutView, LoginView
-from .views import change_main_address, update_profile, add_address, AddaddressView, ProfileView, RegisterView,AddAddressView, AfterAddressView, TermsConditionsView, PrivacyPolicyView
+from .views import edit_address, remove_address, change_main_address, update_profile, add_address, AddaddressView, ProfileView, RegisterView,AddAddressView, AfterAddressView, TermsConditionsView, PrivacyPolicyView
 from .api.auth import ValidatePhoneSendOTP, validateOTP
 from .api.api_views import profile_details
 
@@ -25,5 +25,7 @@ urlpatterns = [
     path('privacy-policy/', PrivacyPolicyView.as_view(), name='privacy-policy'),
     path('terms-and-conditions/', TermsConditionsView.as_view(), name='terms-n-conditions'),
     path('update-profile/', update_profile, name='update-profile'),
-    path('change-main-address/', change_main_address, name='change-main-address')
+    path('change-main-address/', change_main_address, name='change-main-address'),
+    path('remove-address/', remove_address, name='remove-address'),
+    path('edit-address/', edit_address, name='edit-address')
 ]
