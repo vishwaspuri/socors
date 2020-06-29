@@ -268,7 +268,7 @@
 							{% else %}
 							<div class="form-group row">									
 								<label for="select" class=" col-9 form-label text-left">Make Current Addres</label>
-                                <input type="radio" class="col-3 align-center" name="make_main_address" value="True">
+                                <input type="checkbox" class="col-3 align-center" name="make_main_address" value="True">
 							</div>
 							{% endif %}
 							<div class="form-group row">
@@ -320,9 +320,14 @@
 			</div>
 		</div>
         {% endwith %}
-        {% endfor %}
+		{% endfor %}
 		<br>
-		<br>
+		<!--if no address-->
+		<div class="row ml-3">
+			<div class="col-6 offset-3">
+				<a class="btn text-white btn-block" id="add_address" href="addaddress.html">Add Address</a>				
+			</div>
+		</div>
 		<br>
 		<br>
 	</div>
