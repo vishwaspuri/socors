@@ -29,7 +29,7 @@
             <input type="submit" value="login" id="submit">
 
         </form>
-        
+        <p class="bottom">Don't have an account? <a href="{% url 'user:register' %}" class="login">Register</a></p>
         {% comment %} <p class="separator">OR</p>
         <p>Log In With</p>
         <i><a href="{% provider_login_url "facebook" method="js_sdk" %}" class="icon fb"></a></i>

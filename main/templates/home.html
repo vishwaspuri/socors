@@ -42,7 +42,7 @@
             <h1>Register with us and spread the word</h1>
               <a href="{% url 'user:register' %}"><img src="{% static 'images/people.png' %}" alt="store" style="width: 55vw; top: 0;"></a>
           </div>
-          <a href='http://socorsnearyou.xyz/user/signup/' class="register-btn">Login</a>
+          <a href='{% url 'user:login' %}' class="register-btn">Login</a>
         </div>
     </div>
    
