@@ -93,7 +93,7 @@ $(document).ready(function(){
                             OTPrequest.onload=function(){
                                 const OTPresponse=JSON.parse(this.responseText);
                                 if(OTPresponse.status==true){
-                                    document.getElementsByClassName("center")[2].innerHTML="<p class='red'>Click <a href='https://socorsnearyou.xyz/user/login/'>here</a> to login</p>"
+                                    document.getElementsByClassName("center")[2].innerHTML="<p class='red'>Click <a href='https://socorsnearyou.xyz/getting-started/'>here</a> to get started!</p>"
                                 }
                                 else{
                                     showError(OTPresponse.detail)

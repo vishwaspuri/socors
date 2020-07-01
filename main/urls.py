@@ -3,7 +3,7 @@ from main.api import api_views
 from main import views
 
 urlpatterns = [
-    path('',views.BaseView.as_view(),name='home' ),
+    path('getting-started/',views.BaseView.as_view(),name='home' ),
     path('menu/', views.MenuView.as_view(), name='menu'),
     path('mytimeslots/', views.MytimeslotsView.as_view(), name='mytimeslots'),
     path('notifications/', views.NotificationView.as_view(), name='notifications'),
