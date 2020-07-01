@@ -42,24 +42,19 @@
             <h1>Register with us and spread the word</h1>
               <a href="{% url 'user:register' %}"><img src="{% static 'images/people.png' %}" alt="store" style="width: 55vw; top: 0;"></a>
           </div>
+          <a href='http://socorsnearyou.xyz/user/signup/' class="register-btn">Login</a>
         </div>
     </div>
    
     <div class="swiper-pagination"></div>
     <div class="swipeBtn">
         <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
     </div>
 </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script >
-      $(".swipeBtn").on("click",function(){
-        console.log("click click");
-        if($('.swiper-button-next').hasClass('swiper-button-disabled')){
-          $('.swipeBtn').html("<a href='http://socorsnearyou.xyz/user/signup/'><div class='swiper-button-next swiper-button-disabled'></div></a>");
-        }
-      });
-    </script>
+    
     <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 
   <script>
