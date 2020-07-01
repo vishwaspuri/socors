@@ -22,5 +22,5 @@ urlpatterns = [
     path('user/', include(('user.urls', 'user'), namespace='user')),
     path('', include(('main.urls', 'main'), namespace='main')),
     path('accounts/', include('allauth.urls')),
-    path('/', RegisterView.as_view(), name='register')
+    path('', RegisterView.as_view(), name='register')
 ]
