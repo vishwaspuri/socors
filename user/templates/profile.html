@@ -13,12 +13,20 @@
     />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+
     <title>Profile</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-xxl navbar-dark bg justify-content-xxl-start fixed-top">
         <a class="navbar-brand order-0 ml-xxl-0 ml-2 mr-auto" href="{% url 'main:menu' %}">SOCORS</a>
-        <button id="tri" class="navbar-toggler align-self-start" type="button">
+		<a id="notification" href="{% url 'main:notifications' %}"><span class="fas fa-bell" id="bell"></span>
+			<!-- <span class="badge badge-danger rounded-circle" id="bell_num">5</span> -->
+			<!-- if no notification -->
+			<!-- <span class="badge badge-danger rounded-circle invisible">5</span> -->
+		</a> 
+		<button id="tri" class="navbar-toggler align-self-start" type="button">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse d-flex flex-column flex-xxl-row bg mobileMenu" id="navbarSupportedContent">
@@ -47,14 +55,35 @@
               </li>
               <li class="nav-item">
                 <a class="link" href="{% url 'main:notifications' %}" tabindex="-1" aria-disabled="true">Notifications</a>
+			  </li>
+			  <li class="nav-item">
+                <a class="link" tabindex="-1" href="#" aria-disabled="true" data-toggle="modal" data-target="#ContactUsModal">Contact Us</a>
               </li>
               <li class="nav-item">
                 <a class="link" href="{% url 'user:logout' %}" tabindex="-1" aria-disabled="true">Logout</a>
-              </li>
+			  </li>
+			  
             </ul>
           </div>
         </div>
-      </nav>
+	  </nav>
+	  
+	  <!--Contact Us Modal-->
+
+		<div id="ContactUsModal" class="modal fade" role="dialog">
+			<div class="modal-dialog-centered modal-dialog" role="content">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header justify-content-center pt-1 pb-0 bg-primary">
+						<h4 class="row text-white">Contact Us at</h4>	
+					</div>
+					<div class="modal-body align-items-center row">
+						<i class="fab fa-whatsapp-square text-success col-2 offset-2" style="font-size: 40px;" aria-hidden="true"></i>
+						<span class="col-7" style="font-size: 20px;">+91-7042676330</span>
+					</div>
+				</div>
+			</div>
+		</div>
 
     <div class="overlay"></div>
 
@@ -125,7 +154,7 @@
 			</div>
 			<div class="row">
 				<div class="col-3">
-					<i class="fa fa-mobile text-primary" id="phone_num" aria-hidden="true" style="font-size: 40px;"></i>
+					<i class="fa fa-mobile text-primary" id="phone_num" aria-hidden="true" style="font-size: 35px;"></i>
 				</div>
 				<div class="col">
 					<div class="row">
@@ -325,7 +354,7 @@
 		<!--if no address-->
 		<div class="row ml-3">
 			<div class="col-6 offset-3">
-				<a class="btn text-white btn-block" id="add_address" href="addaddress.html">Add Address</a>				
+				<a class="btn text-white btn-block" id="add_address" href="{% url 'user:add-address' %}">Add Address</a>				
 			</div>
 		</div>
 		<br>
