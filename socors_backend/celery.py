@@ -6,7 +6,7 @@ import django
 from celery import Celery
 from django.conf import settings
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE0', 'socors_backend.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'socors_backend.settings')
 django.setup()
 
 app=Celery('socors_backend')
