@@ -182,6 +182,19 @@ p.text{
     padding: 0;
 }
 
+#bell{
+    color: #FFFFFF;
+    opacity: 0.5;
+    font-size: 25px;
+    margin-top: 10px;
+}
+
+#bell_num{
+    position: relative;
+    top: -17px;
+    right: 6px;
+}
+
 .navbar-toggler{
     margin-top: 0.9vh
 }

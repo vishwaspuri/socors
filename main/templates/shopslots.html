@@ -12,11 +12,18 @@
       crossorigin="anonymous"
     />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
+
     <title>Time Slots</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-xxl navbar-dark bg justify-content-xxl-start fixed-top">
         <a class="navbar-brand order-0 ml-xxl-0 ml-2 mr-auto" href="{% url 'main:menu' %}">SOCORS</a>
+        <a id="notification" href="{% url 'main:notifications' %}"><span class="fas fa-bell" id="bell"></span>
+          <span class="badge badge-danger rounded-circle" id="bell_num">5</span>
+          <!-- if no notification -->
+          <!-- <span class="badge badge-danger rounded-circle invisible">5</span> -->
+        </a> 
         <button id="tri" class="navbar-toggler align-self-start" type="button">
           <span class="navbar-toggler-icon"></span>
         </button>
