@@ -156,6 +156,14 @@ def remove_address(request):
         except:
             return redirect('/user/profile/')
         address = Address.objects.get(id = address_id)
+        if address.is_main == True:
+            # Find a new address and make it main
+            # print("Main address reached")
+            new_main_address = Address.objects.filter(user= request.user).first()
+            # print(new_main_address.city)
+            if new_main_address != None:
+                new_main_address.is_main = True
+                new_main_address.save()
         print(address)
         address.delete()
         return redirect('/user/profile/')
