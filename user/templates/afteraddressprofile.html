@@ -13,6 +13,7 @@
     />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
 
     <title>Profile</title>
@@ -20,11 +21,11 @@
 <body>
     <nav class="navbar navbar-expand-xxl navbar-dark bg justify-content-xxl-start fixed-top">
         <a class="navbar-brand order-0 ml-xxl-0 ml-2 mr-auto" href="{% url 'main:menu' %}">SOCORS</a>
-		<a id="notification" href="{% url 'main:notifications' %}><span class="fas fa-bell" id="bell"></span>
+		<a id="notification" href="{% url 'main:notifications' %}"><span class="fas fa-bell" id="bell"></span>
 			<!-- <span class="badge badge-danger rounded-circle" id="bell_num">5</span> -->
 			<!-- if no notification -->
 			<!-- <span class="badge badge-danger rounded-circle invisible">5</span> -->
-		</a> 
+		</a>
 		<button id="tri" class="navbar-toggler align-self-start" type="button">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -60,11 +61,13 @@
               </li>
               <li class="nav-item">
                 <a class="link" href="{% url 'user:logout' %}" tabindex="-1" aria-disabled="true">Logout</a>
-              </li>
+			  </li>
+
             </ul>
           </div>
         </div>
-      </nav>
+	  </nav>
+
 	  <!--Contact Us Modal-->
 
 		<div id="ContactUsModal" class="modal fade" role="dialog">
@@ -72,7 +75,7 @@
 				<!-- Modal content-->
 				<div class="modal-content">
 					<div class="modal-header justify-content-center pt-1 pb-0 bg-primary">
-						<h4 class="row text-white">Contact Us at</h4>	
+						<h4 class="row text-white">Contact Us at</h4>
 					</div>
 					<div class="modal-body pt-2">
 						<div class="row">
@@ -86,29 +89,18 @@
 						  <a href = "mailto: socorsnearyou@gmail.com" class="text-danger">
 							<i class="fas fa-envelope" style="font-size: 30px;" aria-hidden="true"></i>
 						  </a>
-						  <span class="pl-2 mb-1" style="font-size: 15px;">socorsnearyou@gmail.com</span>                
+						  <span class="pl-2 mb-1" style="font-size: 15px;">socorsnearyou@gmail.com</span>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
-{#    <div class="modal show" tabindex="-1" role="dialog" aria-modal="true" style="display: block; margin-top: 30vh;">#}
-{#      <div class="modal-dialog" role="document">#}
-{#        <div class="modal-content">#}
-{#          <div class="modal-body">#}
-{#            <p>Address Added</p>#}
-{#          </div>#}
-{#          <div class="modal-footer">#}
-{#            <button type="button" id="modalbutton" class="btn btn-info">OKAY</button>#}
-{#          </div>#}
-{#        </div>#}
-{#      </div>#}
-{#    </div>#}
-
     <div class="overlay"></div>
+
+
     <div class="content">
-		<div class="row"> 
+		<div class="row">
 			<h1 class="col-4">Profile</h1>
 		</div>
 		<div class="user_photo">
@@ -118,7 +110,7 @@
 		</button>
 		</div>
 		<br>
-		
+
 		<!--Edit Modal Profile Picture-->
 
 		<div id="EditModalProfilePicture" class="modal fade" role="dialog">
@@ -151,13 +143,13 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<!--General Information-->
 		<div id="gen_info" class="ml-4">
 			<div class="row mb-4 ml-1">
 				<div class="header">General Information</div>
 			</div>
-			
+
 			<div class="row">
 				<div class="col-3">
 					<i class="fa fa-user" id="name" aria-hidden="true" style="font-size: 30px;"></i>
@@ -201,7 +193,7 @@
 				<div class="col-4 offset-4">
 				<a class="btn btn-block  text-white" data-toggle="modal" data-target="#EditModal1">Edit</a>
 				</div>
-			</div>		
+			</div>
 		</div>
 
         <!--Edit Modal 1-->
@@ -258,8 +250,24 @@
         {% with address.class_name as block_id %}
 		<div id="addresses" class="ml-4">
 			<div class="row mr-1">
+
 				<div class="col-12">
 					<div class="address">
+                        <form method="POST" id="hello{{ block_id }}" action="{% url 'user:change-main-address' %}">
+                            {% if address.is_main %}
+							<div class="row mt-1">
+								<span class="badge badge-success m-auto">Current Address</span>
+								<input type="hidden" name="make_main_address" value="False">
+							</div>
+							{% else %}
+							<div class="align-items-baseline justify-content-center mt-1 row">
+							        {% csrf_token %}
+                                    <label for="select" class="col-7 form-label mb-0">Make Current Addres</label>
+                                    <input type="hidden" name="selectedAddress" value="{{ address.id }}">
+								    <input type="checkbox" class="align-center col-1" onchange="document.getElementById('hello{{ block_id }}').submit()">
+                            </div>
+							{% endif %}
+                        </form>
 						<div class="row ml-2 mt-2">
 							<span><strong>Street :</strong></span>
 							<span>{{ address.street }}</span>
@@ -291,14 +299,13 @@
 								    <button class="btn btn-block text-white" type="submit">Remove</button>
                                 </form>
                             </div>
-                            </div>
 						</div>
 					</div>
 				</div>
 			</div>
-		
+
 		<!--Edit Modal 2-->
-		
+
 		<div id="{{ block_id }}" class="modal fade" role="dialog">
 			<div class="modal-dialog modal-lg" role="content">
 				<!-- Modal content-->
@@ -310,15 +317,15 @@
 					<div class="modal-body">
                         <form class="p-1 mt-4" method="POST" action="{% url 'user:edit-address' %}">
                             {% csrf_token %}
-							{% if address.is_main %}
-                                <span class="badge badge-success mb-4">Current Address</span>
-                                <input type="hidden" name="make_main_address" value="False">
-							{% else %}
-							<div class="form-group row">									
-								<label for="select" class=" col-9 form-label text-left">Make Current Addres</label>
-                                <input type="checkbox" class="col-3 align-center" name="make_main_address" value="True">
-							</div>
-							{% endif %}
+{#							{% if address.is_main %}#}
+{#                                <span class="badge badge-success mb-4">Current Address</span>#}
+{#                                <input type="hidden" name="make_main_address" value="False">#}
+{#							{% else %}#}
+{#							<div class="form-group row">									#}
+{#								<label for="select" class=" col-9 form-label text-left">Make Current Addres</label>#}
+{#                                <input type="checkbox" class="col-3 align-center" name="make_main_address" value="True">#}
+{#							</div>#}
+{#							{% endif %}#}
 							<div class="form-group row">
 								<label for="street" class="col-3 col-form-label">Street:</label>
 								<div class="col-9">
@@ -373,7 +380,7 @@
 		<!--if no address-->
 		<div class="row ml-3">
 			<div class="col-6 offset-3">
-				<a class="btn text-white btn-block" id="add_address" href="{% url 'user:add-address' %}">Add Address</a>				
+				<a class="btn text-white btn-block" id="add_address" href="{% url 'user:add-address' %}">Add Address</a>
 			</div>
 		</div>
 		<br>
