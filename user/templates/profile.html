@@ -250,8 +250,21 @@
         {% with address.class_name as block_id %}
 		<div id="addresses" class="ml-4">
 			<div class="row mr-1">
+				
 				<div class="col-12">
 					<div class="address">
+						<form method="POST" id="address_change" action="{% url 'user:edit-address' %}">
+							{% if address.is_main %}
+							<div class="row mt-1">
+								<span class="badge badge-success m-auto">Current Address</span>
+								<input type="hidden" name="make_main_address" value="False">
+							</div>
+							{% else %}
+							<div class="align-items-baseline justify-content-center mt-1 row">									
+								<label for="select" class="col-7 form-label mb-0">Make Current Addres</label>
+								<input type="checkbox" class="align-center col-1" name="make_main_address" value="True" onchange="document.getElementById('address_change').submit()">
+							</div>
+							{% endif %}
 						<div class="row ml-2 mt-2">
 							<span><strong>Street :</strong></span>
 							<span>{{ address.street }}</span>
@@ -283,8 +296,8 @@
 								    <button class="btn btn-block text-white" type="submit">Remove</button>
                                 </form>
                             </div>
-                            </div>
 						</div>
+						</form>
 					</div>
 				</div>
 			</div>
