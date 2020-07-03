@@ -134,11 +134,13 @@ def update_profile(request):
 @login_required
 def change_main_address(request):
     if request.method=="POST":
+        # print(request.POST)
         try:
             pk_address=request.POST['selectedAddress']
         except:
             return redirect('/user/profile/')
         address = Address.objects.get(id = pk_address)
+        # print(address.city)
         make_prior_address_not_main(request.user.id)
         address.is_main = True
         address.save()

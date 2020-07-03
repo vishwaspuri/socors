@@ -253,18 +253,21 @@
 				
 				<div class="col-12">
 					<div class="address">
-						<form method="POST" id="address_change" action="{% url 'user:edit-address' %}">
-							{% if address.is_main %}
+                        <form method="POST" id="hello{{ block_id }}" action="{% url 'user:change-main-address' %}">
+                            {% if address.is_main %}
 							<div class="row mt-1">
 								<span class="badge badge-success m-auto">Current Address</span>
 								<input type="hidden" name="make_main_address" value="False">
 							</div>
 							{% else %}
-							<div class="align-items-baseline justify-content-center mt-1 row">									
-								<label for="select" class="col-7 form-label mb-0">Make Current Addres</label>
-								<input type="checkbox" class="align-center col-1" name="make_main_address" value="True" onchange="document.getElementById('address_change').submit()">
-							</div>
+							<div class="align-items-baseline justify-content-center mt-1 row">
+							        {% csrf_token %}
+                                    <label for="select" class="col-7 form-label mb-0">Make Current Addres</label>
+                                    <input type="hidden" name="selectedAddress" value="{{ address.id }}">
+								    <input type="checkbox" class="align-center col-1" onchange="document.getElementById('hello{{ block_id }}').submit()">
+                            </div>
 							{% endif %}
+                        </form>
 						<div class="row ml-2 mt-2">
 							<span><strong>Street :</strong></span>
 							<span>{{ address.street }}</span>
@@ -297,7 +300,6 @@
                                 </form>
                             </div>
 						</div>
-						</form>
 					</div>
 				</div>
 			</div>
@@ -315,15 +317,15 @@
 					<div class="modal-body">
                         <form class="p-1 mt-4" method="POST" action="{% url 'user:edit-address' %}">
                             {% csrf_token %}
-							{% if address.is_main %}
-                                <span class="badge badge-success mb-4">Current Address</span>
-                                <input type="hidden" name="make_main_address" value="False">
-							{% else %}
-							<div class="form-group row">									
-								<label for="select" class=" col-9 form-label text-left">Make Current Addres</label>
-                                <input type="checkbox" class="col-3 align-center" name="make_main_address" value="True">
-							</div>
-							{% endif %}
+{#							{% if address.is_main %}#}
+{#                                <span class="badge badge-success mb-4">Current Address</span>#}
+{#                                <input type="hidden" name="make_main_address" value="False">#}
+{#							{% else %}#}
+{#							<div class="form-group row">									#}
+{#								<label for="select" class=" col-9 form-label text-left">Make Current Addres</label>#}
+{#                                <input type="checkbox" class="col-3 align-center" name="make_main_address" value="True">#}
+{#							</div>#}
+{#							{% endif %}#}
 							<div class="form-group row">
 								<label for="street" class="col-3 col-form-label">Street:</label>
 								<div class="col-9">
