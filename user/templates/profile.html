@@ -246,12 +246,12 @@
         <div class="row ml-1 mb-2">
 		    <div class="header">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Address</div>
         </div>
-		{% for address in user.address.all %}
-        {% with address.class_name as block_id %}
+		
 		<div id="addresses" class="ml-4">
 			<div class="row mr-1">
-				
 				<div class="col-12">
+					{% for address in user.address.all %}
+        			{% with address.class_name as block_id %}
 					<div class="address">
                         <form method="POST" id="hello{{ block_id }}" action="{% url 'user:change-main-address' %}">
                             {% if address.is_main %}
@@ -287,11 +287,11 @@
 							<span>{{ address.pincode }}</span>
 						</div>
                         <div class="row m-3">
-                                <div class="col-5 offset-1">
-									<form>
-										<a class="btn btn-block text-white" data-toggle="modal" data-target="#{{ block_id }}">Edit</a>
-									</form>
-                                </div>
+                            <div class="col-5 offset-1">
+								<form>
+									<a class="btn btn-block text-white" data-toggle="modal" data-target="#{{ block_id }}">Edit</a>
+								</form>
+                            </div>
 							<div class="col-5">
                                 <form method="POST" action="{% url 'user:remove-address' %}">
                                     {% csrf_token %}
@@ -301,81 +301,82 @@
                             </div>
 						</div>
 					</div>
-				</div>
-			</div>
+					<!--Edit Modal 2-->
 		
-		<!--Edit Modal 2-->
-		
-		<div id="{{ block_id }}" class="modal fade" role="dialog">
-			<div class="modal-dialog modal-lg" role="content">
-				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header bg-primary">
-						<h4 class="modal-title text-white">Edit Address</h4>
-						<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+					<div id="{{ block_id }}" class="modal fade" role="dialog">
+						<div class="modal-dialog modal-lg" role="content">
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header bg-primary">
+									<h4 class="modal-title text-white">Edit Address</h4>
+									<button type="button" class="close text-white" data-dismiss="modal">&times;</button>
+								</div>
+								<div class="modal-body">
+									<form class="p-1 mt-4" method="POST" action="{% url 'user:edit-address' %}">
+										{% csrf_token %}
+			{#							{% if address.is_main %}#}
+			{#                          <span class="badge badge-success mb-4">Current Address</span>#}
+			{#                          <input type="hidden" name="make_main_address" value="False">#}
+			{#							{% else %}#}
+			{#							<div class="form-group row">									#}
+			{#								<label for="select" class=" col-9 form-label text-left">Make Current Address</label>#}
+			{#                              <input type="checkbox" class="col-3 align-center" name="make_main_address" value="True">#}
+			{#							</div>#}
+			{#							{% endif %}#}
+										<div class="form-group row">
+											<label for="street" class="col-3 col-form-label">Street:</label>
+											<div class="col-9">
+												<input type="text" class="form-control text-left"  placeholder="{{ address.street }}" id="street" name="street" value="{{ address.street }}">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label for="area" class="col-3 col-form-label">Area:</label>
+											<div class="col-9">
+												<input type="text" class="form-control text-left"  placeholder="{{ address.area }}" id="area" name="area" value="{{ address.area }}">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label for="city" class="col-3 col-form-label">City:</label>
+											<div class="col-9">
+												<input type="text" class="form-control text-left"  placeholder="{{ address.city }}" id="city" name="city" value="{{ address.city }}">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label for="state" class="col-3 col-form-label">State:</label>
+											<div class="col-9">
+												<input type="text" class="form-control text-left"  placeholder="{{ address.state }}" id="state" name="state" value="{{ address.state }}">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label for="pincode" class="col-3 col-form-label">Pincode:</label>
+											<div class="col-9">
+												<input type="text" class="form-control text-left"  placeholder="{{ address.pincode }}" id="pincode" name="pincode" value="{{ address.pincode }}">
+											</div>
+										</div>
+										<input type="hidden" value="{{ address.id }}" name="address_id">
+										<div class="form-group row">
+											<div class="col-5 mt-3 offset-1">
+												<button type="submit" class="btn btn-block text-white">Save</button>
+											</div>
+										</div>
+									</form>
+									<div class="col-5 mt-3" id="remove-btn">
+										<form method="POST" action="{% url 'user:remove-address' %}">
+											{% csrf_token %}
+											<input type="hidden" name="address_pk" value="{{ address.id }}">
+											<button type="submit" class="btn btn-block text-white">Remove</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div class="modal-body">
-                        <form class="p-1 mt-4" method="POST" action="{% url 'user:edit-address' %}">
-                            {% csrf_token %}
-{#							{% if address.is_main %}#}
-{#                                <span class="badge badge-success mb-4">Current Address</span>#}
-{#                                <input type="hidden" name="make_main_address" value="False">#}
-{#							{% else %}#}
-{#							<div class="form-group row">									#}
-{#								<label for="select" class=" col-9 form-label text-left">Make Current Addres</label>#}
-{#                                <input type="checkbox" class="col-3 align-center" name="make_main_address" value="True">#}
-{#							</div>#}
-{#							{% endif %}#}
-							<div class="form-group row">
-								<label for="street" class="col-3 col-form-label">Street:</label>
-								<div class="col-9">
-									<input type="text" class="form-control text-left"  placeholder="{{ address.street }}" id="street" name="street" value="{{ address.street }}">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="area" class="col-3 col-form-label">Area:</label>
-								<div class="col-9">
-									<input type="text" class="form-control text-left"  placeholder="{{ address.area }}" id="area" name="area" value="{{ address.area }}">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="city" class="col-3 col-form-label">City:</label>
-								<div class="col-9">
-									<input type="text" class="form-control text-left"  placeholder="{{ address.city }}" id="city" name="city" value="{{ address.city }}">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="state" class="col-3 col-form-label">State:</label>
-								<div class="col-9">
-									<input type="text" class="form-control text-left"  placeholder="{{ address.state }}" id="state" name="state" value="{{ address.state }}">
-								</div>
-							</div>
-							<div class="form-group row">
-								<label for="pincode" class="col-3 col-form-label">Pincode:</label>
-								<div class="col-9">
-									<input type="text" class="form-control text-left"  placeholder="{{ address.pincode }}" id="pincode" name="pincode" value="{{ address.pincode }}">
-								</div>
-							</div>
-					        <input type="hidden" value="{{ address.id }}" name="address_id">
-							<div class="form-group row">
-								<div class="col-5 mt-3 offset-1">
-									<button type="submit" class="btn btn-block text-white">Save</button>
-								</div>
-                        </form>
-                                <div class="col-5 mt-3">
-                                    <form method="POST" action="{% url 'user:remove-address' %}">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="address_pk" value="{{ address.id }}">
-							            <button type="submit" class="btn btn-block text-white">Remove</button>
-                                    </form>
-						        </div>
-                            </div>
-					</div>
+					{% endwith %}
+					{% endfor %}
 				</div>
-			</div>
+			</div>	
 		</div>
-        {% endwith %}
-		{% endfor %}
+        
 		<br>
 		<!--if no address-->
 		<div class="row ml-3">

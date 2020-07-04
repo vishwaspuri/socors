@@ -181,3 +181,9 @@ a.btn, button.btn{
 #add_address{
 	font-size:16px;
 }
+
+#remove-btn{
+    position: absolute;
+    bottom: 36px;
+    right: 8.33%;
+}
