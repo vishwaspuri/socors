@@ -98,8 +98,12 @@
         
         <h1 id="h1" class="d-flex align-self-start h1margin mb-0">Shops near me</h1>
         <div class="alert alert-info pt-1 pb-1" style="font-size: 12px;">
-          <span><strong>Currently at {{ address.pincode }}.</strong></span>
-          <a href="{% url 'user:profile' %}"> Change Address here.</a>
+            {% for a in user.address.all %}
+                {% if a.is_main %}
+                    <span><strong>Currently at {{ address.pincode }}.</strong></span>
+                {% endif %}
+            {% endfor %}
+            <a href="{% url 'user:profile' %}"> Change Address here.</a>
         </div>
         <!-- if no address added 
         <div class="alert alert-danger pt-1 pb-1" style="font-size: 12px;">
