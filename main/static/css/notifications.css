@@ -66,6 +66,12 @@ img#edit_name{
     margin-right: 15px;
     padding: 0;
 }
+#home{
+    color: #FFFFFF;
+    opacity: 0.5;
+    font-size: 25px;
+    margin-top: 10px;
+}
 
 .navbar-toggler{
     margin-top: 0.9vh
@@ -188,4 +194,7 @@ a.more:hover{
     .overlay.open{
         display: block;
     }
+}
+#ContactUsModal .row{
+    padding: 0;
 }

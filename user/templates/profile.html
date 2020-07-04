@@ -21,6 +21,7 @@
 <body>
     <nav class="navbar navbar-expand-xxl navbar-dark bg justify-content-xxl-start fixed-top">
         <a class="navbar-brand order-0 ml-xxl-0 ml-2 mr-auto" href="{% url 'main:menu' %}">SOCORS</a>
+        <a id="explore_page" class="mr-3" href="{% url 'main:explore' %}"><span class="fas fa-home" id="home"></span></a>
 		<a id="notification" href="{% url 'main:notifications' %}"><span class="fas fa-bell" id="bell"></span>
 			<!-- <span class="badge badge-danger rounded-circle" id="bell_num">5</span> -->
 			<!-- if no notification -->
@@ -262,7 +263,7 @@
 							{% else %}
 							<div class="align-items-baseline justify-content-center mt-1 row">
 							        {% csrf_token %}
-                                    <label for="select" class="col-7 form-label mb-0">Make Current Addres</label>
+                                    <label for="select" class="col-7 form-label mb-0">Make Current Address</label>
                                     <input type="hidden" name="selectedAddress" value="{{ address.id }}">
 								    <input type="checkbox" class="align-center col-1" onchange="document.getElementById('hello{{ block_id }}').submit()">
                             </div>

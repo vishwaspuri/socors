@@ -19,11 +19,12 @@
 <body>
     <nav class="navbar navbar-expand-xxl navbar-dark bg justify-content-xxl-start fixed-top">
         <a class="navbar-brand order-0 ml-xxl-0 ml-2 mr-auto" href="{% url 'main:menu' %}">SOCORS</a>
-        <a id="notification" href="{% url 'main:notifications' %}"><span class="fas fa-bell" id="bell"></span>
+        <a id="explore_page" class="mr-3" href="{% url 'main:explore' %}"><span class="fas fa-home" id="home"></span></a>
+        <a id="notifications" class="mr-1" href="{% url 'main:notifications' %}"><span class="fas fa-bell" id="bell"></span>
           <!-- <span class="badge badge-danger rounded-circle" id="bell_num">5</span> -->
           <!-- if no notification -->
           <!-- <span class="badge badge-danger rounded-circle invisible">5</span> -->
-        </a> 
+        </a>
         <button id="tri" class="navbar-toggler align-self-start" type="button">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -95,7 +96,17 @@
     
     <div class="content">
         
-        <h1 id="h1" class="d-flex align-self-start h1margin">Shops near me</h1>
+        <h1 id="h1" class="d-flex align-self-start h1margin mb-0">Shops near me</h1>
+        <div class="alert alert-info pt-1 pb-1" style="font-size: 12px;">
+          <span><strong>Currently at {{ address.pincode }}.</strong></span>
+          <a href="{% url 'user:profile' %}"> Change Address here.</a>
+        </div>
+        <!-- if no address added 
+        <div class="alert alert-danger pt-1 pb-1" style="font-size: 12px;">
+          <span><strong>Please add an address. </strong></span>
+          <a href="{% url 'user:add-address' %}">Click here.</a>
+        </div>
+        -->
         {% if user.address.all.exists %}
         {% for shop in shops %}
             <div class="shop row">
