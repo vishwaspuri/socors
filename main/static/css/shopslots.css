@@ -8,6 +8,19 @@ body{
     text-align: center;
 }
 
+#remarks{
+    background: rgba(45,168,207,0.5);
+    width: 85vw;
+    margin-left: 30px;
+    border-radius: 5px;
+    color: black;
+    padding-left: 15px;
+    font-size: 15px;
+}
+#remarks li{
+    text-align: left;
+}
+
 #h1{
     font-weight: 800;
     color: black;
