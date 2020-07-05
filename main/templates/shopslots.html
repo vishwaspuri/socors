@@ -95,6 +95,32 @@
     <div class="overlay"></div>
     <div class="content">
         <h1 id="h1" class="d-flex justify-content-center h1margin">{{ shop.shop_name }}</h1>
+        <div id="remarks" class="pb-1 pt-1">
+          <div class="remark1">
+            <ul class="pl-3 mb-0">
+              <p class="mb-1 text-left"><strong>Shopkeeper's Remark</strong></p>
+              <li>remark 1</li>
+            </ul>
+          </div>
+          <div class="remark2">
+            <ul class="list-unstyled mb-0">
+              <p class="mb-1 pl-3 text-left"><strong>Online Payment Options</strong></p>
+							<li>
+								<img src="{% static 'images/Paytm.png' %}" alt="Paytm">
+								<span>Paytm Number</span>
+							</li>
+							<li>
+								<img src="{% static 'images/GPay.png' %}" alt="GPay">
+								<span>Google Pay Number</span>
+							</li>
+							<li>
+								<img src="{% static 'images/PhonePe.png' %}" alt="PhonePe">
+								<span>PhonePe Number</span>
+							</li>
+						</ul>
+          </div>
+        </div>
+        
         <div class="header d-flex align-items-start">
                 <h5>Timeslots</h5>
         </div>
