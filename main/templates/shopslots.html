@@ -99,7 +99,7 @@
           <div class="remark1">
             <ul class="pl-3 mb-0">
               <p class="mb-1 text-left"><strong>Shopkeeper's Remark</strong></p>
-              <li>remark 1</li>
+              <li>{{ shop.owners_remark }}</li>
             </ul>
           </div>
           <div class="remark2">
@@ -107,15 +107,15 @@
               <p class="mb-1 pl-3 text-left"><strong>Online Payment Options</strong></p>
 							<li>
 								<img src="{% static 'images/Paytm.png' %}" alt="Paytm">
-								<span>Paytm Number</span>
+								<span>{{ user.paytm_number }}</span>
 							</li>
 							<li>
 								<img src="{% static 'images/GPay.png' %}" alt="GPay">
-								<span>Google Pay Number</span>
+								<span>{{ user.gpay_number }}</span>
 							</li>
 							<li>
 								<img src="{% static 'images/PhonePe.png' %}" alt="PhonePe">
-								<span>PhonePe Number</span>
+								<span>{{ user.phonepe_number }}</span>
 							</li>
 						</ul>
           </div>

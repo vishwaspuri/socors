@@ -23,6 +23,10 @@ class Shop(models.Model):
     shop_type           =models.CharField(max_length=60, default='General Store')
     give_whatsapp_order =models.BooleanField(default=False)
     shop_type           =models.IntegerField(validators=[MaxValueValidator(6)])
+    owners_remark       =models.CharField(max_length=256, null=True, default='N/A')
+    gpay_number         =models.CharField(max_length=10, null=True, default='N/A')
+    paytm_number        =models.CharField(max_length=10, null=True, default='N/A')
+    phonepe_number      =models.CharField(max_length=10, null=True, default='N/A')
     '''
         Shop Type Code:
             1. Groceries

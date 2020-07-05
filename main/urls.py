@@ -1,5 +1,5 @@
 from django.urls import path
-from main.api import api_views
+from main.api import api_views, shop_view
 from main import views
 
 urlpatterns = [
@@ -25,5 +25,6 @@ urlpatterns = [
     path('is-next-day-off/<str:gst_id>/', api_views.is_next_day_off, name='is-next-day-off'),
     path('api/add-break/<str:gst_id>/', api_views.create_break, name='create-break'),
     path('pick-up-form/<str:slot_id>/', views.pick_up_view, name='pick-up-form'),
-    path('mytimeslots-post-confirmation/<str:slot_id>/', views.my_timeslots_post_confirmation, name='my-timeslots-post-confirmation')
+    path('mytimeslots-post-confirmation/<str:slot_id>/', views.my_timeslots_post_confirmation, name='my-timeslots-post-confirmation'),
+    path('api/edit-payment-remark/', shop_view.shop_detail, name='payment-remark-details')
 ]
