@@ -39,6 +39,15 @@ body{
     line-height: 5.3vh;
 }
 
+.feedback{
+    border: 1px solid black;
+    text-align: left;
+    border-radius: 4px;
+    padding-left: 5px;
+    height: 70px;
+    box-sizing: border-box;
+}
+
 #nameEdit{
     width: 50vw ;
     height: 25px;
