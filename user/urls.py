@@ -1,15 +1,16 @@
 from django.urls import path
 from user.api import auth
 from django.contrib.auth.views import LogoutView, LoginView
-from .views import edit_address, remove_address, change_main_address, update_profile, add_address, AddaddressView, ProfileView, RegisterView,AddAddressView, AfterAddressView, TermsConditionsView, PrivacyPolicyView
+from .views import login_view, edit_address, remove_address, change_main_address, update_profile, add_address, AddaddressView, ProfileView, RegisterView,AddAddressView, AfterAddressView, TermsConditionsView, PrivacyPolicyView
 from .api.auth import ValidatePhoneSendOTP, validateOTP
 from .api.api_views import profile_details
 
 urlpatterns = [
     path('api/login/', auth.LoginView.as_view(), name='api-login'),
-    path('login/', LoginView.as_view(
-        template_name='login.html'
-    ), name='login'),
+    # path('login/', LoginView.as_view(
+    #     template_name='login.html'
+    # ), name='login'),
+    path('login/', login_view, name="login"),
     path('api/new-address/',add_address, name='add-address/'),
     path('api/validate-phone/',  ValidatePhoneSendOTP.as_view(), name='validate-phone-number'),
     path('api/otp/', validateOTP.as_view(), name='validate-otp'),

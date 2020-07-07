@@ -16,8 +16,13 @@
         <form id='login-form' action="{% url 'user:login' %}" method="POST">
             {% csrf_token %}
             <label for="number"><span class="icon num_ico"></span></label>
-            <input type="email" placeholder="Email Address" name="username" required><br>
+            <input type="tel" placeholder="Phone Number" name="ph_number" required><br>
             <input type="hidden" placeholder="password" name="password" value="socors@123" required><br>
+            {% if not form.is_valid %}
+                <p class="label label-danger">
+                    {{ error }}
+                </p>
+            {% endif %}
             {% if form.errors %}
                 <p class=" label label-danger">
                     <!-- Your email and password didn't match.

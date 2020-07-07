@@ -13,6 +13,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .addresshelper import make_prior_address_not_main
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate
+from django.http import HttpResponseForbidden
 # Create your views here.
 
 @authentication_classes([UserAuthentication])
@@ -177,3 +179,30 @@ def edit_address(request):
             form.save()
             return redirect('/user/profile/')
 
+
+def login_view(request):
+    if request.method == "POST":
+        ph_number = request.POST['ph_number']
+        password  = request.POST['password']
+        try:
+            email = User.objects.get(ph_number= ph_number).email
+        except KeyError:
+            return redirect(request, 'login.html')
+            # return redirect(request, 'login.html', {
+            #     "is_valid": False,
+            #     "error": "The phone number entered does not exist."
+            # })
+        user = authenticate(username = email, password= password)
+        if user is not None:
+            if user.is_active:
+                login(request, user=user)
+                return redirect('main:explore')
+            else:
+                return HttpResponseForbidden("<html><head><title>Login Forbidden</title></head><body><h1>The User is deactivated. Please contact customer service.</h1></body></html>")
+        else:
+            return redirect(request, 'login.html', {
+                "is_valid": False,
+                "error": "Invalid credentials provided"
+            })
+    else:
+        return render(request, 'login.html')
