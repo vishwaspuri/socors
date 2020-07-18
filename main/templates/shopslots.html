@@ -135,16 +135,13 @@
         {% if forloop.counter0|divisibleby:3 %}<tr>{% endif %}
                     {% if slot.is_slot_in_shop_time %}
                         {% if slot.num_entries_left %}
-                            <form action="{% url 'main:pick-up-form' slot_id=slot.slot_id %}" method="GET">
-                                {% csrf_token %}
-                                <td><button type="submit" class="bt">{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button></td>
-                            </form>
+                            <td><button type="submit" class="bt" data-toggle="modal" data-target=".{{ block_class }}">{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button></td>
                         {% else %}
                             <td><button type="button" class="bt btn-danger" disabled>{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button></td>
                         {% endif %}
                     {% else %}
                         {% if slot.num_entries_left %}
-                                <td><button type="button" class="bt" disabled>{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button></td>
+                            <td><button type="button" class="bt" disabled>{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button></td>
                         {% else %}
                             <td><button type="button" class="bt btn-danger" disabled>{{ slot.slot_start_time|time }}- {{ slot.slot_stop_time|time }}</button></td>
                         {% endif %}
@@ -155,7 +152,7 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         <form action="{% url 'main:pick-up-form' slot_id=slot.slot_id %}" method="get">
-                            <button class="btn btn-info" type="submit">Pick-up</button>
+                            <button class="btn btn-info" type="submit">Delivery</button>
                         </form>
                         <br>
                         <br>
