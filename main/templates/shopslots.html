@@ -152,14 +152,15 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         <form action="{% url 'main:pick-up-form' slot_id=slot.slot_id %}" method="get">
-                            <button class="btn btn-info" type="submit">Delivery</button>
+                            {% csrf_token %}
+                            <button class="btn btn-info" type="submit">Pick-Up</button>
                         </form>
                         <br>
                         <br>
-                        <form method="post" action="{% url 'main:buy-in' slot.slot_id %}">
+                        <form method="get" action="{% url 'main:pick-up-form' slot_id=slot.slot_id %}">
                             {% csrf_token %}
-                            <input type="hidden" name="next" value="{{ next }}" />
-                            <input class="btn btn-info" type="submit" value="Buy-in" id="submit">
+                            <input name="delivery" type="hidden" value="True">
+                            <button class="btn btn-info" type="submit">Delivery</button>
                         </form>
                     </div>
                 </div>

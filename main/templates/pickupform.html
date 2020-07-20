@@ -9,6 +9,9 @@
     <title>Pick-up</title>
 </head>
 <body>
+    {% if is_delivery %}
+        <p style="color: red;">Delivery Order!</p>
+    {% endif %}
     <h1>List Items</h1>
     <form action="{% url 'main:pick-up-form' slot_id=slot_id %}" method="POST">
     {% csrf_token %}
@@ -35,7 +38,11 @@
                     <img src="{% static 'images/plus.png' %}" class="plus-icon" alt="add_remark">
                 </td>
             </tr>
-        
+    {% if is_delivery %}
+        <input type="hidden" name="Delivery" value="1">
+    {% else %}
+        <input type="hidden" name="Delivery" value="0">
+    {% endif %}
     </table>
         <div class="center">
             <input type="submit" value="submit" id="submit">

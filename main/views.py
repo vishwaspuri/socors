@@ -7,7 +7,6 @@ from django.http import HttpResponseRedirect
 from .forms import PickUpForm
 from main.shopkeeper_helpers import send_pick_up_to_shopkeeper, send_buy_in_to_shopkeeper
 from datetime import datetime, timedelta
-
 # ------------------------------------------------------------------------------
 # -----------------GENERIC VIEWS FOR TEMPLATES----------------------------------
 # ------------------------------------------------------------------------------
@@ -63,21 +62,36 @@ def pick_up_view(request, slot_id):
                 remark = 'N/A'
             order = order + 'Item:' + str(item) + ' Quantity:' + str(quantity) + ' Remark:' + str(remark) + '\n'
         # print(order)
+        if request.POST['Delivery']=='1':
+            is_delivery = True
+        else:
+            is_delivery = False
         slot = Slot.objects.get(slot_id=slot_id)
         pickup = PickUpBooking()
         pickup.user = request.user
         pickup.slot = slot
         pickup.shop = slot.shop
         pickup.message_for_shopkeeper = order
+        pickup.is_delivery = is_delivery
         pickup.save()
-        # print(pickup.pick_up_id)
-        send_pick_up_to_shopkeeper(str(slot.slot_id), str(pickup.pick_up_id), str(pickup.user.id), str(pickup.user.full_name), str(pickup.message_for_shopkeeper))
+        send_pick_up_to_shopkeeper(is_delivery,str(slot.slot_id), str(pickup.pick_up_id), str(pickup.user.id), str(pickup.user.full_name), str(pickup.message_for_shopkeeper))
 
         url = reverse('main:my-timeslots-post-confirmation', kwargs={'slot_id': slot.slot_id})
         return HttpResponseRedirect(url)
     else:
-        slot = Slot.objects.get(slot_id=slot_id)
-        return render(request, 'pickupform.html', {"slot_id": slot.slot_id})
+        print("1")
+        try:
+            slot = Slot.objects.get(slot_id=slot_id)
+            if (request.GET.get('delivery') == 'True'):
+                return render(request, 'pickupform.html', {
+                    'is_delivery': True,
+                    "slot_id": slot.slot_id
+                })
+            else:
+                return render(request, 'pickupform.html', {"slot_id": slot.slot_id})
+        except:
+            slot = Slot.objects.get(slot_id=slot_id)
+            return render(request, 'pickupform.html', {"slot_id": slot.slot_id})
 
 
 
@@ -141,6 +155,7 @@ def create_buy_in_booking(request, slot_id):
 
 def create_pick_up_booking(request, slot_id):
     if request.method == "POST":
+        print(request.POST)
         form = PickUpForm(request.POST)
         if form.is_valid():
             pickup      = form.save(commit=False)
@@ -153,7 +168,21 @@ def create_pick_up_booking(request, slot_id):
             return HttpResponseRedirect('/mytimeslots')
     else:
         form = PickUpForm()
-    return render(request, 'shopslots.html', {'form': form})
+    # Check whether delivery is true
+    '''
+    print("1")
+    try:
+        print("Idhar to pahuncha")
+        if(request.GET.get('delivery') == 'True'):
+            return render(request, 'shopslots.html', {
+                'is_delivery': True,
+                'form': form
+            })
+    except:
+    '''
+    return render(request, 'shopslots.html', {
+        'form': form
+    })
 
 
 def my_timeslots_post_confirmation(request,slot_id):

@@ -20,9 +20,10 @@ def send_buy_in_to_shopkeeper(slot_id, buyin_id, user_id, user_name):
     else:
         return True
 
-def send_pick_up_to_shopkeeper(slot_id, pickup_id, user_id, user_name, message):
+def send_pick_up_to_shopkeeper(is_delivery,slot_id, pickup_id, user_id, user_name, message):
     url = BASE_URL + '/api/create-pickup/'
     payload = {
+        "is_delivery": is_delivery,
         "slot_id": slot_id,
         "pickup_id": pickup_id,
         "user_id": user_id,

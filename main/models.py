@@ -129,6 +129,7 @@ class PickUpBooking(models.Model):
     slot                  =models.ForeignKey(Slot, on_delete=models.CASCADE, related_name='pickupbookings')
     shop                  =models.ForeignKey(Shop, on_delete=models.CASCADE, related_name='pickupbookings')
     message_for_shopkeeper=models.TextField(max_length=256, null=True)
+    is_delivery           =models.BooleanField(default=False)
 
     def class_name(self):
         return "pickup"+str(self.pick_up_id)
